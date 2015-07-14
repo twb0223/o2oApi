@@ -1,0 +1,1163 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>BaseData.Model</name>
+  </assembly>
+  <members>
+    <member name="T:BaseData.Model.Department">
+      <summary>
+        部门
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Department.DepartmentID">
+      <summary>
+        部门ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Department.DepartmentName">
+      <summary>
+        部门名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Department.ProjectID">
+      <summary>
+        所属项目ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Department.Project">
+      <summary>
+        所属项目实体
+      </summary>
+    </member>
+    <member name="T:BaseData.Model.Equipment">
+      <summary>
+        设备
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.EquipmentID">
+      <summary>
+        设备ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.EquipmentName">
+      <summary>
+        设备名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.EquipmentMac">
+      <summary>
+        Mac地址
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.EquipmentCPU">
+      <summary>
+        设备CPU
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.EquipmentDisk">
+      <summary>
+        设备存储介质
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.EquipmentIP">
+      <summary>
+        设备IP
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.EquipmentTypeID">
+      <summary>
+        设备类型
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.OsTypeID">
+      <summary>
+        设备操作系统
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.Status">
+      <summary>
+        设备状态：0：未分配；1：已分配
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.ClientChangeFlag">
+      <summary>
+        设备信息变更标识，供通讯服务使用
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.CreateTime">
+      <summary>
+        创建时间
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Equipment.CreateBy">
+      <summary>
+        创建人
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.EquipmentType.EquipmentTypeID">
+      <summary>
+        设备类型ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.EquipmentType.EquipmentTypeName">
+      <summary>
+        设备类型名称
+      </summary>
+    </member>
+    <member name="T:BaseData.Model.EquipmentStation">
+      <summary>
+        设备点位关系
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.EquipmentStation.ID">
+      <summary>
+        设备点位关系ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.EquipmentStation.EquipmentID">
+      <summary>
+        设备ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.EquipmentStation.Equipment">
+      <summary>
+        设备对象
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.EquipmentStation.StationID">
+      <summary>
+        点位ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.EquipmentStation.Station">
+      <summary>
+        点位对象
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.OsType.OsTypeID">
+      <summary>
+        操作系统类型ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.OsType.OsTypeName">
+      <summary>
+        操作系统类型名称
+      </summary>
+    </member>
+    <member name="T:BaseData.Model.Project">
+      <summary>
+        项目
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Project.ProjectID">
+      <summary>
+        项目ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Project.ProjectName">
+      <summary>
+        项目名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Project.ProjectTypeID">
+      <summary>
+        项目类型ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Project.ProjectType">
+      <summary>
+        项目类型对象
+      </summary>
+    </member>
+    <member name="T:BaseData.Model.ProjectType">
+      <summary>
+        项目类型
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.ProjectType.ProjectTypeID">
+      <summary>
+        项目类型ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.ProjectType.ProjectTypeName">
+      <summary>
+        项目类型名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Role.RoleID">
+      <summary>
+        角色ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Role.RoleName">
+      <summary>
+        角色名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Role.ProjectID">
+      <summary>
+        所属项目
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Role.Project">
+      <summary>
+        项目对象
+      </summary>
+    </member>
+    <member name="T:BaseData.Model.Station">
+      <summary>
+        点位
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Station.StationID">
+      <summary>
+        点位ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Station.StationName">
+      <summary>
+        点位名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Station.StationDes">
+      <summary>
+        点位描述
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Station.Status">
+      <summary>
+        设备状态：0：未分配；1：已分配
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Station.DepartmentID">
+      <summary>
+        部门ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.Station.Department">
+      <summary>
+        部门对象
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.UserID">
+      <summary>
+        用户ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.UserAccount">
+      <summary>
+        用户账号（登陆使用）
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.UserName">
+      <summary>
+        用户名称(显示用)
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.Password">
+      <summary>
+        用户密码
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.CreateTime">
+      <summary>
+        创建时间
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.Enable">
+      <summary>
+        是否可用 True:可用，false：禁用
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.DepartmentID">
+      <summary>
+        所属部门
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.ProjectID">
+      <summary>
+        所属项目
+      </summary>
+    </member>
+    <member name="P:BaseData.Model.User.RoleID">
+      <summary>
+        角色ID
+      </summary>
+    </member>
+  </members>
+
+  <assembly>
+    <name>BaseData.Web</name>
+  </assembly>
+  <members>
+    <member name="M:BaseData.Web.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+      <summary>
+        Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+      </summary>
+      <param name="description">
+        The <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+      </param>
+      <returns>The ID as a string.</returns>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.HelpPageConfig">
+      <summary>
+        Use this class to customize the Help Page.
+        For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+        or you can provide the samples for the requests/responses.
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.Controllers.HelpController">
+      <summary>
+        The controller that will handle requests for the help page.
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+      <summary>
+        Sets the documentation provider for help page.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="documentationProvider">The documentation provider.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+      <summary>
+        Sets the objects that will be used by the formatters to produce sample requests/responses.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="sampleObjects">The sample objects.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+      <summary>
+        Sets the sample request directly for the specified media type and action.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="sample">The sample request.</param>
+      <param name="mediaType">The media type.</param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+      <summary>
+        Sets the sample request directly for the specified media type and action with parameters.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="sample">The sample request.</param>
+      <param name="mediaType">The media type.</param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+      <param name="parameterNames">The parameter names.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+      <summary>
+        Sets the sample request directly for the specified media type of the action.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="sample">The sample response.</param>
+      <param name="mediaType">The media type.</param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+      <summary>
+        Sets the sample response directly for the specified media type of the action with specific parameters.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="sample">The sample response.</param>
+      <param name="mediaType">The media type.</param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+      <param name="parameterNames">The parameter names.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+      <summary>
+        Sets the sample directly for all actions with the specified media type.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="sample">The sample.</param>
+      <param name="mediaType">The media type.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+      <summary>
+        Sets the sample directly for all actions with the specified type and media type.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="sample">The sample.</param>
+      <param name="mediaType">The media type.</param>
+      <param name="type">The parameter type or return type of an action.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+      <summary>
+        Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+        The help page will use this information to produce more accurate request samples.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="type">The type.</param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+      <summary>
+        Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+        The help page will use this information to produce more accurate request samples.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="type">The type.</param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+      <param name="parameterNames">The parameter names.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+      <summary>
+        Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+        The help page will use this information to produce more accurate response samples.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="type">The type.</param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+      <summary>
+        Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+        The help page will use this information to produce more accurate response samples.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="type">The type.</param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+      <param name="parameterNames">The parameter names.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+      <summary>
+        Gets the help page sample generator.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <returns>The help page sample generator.</returns>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator)">
+      <summary>
+        Sets the help page sample generator.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="sampleGenerator">The help page sample generator.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+      <summary>
+        Gets the model description generator.
+      </summary>
+      <param name="config">The configuration.</param>
+      <returns>
+        The <see cref="T:BaseData.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/>
+      </returns>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+      <summary>
+        Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+      </summary>
+      <param name="config">
+        The <see cref="T:System.Web.Http.HttpConfiguration"/>.
+      </param>
+      <param name="apiDescriptionId">
+        The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.
+      </param>
+      <returns>
+        An <see cref="T:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel"/>
+      </returns>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.ModelDescriptions.ModelDescription">
+      <summary>
+        Describes a type model.
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+      <summary>
+        Generates model descriptions for given types.
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+      <summary>
+        Use this attribute to change the name of the <see cref="T:BaseData.Web.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel">
+      <summary>
+        The model that represents an API displayed on the help page.
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+      <summary>
+        Initializes a new instance of the <see cref="T:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+      <summary>
+        Gets or sets the <see cref="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+      <summary>
+        Gets or sets the <see cref="T:BaseData.Web.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+      <summary>
+        Gets or sets the documentation for the request.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+      <summary>
+        Gets or sets the <see cref="T:BaseData.Web.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+      <summary>
+        Gets the request body parameter descriptions.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+      <summary>
+        Gets or sets the <see cref="T:BaseData.Web.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+      <summary>
+        Gets the resource property descriptions.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+      <summary>
+        Gets the sample requests associated with the API.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+      <summary>
+        Gets the sample responses associated with the API.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+      <summary>
+        Gets the error messages associated with this model.
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator">
+      <summary>
+        This class will generate the samples for the help page.
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+      <summary>
+        Initializes a new instance of the <see cref="T:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+      <summary>
+        Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+      </summary>
+      <param name="api">
+        The <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+      </param>
+      <returns>The samples keyed by media type.</returns>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+      <summary>
+        Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+      </summary>
+      <param name="api">
+        The <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+      </param>
+      <returns>The samples keyed by media type.</returns>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,BaseData.Web.Areas.HelpPage.SampleDirection)">
+      <summary>
+        Gets the request or response body samples.
+      </summary>
+      <param name="api">
+        The <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+      </param>
+      <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+      <returns>The samples keyed by media type.</returns>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,BaseData.Web.Areas.HelpPage.SampleDirection)">
+      <summary>
+        Search for samples that are provided directly through <see cref="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+      </summary>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+      <param name="parameterNames">The parameter names.</param>
+      <param name="type">The CLR type.</param>
+      <param name="formatter">The formatter.</param>
+      <param name="mediaType">The media type.</param>
+      <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+      <returns>The sample that matches the parameters.</returns>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+      <summary>
+        Gets the sample object that will be serialized by the formatters.
+        First, it will look at the <see cref="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+        one using <see cref="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:BaseData.Web.Areas.HelpPage.ObjectGenerator"/>) and other
+        factories in <see cref="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+      </summary>
+      <param name="type">The type.</param>
+      <returns>The sample object.</returns>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+      <summary>
+        Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+      </summary>
+      <param name="api">
+        The <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+      </param>
+      <returns>The type.</returns>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},BaseData.Web.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+      <summary>
+        Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+      </summary>
+      <param name="api">
+        The <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+      </param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+      <param name="parameterNames">The parameter names.</param>
+      <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+      <param name="formatters">The formatters.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+      <summary>
+        Writes the sample object using formatter.
+      </summary>
+      <param name="formatter">The formatter.</param>
+      <param name="value">The value.</param>
+      <param name="type">The type.</param>
+      <param name="mediaType">Type of the media.</param>
+      <returns></returns>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+      <summary>
+        Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+      <summary>
+        Gets the objects that are used directly as samples for certain actions.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+      <summary>
+        Gets the objects that are serialized as samples by the supported formatters.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+      <summary>
+        Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+        stopping when the factory successfully returns a non-<see langref="null"/> object.
+      </summary>
+      <remarks>
+        Collection includes just <see cref="M:BaseData.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+        <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+        <code>SampleObjectFactories.Add(func)</code> to provide a fallback.
+      </remarks>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.HelpPageSampleKey">
+      <summary>
+        This is used to identify the place where the sample should be applied.
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+      <summary>
+        Creates a new <see cref="T:BaseData.Web.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+      </summary>
+      <param name="mediaType">The media type.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+      <summary>
+        Creates a new <see cref="T:BaseData.Web.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+      </summary>
+      <param name="mediaType">The media type.</param>
+      <param name="type">The CLR type.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(BaseData.Web.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+      <summary>
+        Creates a new <see cref="T:BaseData.Web.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+      </summary>
+      <param name="sampleDirection">
+        The <see cref="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+      </param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+      <param name="parameterNames">The parameter names.</param>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,BaseData.Web.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+      <summary>
+        Creates a new <see cref="T:BaseData.Web.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+      </summary>
+      <param name="mediaType">The media type.</param>
+      <param name="sampleDirection">
+        The <see cref="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+      </param>
+      <param name="controllerName">Name of the controller.</param>
+      <param name="actionName">Name of the action.</param>
+      <param name="parameterNames">The parameter names.</param>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+      <summary>
+        Gets the name of the controller.
+      </summary>
+      <value>
+        The name of the controller.
+      </value>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.ActionName">
+      <summary>
+        Gets the name of the action.
+      </summary>
+      <value>
+        The name of the action.
+      </value>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.MediaType">
+      <summary>
+        Gets the media type.
+      </summary>
+      <value>
+        The media type.
+      </value>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+      <summary>
+        Gets the parameter names.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+      <summary>
+        Gets the <see cref="P:BaseData.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.ImageSample">
+      <summary>
+        This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.ImageSample.#ctor(System.String)">
+      <summary>
+        Initializes a new instance of the <see cref="T:BaseData.Web.Areas.HelpPage.ImageSample"/> class.
+      </summary>
+      <param name="src">The URL of an image.</param>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.InvalidSample">
+      <summary>
+        This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.ObjectGenerator">
+      <summary>
+        This class will create an object of a given type and populate it with sample data.
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+      <summary>
+        Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+        Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+        Complex types: POCO types.
+        Nullables: <see cref="T:System.Nullable`1"/>.
+        Arrays: arrays of simple types or complex types.
+        Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+        Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+        Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+        Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+        Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+      </summary>
+      <param name="type">The type.</param>
+      <returns>An object of the given type.</returns>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.SampleDirection">
+      <summary>
+        Indicates whether the sample is used for request or response
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.TextSample">
+      <summary>
+        This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.Areas.HelpPage.XmlDocumentationProvider">
+      <summary>
+        A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+      <summary>
+        Initializes a new instance of the <see cref="T:BaseData.Web.Areas.HelpPage.XmlDocumentationProvider"/> class.
+      </summary>
+      <param name="documentPath">The physical path to XML document.</param>
+    </member>
+    <member name="T:BaseData.Web.Controllers.AuthorityMenusAPIController">
+      <summary>
+        权限菜单API
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.AuthorityMenusAPIController.GetAuthorityByProjectID(System.Int32)">
+      <summary>
+        获取指定项目的权限菜单
+      </summary>
+      <param name="ProjectID">项目ID</param>
+      <returns>全部菜单数据，未分组</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.AuthorityMenusAPIController.GetAuthorityMenuByRoleID(System.Int32,System.Int32)">
+      <summary>
+        获取角色对应菜单
+      </summary>
+      <param name="RoleID">角色ID</param>
+      <param name="ProjectID">项目ID</param>
+      <returns>返回角色对应菜单JSON(已分组)</returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.DepartmentsAPIController">
+      <summary>
+        部门信息API
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.DepartmentsAPIController.GetDepartments">
+      <summary>
+        获取部门信息
+      </summary>
+      <returns>返回部门集合</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.DepartmentsAPIController.GetDepartmentsByProjectID(System.Int32)">
+      <summary>
+        通过项目获取部门集合
+      </summary>
+      <param name="ProjectID">项目ID</param>
+      <returns>返回部门集合</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.DepartmentsAPIController.GetDepartment(System.Int32)">
+      <summary>
+        获取部门对象
+      </summary>
+      <param name="id">部门ID</param>
+      <returns>返回部门对象</returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.EquipmentsAPIController">
+      <summary>
+        设备信息API
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.EquipmentsAPIController.GetEquements">
+      <summary>
+        获取设备列表
+      </summary>
+      <returns>返回设备集合</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.EquipmentsAPIController.GetEquipment(System.String)">
+      <summary>
+        获取设备对象,
+      </summary>
+      <param name="id">设备ID</param>
+      <returns>设备对象</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.EquipmentsAPIController.GetEquipmentStations(System.String)">
+      <summary>
+        获取设备点位详细信息
+      </summary>
+      <param name="EquipmentID">设备ID</param>
+      <returns></returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.EquipmentsAPIController.GetEquipmentStationsListByProject(System.Int32)">
+      <summary>
+        获取指定项目下所有设备点位信息
+      </summary>
+      <param name="ProjectID">项目ID</param>
+      <returns>返回设备点位集合</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.EquipmentsAPIController.GetEquipmentStationsListByDepartmentID(System.Int32)">
+      <summary>
+        获取指定部门下所有设备点位信息
+      </summary>
+      <param name="ProjectID">部门ID</param>
+      <returns>返回设备点位集合</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.EquipmentsAPIController.GetEquipmentStationsListByProject(System.String)">
+      <summary>
+        通过Mac地址获取设备信息(Mac地址唯一)
+      </summary>
+      <param name="EquipmentMac">设备MAC地址</param>
+      <returns>返回设备信息</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.EquipmentsAPIController.PostEquipment(BaseData.Web.ViewModels.EquipmentParameter)">
+      <summary>
+        添加设备，终端首次接入是调用
+      </summary>
+      <param name="para">设备对象</param>
+      <returns>结果OK，Error</returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.ProjectsAPIController">
+      <summary>
+        项目信息API
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.ProjectsAPIController.GetProjects">
+      <summary>
+        获取项目集合
+      </summary>
+      <returns>返回项目集合</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.ProjectsAPIController.GetProject(System.Int32)">
+      <summary>
+        获取单个项目信息
+      </summary>
+      <param name="id">项目ID</param>
+      <returns>返回项目信息</returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.StationsAPIController">
+      <summary>
+        点位信息API
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.StationsAPIController.GetStations">
+      <summary>
+        获取点位列表
+      </summary>
+      <returns>返回点位集合</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.StationsAPIController.GetStationsByDepmentID(System.Int32)">
+      <summary>
+        通过部门编号获取点位集合
+      </summary>
+      <param name="DepartmentID">部门ID</param>
+      <returns>返回该部门下所有点位</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.StationsAPIController.GetStationsByProjectID(System.Int32)">
+      <summary>
+        通过项目编号获取所有点位列表
+      </summary>
+      <param name="ProjectID">项目ID</param>
+      <returns>返回该项目下所有点位信息</returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.StationsAPIController.GetStation(System.String)">
+      <summary>
+        通过点位ID获取点位
+      </summary>
+      <param name="id">点位ID</param>
+      <returns>点位实体</returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.UsersAPIController">
+      <summary>
+        用户信息API
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.UsersAPIController.GetCheckUser(System.String,System.String)">
+      <summary>
+        登陆用户获取账号信息，权限菜单
+      </summary>
+      <param name="Account">账号</param>
+      <param name="Password">密码(MD5加密)</param>
+      <returns>返回用户信息及权限菜单</returns>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.EquipmentID">
+      <summary>
+        设备ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.StationID">
+      <summary>
+        点位ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.OsTypeName">
+      <summary>
+        操作系统
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.EquipmentTypeName">
+      <summary>
+        设备类别
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.EquipmentName">
+      <summary>
+        设备名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.EquipmentMac">
+      <summary>
+        设备mac地址
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.EquipmentCPU">
+      <summary>
+        设备cpu
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.EquipmentDisk">
+      <summary>
+        设备存储介质
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.Status">
+      <summary>
+        设备状态
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.ClientChangeFlag">
+      <summary>
+        变更标识
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.CreateTime">
+      <summary>
+        创建时间
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.CreateBy">
+      <summary>
+        创建人
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.OsTypeID">
+      <summary>
+        操作系统类型ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.EquipmentTypeID">
+      <summary>
+        设备类型ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.StationName">
+      <summary>
+        点位名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.StationDes">
+      <summary>
+        点位描述
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.DepartmentID">
+      <summary>
+        部门ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.DepartmentName">
+      <summary>
+        部门名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.ProjectID">
+      <summary>
+        项目ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.ProjectName">
+      <summary>
+        项目名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.ProjectTypeID">
+      <summary>
+        项目类型ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.ProjectTypeName">
+      <summary>
+        项目类型名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentStations_VM.EquipmentIP">
+      <summary>
+        设备IP地址
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.ViewModels.EquipmentParameter">
+      <summary>
+        设备参数类
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.EquipmentParameter.EquipmentMac">
+      <summary>
+        设备MAC地址
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.UserAccount">
+      <summary>
+        账号
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.UserName">
+      <summary>
+        用户姓名
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.RoleID">
+      <summary>
+        角色ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.RoleName">
+      <summary>
+        角色名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.ProjectID">
+      <summary>
+        所在项目ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.ProjectName">
+      <summary>
+        项目名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.DepartmentID">
+      <summary>
+        部门ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.DepartmentName">
+      <summary>
+        部门名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfo.MenuJson">
+      <summary>
+        权限菜单
+      </summary>
+    </member>
+    <member name="F:BaseData.Web.ViewModels.UserParameter.Account">
+      <summary>
+        账号
+      </summary>
+    </member>
+    <member name="F:BaseData.Web.ViewModels.UserParameter.Password">
+      <summary>
+        密码
+      </summary>
+    </member>
+  </members>
+</doc>

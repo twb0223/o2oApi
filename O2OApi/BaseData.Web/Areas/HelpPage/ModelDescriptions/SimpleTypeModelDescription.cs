@@ -1,0 +1,6 @@
+namespace BaseData.Web.Areas.HelpPage.ModelDescriptions
+{
+    public class SimpleTypeModelDescription : ModelDescription
+    {
+    }
+}

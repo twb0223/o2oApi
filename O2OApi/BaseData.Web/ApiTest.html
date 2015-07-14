@@ -1,0 +1,113 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>用户管理</title>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">基础数据平台</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Products/Index">商品管理</a></li>
+                    <li><a href="/Projects">管理</a></li>
+                    <li><a href="/Users">用户管理</a></li>
+                    <li><a href="/Help">API</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body">
+                    <div class=" form-horizontal">
+                        <div class="form-group">
+                            <label for="reqtype" class="col-sm-2 control-label">请求方式</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="reqtype">
+                                    <option value="GET">GET</option>
+                                    <option value="POST">POST</option>
+                                    <option value="PUT">PUT</option>
+                                    <option value="DELETE">DELETE</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="url" class="col-sm-2 control-label">Api Url</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="url"
+                                       placeholder="请输入Api请求url">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="request" class="col-sm-2 control-label">请求参数</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="request" rows="8" placeholder="请输入请求JSON（GET请求不填）"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="respone" class="col-sm-2 control-label">返回结果</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="respone" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" pull-right">
+                        <button id="send" type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-ok"></span> 提交
+                        </button>
+                        <button type="button" id="clear" class="btn btn-default btn-sm" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>清空</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2015 - O2O</p>
+        </footer>
+    </div>
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/respond.min.js"></script>
+    <script>
+        $(function () {
+            $("#send").bind("click", function () {
+                var url = $("#url").val();
+                var type = $("#reqtype").val();
+                var reqdata = $("#request").val() == "" ? null : $("#request").val();
+                $.ajax({
+                    url: url,
+                    type: type,
+                    data: eval('(' + reqdata + ')'),
+                    success: function (data) {
+                        $("#respone").val(JSON.stringify(data));
+                    }, error: function (error) {
+                        $("#respone").val(error.responseText);
+                    }
+                });
+            });
+            $("#clear").bind("click", function () { $(".form-control").val(""); });
+        });
+    </script>
+
+</body>
+</html>

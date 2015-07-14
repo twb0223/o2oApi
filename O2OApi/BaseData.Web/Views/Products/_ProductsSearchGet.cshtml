@@ -1,0 +1,64 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<BaseData.Model.Product>
+@{
+    var idx = 0;
+   
+}
+<table class="table table-striped">
+    <tr>
+        <th>
+            序号
+        </th>
+        <th>
+            商品条码
+        </th>
+        <th>
+            商品名称
+        </th>
+        <th>
+            商品类型
+        </th>
+        @*<th>
+                商品图片
+            </th>*@
+        <th>
+            操作
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        idx++;
+        <tr>
+            <td>
+                @idx
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdcutName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType.ProductTypeName)
+            </td>
+            @*<td>
+                </td>*@
+            <td>
+
+                <a title="编辑" href="javascript:Edit('@item.ProductCode');"><span class=" glyphicon glyphicon-edit"></span></a>
+                &nbsp;&nbsp;
+                <a title="删除" href="javascript:Delete('@item.ProductCode')"><span class="glyphicon glyphicon-trash"></span></a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<hr />
+<div style="padding-top:5px; width:100%">
+    <div style="float:left">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "products", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>

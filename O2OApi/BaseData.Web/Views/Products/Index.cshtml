@@ -1,0 +1,305 @@
+﻿@model IEnumerable<BaseData.Model.Product>
+
+@{
+    ViewBag.Title = "商品添加";
+    var idx = 0;
+}
+
+<div>
+    <ol class="breadcrumb">
+        <li><a href="../Products/Index">商品信息</a></li>
+        <li><a href="../ProductStore/Index">库存管理</a></li>
+        <li><a href="../ProductStore/InRecord">进货记录</a></li>
+        <li><a href="../ProductStore/OutRecord">出货记录</a></li>
+        <li><a href="../ProductStore/BreakRecord">货损记录</a></li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
+                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "products", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                        {
+                            <div class="row">
+                                <div class="col-lg-5 col-md-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="key" id="key" placeholder="商品名称，条码，类型">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                                查询
+                                            </button>
+
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                    <div class=" col-md-1 pull-right">
+                        <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div id="products">
+                    @Html.Partial("_ProductsSearchGet", Model)
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+
+                    <div class="form-group">
+                        <label for="productcode" class="col-sm-2 control-label">商品条码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="productcode"
+                                   placeholder="请输商品条码(数字)" maxlength="50"  onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productname" class="col-sm-2 control-label">商品名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="productname"
+                                   placeholder="请输入商品名称" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="producttypeid" class="col-sm-2 control-label">商品类型</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="producttypeid">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productdes" class="col-sm-2 control-label">商品描述</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="productdes"
+                                      placeholder="请输入商品描述" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="alert alert-danger" style="display:none" id="errmsg">输出数据不合法，请检查重新输入！</div>
+                <button id="save" type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-ok"></span> 提交
+                </button>
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="emyModal" tabindex="-1" role="dialog" aria-labelledby="emyModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="emyModalLabel">编辑商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+
+                    <div class="form-group">
+                        <label for="eproductcode" class="col-sm-2 control-label">商品条码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="eproductcode"
+                                   placeholder="请输商品条码" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eproductname" class="col-sm-2 control-label">商品名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="eproductname"
+                                   placeholder="请输入商品名称">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eproducttypeid" class="col-sm-2 control-label">商品类型</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="eproducttypeid">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eproductdes" class="col-sm-2 control-label">商品描述</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="eproductdes"
+                                      placeholder="请输入商品描述" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="alert alert-danger" style="display:none" id="edrrmsg">输出数据不合法，请检查重新输入！</div>
+                <button id="esave" type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-ok"></span> 提交
+                </button>
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        var authJson = null;
+        $(function () {
+            $.getJSON("/api/ProductTypesApi", function (data) {
+                var item = "<option value=-1>=请选择=</option>";
+                for (var i = 0; i < data.length; i++) {
+                    item += ' <option value="' + data[i].ProductTypeID + '">' + data[i].ProductTypeName + '</option>';
+                }
+                $("#producttypeid").empty().append(item);
+                $("#eproducttypeid").empty().append(item);
+            });
+
+            //新建
+            $("#productname").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#eproductname").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#productcode").bind('change', function () {
+                $("#errmsg").css("display", "none")
+                $.getJSON("/Users/CheckAccount", { account: $(this).val() }, function (data) {
+                    if (data == "ishave") {
+                        $("#errmsg").css("display", "block").text("账号:" + $("#useraccount").val() + "已被使用，请重新输入！");
+                        $("#useraccount").val('').focus();
+                    }
+                });
+            });
+            $("#producttypeid").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#eproducttypeid").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+
+            $("#save").bind("click", function () {
+                $("#errmsg").css("display", "none");
+                var model = {};
+                model.ProductCode = $("#productcode").val();
+                model.ProdcutName = $("#productname").val();
+                model.ProdcutDes = $("#productdes").val();
+                model.ProductTypeID = $("#producttypeid").val();
+                if (model.ProductCode == "") {
+                    $("#productcode").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.ProdcutName == "") {
+                    $("#productname").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.ProductTypeID == "-1") {
+                    $("#producttypeid").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                $.ajax({
+                    url: "/Products/Create",
+                    type: 'POST',
+                    data: { jsonstr: JSON.stringify(model) },
+                    success: function (data) {
+                        if (data == "OK") {
+                            location.href = "/Products/Index";
+                        }
+                    },
+                    error: function (error) {
+                        if (error.status == 500) {
+                            $("#errmsg").css("display", "block");
+                        }
+                    }
+                });
+            });
+            $("#esave").bind("click", function () {
+                $("#ederrmsg").css("display", "none");
+                var model = {};
+                model.ProductCode = $("#eproductcode").val();
+                model.ProdcutName = $("#eproductname").val();
+                model.ProdcutDes = $("#eproductdes").val();
+                model.ProductTypeID = $("#eproducttypeid").val();
+                if (model.ProductCode == "") {
+                    $("#eproductcode").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.ProdcutName == "") {
+                    $("#eproductname").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.ProductTypeID == "-1") {
+                    $("#eproducttypeid").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                $.ajax({
+                    url: "/Products/Edit",
+                    type: 'POST',
+                    data: { jsonstr: JSON.stringify(model) },
+                    success: function (data) {
+                        if (data == "OK") {
+                            location.href = "/Products/Index";
+                        }
+                    },
+                    error: function (error) {
+                        if (error.status == 500) {
+                            $("#errmsg").css("display", "block");
+                        }
+                    }
+                });
+            });
+
+        });
+        function Edit(id) {
+            $.ajax({
+                url: "/Products/GetForEdit",
+                type: 'GET',
+                data: { id: id },
+                success: function (data) {
+                    $("#eproductcode").val(data.ProductCode).attr("disabled", "disabled");
+                    $("#eproductname").val(data.ProdcutName);
+                    $("#eproductdes").val(data.ProdcutDes);
+                    $("#eproducttypeid").val(data.ProductTypeID);
+                    $('#emyModal').modal('show');
+                }
+            });
+
+           
+        }
+        function Delete(id) {
+            if (confirm("提示：以下操作将会删除该商品信息，是否继续?")) {
+                $.ajax({
+                    url: "/Products/Delete",
+                    type: 'GET',
+                    data: { id: id },
+                    success: function (data) {
+                        location.href = "/Products/Index";
+                    }
+                });
+            }
+        }
+
+    </script>
+}

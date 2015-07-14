@@ -1,0 +1,574 @@
+﻿@model IEnumerable<BaseData.Web.ViewModels.UserRole_VM>
+@{
+    ViewBag.Title = "用户管理";
+    var idx = 0;
+}
+
+<div>
+    <ol class="breadcrumb">
+        <li><a href="../Users/Index">用户管理</a></li>
+        <li><a href="../Roles/Index">角色管理</a></li>
+        <li><a href="../AuthorityMenus/Index">角色权限管理</a></li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <h2 class="panel-title">用户管理</h2>
+                        </td>
+                        <td class="pull-right">
+                            <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            用户名称
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            所属项目
+                        </th>
+                        <th>
+                            角色
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        idx++;
+                        <tr>
+                            <td>
+                                @idx
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Enable)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProjectName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RoleName)
+                            </td>
+                            <td>
+
+                                <a title="编辑" href="javascript:Edit('@item.UserID');"><span class=" glyphicon glyphicon-edit"></span></a>
+                                &nbsp;&nbsp;
+                                <a title="删除" href="javascript:Delete('@item.UserID')"><span class="glyphicon glyphicon-trash"></span></a>
+                                &nbsp;&nbsp;
+                                @if (item.Enable == "已启用")
+                                {
+                                    <a title="锁定" href="javascript:Lock('@item.UserID');"><span class=" glyphicon glyphicon-lock"></span></a>
+                                }
+                                else
+                                {
+                                    <a title="解除锁定" href="javascript:ReLock('@item.UserID');"><span class=" glyphicon glyphicon-lock"></span></a>
+                                }
+
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">用户新建</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+
+                    <div class="form-group">
+                        <label for="useraccount" class="col-sm-2 control-label">用户账号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="useraccount"
+                                   placeholder="请输入用户账号,不少于6位">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">用户姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="username"
+                                   placeholder="请输入用户姓名">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userpwd" class="col-sm-2 control-label">登陆密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="userpwd"
+                                   placeholder="请输入登陆密码" maxlength="6">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reuserpwd" class="col-sm-2 control-label">确认密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="reuserpwd"
+                                   placeholder="请确认登陆密码" maxlength="6">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="project" class="col-sm-2 control-label">所属项目</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="project">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="deptment" class="col-sm-2 control-label">所属部门</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="deptment">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="userrole" class="col-sm-2 control-label">所属角色</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="userrole">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="alert alert-danger" style="display:none" id="errmsg">输出数据不合法，请检查重新输入！</div>
+                <button id="save" type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-ok"></span> 提交
+                </button>
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLable" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myEditModalLable">用户修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+                    <input type="hidden" id="userid" />
+                    <div class="form-group">
+                        <label for="eduseraccount" class="col-sm-2 control-label">用户账号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="eduseraccount"
+                                   placeholder="请输入用户账号" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edusername" class="col-sm-2 control-label">用户姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="edusername"
+                                   placeholder="请输入用户姓名">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eduserpwd" class="col-sm-2 control-label">登陆密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="eduserpwd"
+                                   placeholder="请输入登陆密码" maxlength="6">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edreuserpwd" class="col-sm-2 control-label">确认密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="edreuserpwd"
+                                   placeholder="请输入登陆密码" maxlength="6">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="edproject" class="col-sm-2 control-label">所属项目</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="edproject">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="eddeptment" class="col-sm-2 control-label">所属部门</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="eddeptment">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="eduserrole" class="col-sm-2 control-label">所属角色</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="eduserrole">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger" style="display:none" id="ederrmsg">输出数据不合法，请检查重新输入！</div>
+                <button id="esave" type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-ok"></span> 提交
+                </button>
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script>
+        var authJson = null;
+        $(function () {
+            $.getJSON("/api/ProjectsAPI", function (data) {
+                var item = "<option value=-1>=请选择=</option>";
+                for (var i = 0; i < data.length; i++) {
+                    item += ' <option value="' + data[i].ProjectID + '">' + data[i].ProjectName + '</option>';
+                }
+                $("#project").empty().append(item);
+                $("#edproject").empty().append(item);
+            });
+            //新建
+            $("#username").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#useraccount").bind('change', function () {
+                $("#errmsg").css("display", "none")
+                //$(this).parents(".form-group").attr("class", "form-group");
+                //if ($(this).val().length < 8) {
+                //    $("#errmsg").css("display", "block").text("账号长度不得少于8位！");
+                //    return;
+                //}
+                $.getJSON("/Users/CheckAccount", { account: $(this).val() }, function (data) {
+                    if (data == "ishave") {
+                        $("#errmsg").css("display", "block").text("账号:" + $("#useraccount").val() + "已被使用，请重新输入！");
+                        $("#useraccount").val('').focus();
+                    }
+                });
+            });
+            $("#reuserpwd").bind('change', function () { $("#errmsg").css("display", "none"); $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#userpwd").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#project").bind("change", function () {
+                $(this).parents(".form-group").attr("class", "form-group");
+                var pid = $(this).val();
+                $.getJSON("/api/DepartmentsAPI", { ProjectID: pid }, function (data) {
+                    var item = "<option value=-1>=请选择=</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        item += ' <option value="' + data[i].DepartmentID + '">' + data[i].DepartmentName + '</option>';
+                    }
+                    $("#deptment").empty().append(item);
+                });
+
+                $.getJSON("/Roles/GetRolesByProjectID", { ProjectID: pid }, function (data) {
+                    var item = "<option value=-1>=请选择=</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        item += ' <option value="' + data[i].RoleID + '">' + data[i].RoleName + '</option>';
+                    }
+                    $("#userrole").empty().append(item);
+                });
+            });
+            $("#deptment").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#userrole").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            //编辑
+            $("#edusername").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            //$("#eduseraccount").bind('change', function () {
+            //    $("#ederrmsg").css("display", "none");
+            //    $(this).parents(".form-group").attr("class", "form-group");
+            //    $.getJSON("/Users/CheckAccount", { account: $(this).val() }, function (data) {
+            //        if (data == "ishave") {
+            //            $("#ederrmsg").css("display", "block").text("账号:" + $("#eduseraccount").val() + "已被使用，请重新输入！");
+            //            $("#eduseraccount").val('').focus();
+            //        }
+            //    });
+            //});
+
+            $("#edreuserpwd").bind('change', function () { $("#ederrmsg").css("display", "none"); $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#eduserpwd").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#edproject").bind("change", function () {
+                $(this).parents(".form-group").attr("class", "form-group");
+                var pid = $(this).val();
+                $.getJSON("/api/DepartmentsAPI", { ProjectID: pid }, function (data) {
+                    var item = "<option value=-1>=请选择=</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        item += ' <option value="' + data[i].DepartmentID + '">' + data[i].DepartmentName + '</option>';
+                    }
+                    $("#eddeptment").empty().append(item);
+                });
+
+                $.getJSON("/Roles/GetRolesByProjectID", { ProjectID: pid }, function (data) {
+                    var item = "<option value=-1>=请选择=</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        item += ' <option value="' + data[i].RoleID + '">' + data[i].RoleName + '</option>';
+                    }
+                    $("#eduserrole").empty().append(item);
+                });
+            });
+            $("#eddeptment").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#eduserrole").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+
+            $("#save").bind("click", function () {
+                $("#errmsg").css("display", "none");
+                var model = {};
+                model.ProjectID = $("#project").val();
+                model.UserName = $("#username").val();
+                model.UserAccount = $("#useraccount").val();
+                model.Password = $("#reuserpwd").val();
+                model.DepartmentID = $("#deptment").val();
+                model.RoleID = $("#userrole").val();
+                model.Enable = true;
+
+                if (model.UserAccount == "") {
+                    $("#useraccount").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                //if (model.UserAccount.length < 8) {
+                //    $("#errmsg").css("display", "block").text("账号长度不得少于8位！");
+                //    return;
+                //}
+                if (model.UserName == "") {
+                    $("#username").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if ($("#userpwd").val() == "") {
+                    $("#userpwd").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+
+                if (model.Password == "") {
+                    $("#reuserpwd").parents(".form-group").attr("class", "form-group has-error");
+                    $("#errmsg").css("display", "none");
+                    return;
+                }
+                if ($("#userpwd").val() != model.Password) {
+                    $("#errmsg").css("display", "block").text("两次输入密码不一致！");
+                    return;
+                }
+                if (model.ProjectID == "-1") {
+                    $("#project").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.RoleID == "-1") {
+                    $("#userrole").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.DepartmentID == "-1") {
+                    $("#deptment").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                $.ajax({
+                    url: "/Users/Create",
+                    type: 'POST',
+                    data: { jsonstr: JSON.stringify(model) },
+                    success: function (data) {
+                        if (data == "OK") {
+                            location.href = "/Users/Index";
+                        }
+                    },
+                    error: function (error) {
+                        if (error.status == 500) {
+                            $("#errmsg").css("display", "block");
+                        }
+                    }
+                });
+            });
+        });
+        function Edit(id) {
+            $.ajax({
+                url: "/Users/GetForEdit",
+                type: 'GET',
+                data: { id: id },
+                success: function (data) {
+                    $("#userid").val(data.UserID);
+                    $("#edusername").val(data.UserName);
+                    $("#userid").val(data.UserID);
+                    $("#eduseraccount").val(data.UserAccount);
+                    $("#edreuserpwd").val(data.Password);
+                    $("#eduserpwd").val(data.Password);
+
+                    $("#edproject").val(data.ProjectID);
+                    $.ajax({
+                        url: "/api/DepartmentsAPI",
+                        type: 'GET',
+                        data: { ProjectID: data.ProjectID },
+                        async: false,
+                        success: function (data) {
+                            var item = "<option value='-1'>=请选择=</option>";
+                            for (var i = 0; i < data.length; i++) {
+                                item += ' <option value="' + data[i].DepartmentID + '">' + data[i].DepartmentName + '</option>';
+                            }
+                            $("#eddeptment").empty().append(item);
+                        }
+                    });
+                    $.ajax({
+                        url: "/Roles/GetRolesByProjectID",
+                        type: 'GET',
+                        data: { ProjectID: data.ProjectID },
+                        async: false,
+                        success: function (data) {
+                            var item = "<option value='-1'>=请选择=</option>";
+                            for (var i = 0; i < data.length; i++) {
+                                item += ' <option value="' + data[i].RoleID + '">' + data[i].RoleName + '</option>';
+                            }
+                            $("#eduserrole").empty().append(item);
+                        }
+                    });
+                    $("#eduserrole").val(data.RoleID);
+                    $("#eddeptment").val(data.DepartmentID);
+                    $('#myEditModal').modal('show');
+                }
+            });
+
+            $("#esave").bind("click", function () {
+                $("#ederrmsg").css("display", "none");
+                var model = {};
+                model.ProjectID = $("#edproject").val();
+                model.UserName = $("#edusername").val();
+                model.UserAccount = $("#eduseraccount").val();
+                model.Password = $("#edreuserpwd").val();
+                model.DepartmentID = $("#eddeptment").val();
+                model.RoleID = $("#eduserrole").val();
+                model.Enable = true;
+                model.UserID = $("#userid").val();
+
+                if (model.UserName == "") {
+                    $("#edusername").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.UserAccount == "") {
+                    $("#eduseraccount").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if ($("#eduserpwd").val() == "") {
+                    $("#eduserpwd").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.Password == "") {
+                    $("#edreuserpwd").parents(".form-group").attr("class", "form-group has-error");
+                    $("#ederrmsg").css("display", "none");
+                    return;
+                }
+                if ($("#eduserpwd").val() != model.Password) {
+                    $("#ederrmsg").css("display", "block").text("两次输入密码不一致！");
+                    return;
+                }
+                if (model.ProjectID == "-1") {
+                    $("#edproject").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.DepartmentID == "-1") {
+                    $("#eddeptment").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                if (model.RoleID == "-1") {
+                    $("#eduserrole").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+                $.ajax({
+                    url: "/Users/Edit",
+                    type: 'POST',
+                    data: { jsonstr: JSON.stringify(model) },
+                    success: function (data) {
+                        location.href = "/Users/Index";
+                    },
+                    error: function (error) {
+                        if (error.status == 500) {
+                            $("#ederrmsg").css("display", "block");
+                        }
+                    }
+                });
+            });
+        }
+        function Delete(id) {
+            if (confirm("提示：以下操作将会删除该用户信息，是否继续?")) {
+                $.ajax({
+                    url: "/Users/Delete",
+                    type: 'GET',
+                    data: { id: id },
+                    success: function (data) {
+                        location.href = "/Users/Index";
+                    }
+                });
+            }
+        }
+        function Lock(id) {
+            if (confirm("提示：以下操作将会锁定该账号，是否继续?")) {
+                $.ajax({
+                    url: "/Users/Lock",
+                    type: 'GET',
+                    data: { id: id },
+                    success: function (data) {
+                        location.href = "/Users/Index";
+                    }
+                });
+            }
+        }
+        function ReLock(id) {
+            if (confirm("提示：以下操作将会解除该账号锁定，是否继续?")) {
+                $.ajax({
+                    url: "/Users/Lock",
+                    type: 'GET',
+                    data: { id: id },
+                    success: function (data) {
+                        location.href = "/Users/Index";
+                    }
+                });
+            }
+        }
+
+    </script>
+}
