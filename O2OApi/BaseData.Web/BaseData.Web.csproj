@@ -168,6 +168,9 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Common\MyPagedList.cs" />
     <Compile Include="Common\Tools.cs" />
+    <Compile Include="Controllers\AccountsApiController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AreasApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductTypesApiController.cs" />
@@ -251,11 +254,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Users\_UsersSearchGet.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\_ProductsSearchGet.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Accounts\_AccountSearchGet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Model\BaseData.Model.csproj">

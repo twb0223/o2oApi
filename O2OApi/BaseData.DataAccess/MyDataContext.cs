@@ -18,6 +18,10 @@ namespace BaseData.DataAccess
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<City> Citys { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+
 
         public MyDataContext()
             : base(ConnectionString)

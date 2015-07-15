@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BaseData.Model
 {
     /// <summary>
-    /// 用户
+    /// 系统用户
     /// </summary>
     public class User
     {
@@ -50,6 +50,12 @@ namespace BaseData.Model
         /// 是否可用 True:可用，false：禁用
         /// </summary>
         public bool Enable { get; set; }
+
+        
+        public int AreaID { get; set; }
+
+        public virtual Area Area { get; set; }
+
 
     }
 }
