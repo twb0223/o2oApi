@@ -18,9 +18,9 @@
         <th>
             商品类型
         </th>
-        @*<th>
-                商品图片
-            </th>*@
+        <th>
+                商品单价(元)
+            </th>
         <th>
             操作
         </th>
@@ -42,8 +42,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductType.ProductTypeName)
             </td>
-            @*<td>
-                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.DynamicPrice)
+                </td>
             <td>
 
                 <a title="编辑" href="javascript:Edit('@item.ProductCode');"><span class=" glyphicon glyphicon-edit"></span></a>

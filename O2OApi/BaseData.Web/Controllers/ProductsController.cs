@@ -103,6 +103,7 @@ namespace BaseData.Web.Controllers
                 entiy.ProductCode = model.ProductCode;
                 entiy.ProductTypeID = model.ProductTypeID;
                 entiy.ProdcutDes = model.ProdcutDes;
+                entiy.DynamicPrice = model.DynamicPrice;
                 try
                 {
 

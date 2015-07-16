@@ -9,52 +9,53 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BaseData.Model
 {
     /// <summary>
-    /// 商品信息
+    /// 进货记录
     /// </summary>
-    public class Product
+    public class InRecord
     {
+        /// <summary>
+        /// 记录ID
+        /// </summary>
+        [Key]
+        public string InRecordID { get; set; }
+
         /// <summary>
         /// 产品条码
         /// </summary>
-        [Key]
+        [Required]
         [MaxLength(100)]
         public string ProductCode { get; set; }
 
-
         /// <summary>
-        /// 产品名称
+        /// 数量
         /// </summary>
         [Required]
-        [MaxLength(200)]
-        public string ProdcutName { get; set; }
+        public int Num { get; set; }
 
         /// <summary>
-        /// 产品描述
-        /// </summary>
-     
-        [MaxLength(500)]
-        public string ProdcutDes { get; set; }
-
-        /// <summary>
-        /// 产品图片[img1.jpg|img2.jpg|img3.jpg]
-        /// </summary>
-    
-        public string ImgUrl { get; set; }
-
-        /// <summary>
-        /// 产品类型ID
+        /// 单品进价
         /// </summary>
         [Required]
-        public int ProductTypeID { get; set; }
-        /// <summary>
-        /// 产品类型
-        /// </summary>
-        public virtual ProductType ProductType { get; set; }
+        public double InPrice { get; set; }
 
         /// <summary>
-        /// 当前售价
+        /// 进货日期
         /// </summary>
         [Required]
-        public double DynamicPrice { get; set; } 
+        public DateTime InDate { get; set; }
+
+        /// <summary>
+        /// 经办人
+        /// </summary>
+        [Required]
+        [MaxLength(50)]
+        public string CreateBy { get; set; }
+
+
+        /// <summary>
+        /// 经办时间
+        /// </summary>
+        [Required]
+        public DateTime CreateAt { get; set; }
     }
 }

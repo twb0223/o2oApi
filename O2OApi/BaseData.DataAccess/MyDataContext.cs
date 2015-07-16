@@ -22,6 +22,11 @@ namespace BaseData.DataAccess
         public DbSet<Area> Areas { get; set; }
         public DbSet<Account> Accounts { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<InRecord> InRecords { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
 
         public MyDataContext()
             : base(ConnectionString)
