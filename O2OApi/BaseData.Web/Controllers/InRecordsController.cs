@@ -32,7 +32,7 @@ namespace BaseData.Web.Controllers
                 qry = qry.Where(x => x.ProductCode.Contains(key) || x.CreateBy.Contains(key));
             var model = qry.OrderByDescending(a => a.ProductCode).ToPagedList(id, 10);
             if (Request.IsAjaxRequest())
-                return PartialView("_ProductsSearchGet", model);
+                return PartialView("_InRecordsSearchGet", model);
             return View(model);
         }
 

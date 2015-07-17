@@ -1,16 +1,12 @@
-﻿@model IEnumerable<BaseData.Model.Account>
-
+﻿@model IEnumerable<BaseData.Model.Order>
 @{
-    ViewBag.Title = "注册用户信息";
+    ViewBag.Title = "订单管理";
 }
-
 <div>
     <ol class="breadcrumb">
-        <li><a href="../Users/Index">系统用户管理</a></li>
-        <li><a href="../Accounts/Index">注册用户管理</a></li>
+        <li><a href="../Orders/Index">订单管理</a></li>
     </ol>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
@@ -22,29 +18,31 @@
                             <div class="row">
                                 <div class="col-lg-5 col-md-7">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="key" id="key" placeholder="账号,Email">
+                                        <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：条码,经办人">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit">
                                                 <span class="glyphicon glyphicon-search"></span>
                                             </button>
-
                                         </span>
-
                                     </div>
                                 </div>
-
                             </div>
                         }
                     </div>
+                    @*<div class=" col-md-1 pull-right">
+                        <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
+                    </div>*@
                 </div>
 
             </div>
             <div class="panel-body">
                 <div id="tables">
-                    @Html.Partial("_AccountSearchGet", Model)
+                    @Html.Partial("_OrdersSearchGet", Model)
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 

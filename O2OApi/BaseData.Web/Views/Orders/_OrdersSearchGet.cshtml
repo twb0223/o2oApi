@@ -1,0 +1,58 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<BaseData.Model.Order>
+@{
+    var idx = 0;
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+            序号
+        </th>
+        <th>
+            订单编号
+        </th>
+        <th>
+            订购账号
+        </th>
+        <th>
+            订单状态
+        </th>
+        <th>操作</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @idx
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a title="明细" href="javascript:Details('@item.OrderID');"><span class=" glyphicon glyphicon-eye-open"></span></a>
+                &nbsp;&nbsp;
+
+                <a title="分配" href="javascript:Edit('@item.OrderID');"><span class=" glyphicon glyphicon-share-alt"></span></a>
+                &nbsp;&nbsp;
+                @*<a title="删除" href="javascript:Delete('@item.OrderID')"><span class="glyphicon glyphicon-trash"></span></a>*@
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<hr />
+<div style="padding-top:5px; width:100%">
+    <div style="float:left">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "tables", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>
