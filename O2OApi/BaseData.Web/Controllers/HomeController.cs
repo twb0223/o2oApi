@@ -36,7 +36,7 @@ namespace BaseData.Web.Controllers
             string pwd = from["password"];
             var encypwd = Tools.MD5Encrypt(pwd);
             var restult = db.Users.Any(x => x.UserAccount == account && x.Password == encypwd && x.Enable == true);
-            if (restult)
+            if (!restult)
             {
                 return Redirect("Login");
             }

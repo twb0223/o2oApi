@@ -172,6 +172,7 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AreasApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InRecordsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductTypesApiController.cs" />
     <Compile Include="Controllers\UsersApiController.cs" />
@@ -260,6 +261,8 @@
     <Content Include="Views\Products\_ProductsSearchGet.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
     <Content Include="Views\Accounts\_AccountSearchGet.cshtml" />
+    <Content Include="Views\InRecords\Index.cshtml" />
+    <Content Include="Views\InRecords\_InRecordsSearchGet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Model\BaseData.Model.csproj">

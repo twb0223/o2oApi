@@ -38,11 +38,6 @@ namespace BaseData.Model
         [Required]
         public double InPrice { get; set; }
 
-        /// <summary>
-        /// 进货日期
-        /// </summary>
-        [Required]
-        public DateTime InDate { get; set; }
 
         /// <summary>
         /// 经办人

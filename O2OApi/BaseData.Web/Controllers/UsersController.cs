@@ -20,7 +20,7 @@ namespace BaseData.Web.Controllers
         private MyDataContext db = new MyDataContext();
         public ActionResult Index()
         {
-            var list = db.Users.ToList();
+            var list = db.Users.Include(x=>x.Area).Include(x=>x.Area.City).ToList();
 
             return View(list);
         }

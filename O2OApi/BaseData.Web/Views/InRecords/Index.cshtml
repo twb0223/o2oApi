@@ -1,7 +1,7 @@
-﻿@model IEnumerable<BaseData.Model.Product>
+﻿@model IEnumerable<BaseData.Model.InRecord>
 
 @{
-    ViewBag.Title = "商品管理";
+    ViewBag.Title = "进货记录";
 }
 
 <div>
@@ -19,12 +19,13 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
-                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "products", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
                         {
                             <div class="row">
+                               
                                 <div class="col-lg-5 col-md-7">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码，类型">
+                                        <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：条码,经办人">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit">
                                                 查询
@@ -45,8 +46,8 @@
 
             </div>
             <div class="panel-body">
-                <div id="products">
-                    @Html.Partial("_ProductsSearchGet", Model)
+                <div id="tables">
+                    @Html.Partial("_InRecordsSearchGet", Model)
                 </div>
 
 
@@ -60,7 +61,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加商品</h4>
+                <h4 class="modal-title" id="myModalLabel">添加进货记录</h4>
             </div>
             <div class="modal-body">
                 <div class=" form-horizontal">
@@ -74,38 +75,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="productname" class="col-sm-2 control-label">商品名称</label>
+                        <label for="innum" class="col-sm-2 control-label">商品数量</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="productname"
-                                   placeholder="请输入商品名称">
+                            <input type="text" class="form-control" id="innum"
+                                   placeholder="请输入商品数量" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="producttypeid" class="col-sm-2 control-label">商品类型</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="producttypeid">
-                                <option value="">默认选择</option>
-                            </select>
-                        </div>
-                    </div>
+
 
                     <div class="form-group">
-                        <label for="DynamicPrice" class="col-sm-2 control-label">出售单价</label>
+                        <label for="DynamicPrice" class="col-sm-2 control-label">单品进价</label>
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">￥</span>
-                                <input type="text" class="form-control" id="DynamicPrice" placeholder="请输入出售单价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
+                                <input type="text" class="form-control" id="DynamicPrice" placeholder="请输入单品进价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
                                 <span class="input-group-addon">元</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="productdes" class="col-sm-2 control-label">商品描述</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="productdes"
-                                      placeholder="请输入商品描述" rows="4"></textarea>
                         </div>
                     </div>
 
@@ -128,11 +114,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="emyModalLabel">编辑商品</h4>
+                <h4 class="modal-title" id="emyModalLabel">编辑进货记录</h4>
             </div>
             <div class="modal-body">
+                <input type="hidden" id="einrecordid" />
+                <input type="hidden" id="ecreateat" />
+                <input type="hidden" id="ecreateby" />
                 <div class=" form-horizontal">
-
                     <div class="form-group">
                         <label for="eproductcode" class="col-sm-2 control-label">商品条码</label>
                         <div class="col-sm-10">
@@ -142,44 +130,25 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="eproductname" class="col-sm-2 control-label">商品名称</label>
+                        <label for="einnum" class="col-sm-2 control-label">商品数量</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="eproductname"
-                                   placeholder="请输入商品名称">
+                            <input type="text" class="form-control" id="einnum"
+                                   placeholder="请输入商品数量" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="eproducttypeid" class="col-sm-2 control-label">商品类型</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="eproducttypeid">
-                                <option value="">默认选择</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="eDynamicPrice" class="col-sm-2 control-label">出售单价</label>
+                        <label for="eDynamicPrice" class="col-sm-2 control-label">单品进价</label>
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon">￥</span>
-                                <input type="text" class="form-control" id="eDynamicPrice" placeholder="请输入出售单价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
+                                <input type="text" class="form-control" id="eDynamicPrice" placeholder="请输入单品进价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
                                 <span class="input-group-addon">元</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="eproductdes" class="col-sm-2 control-label">商品描述</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="eproductdes"
-                                      placeholder="请输入商品描述" rows="4"></textarea>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-
             <div class="modal-footer">
                 <div class="alert alert-danger" style="display:none" id="edrrmsg">输出数据不合法，请检查重新输入！</div>
                 <button id="esave" type="button" class="btn btn-default btn-sm">
@@ -192,67 +161,55 @@
 </div>
 
 
-
 @section Scripts {
     <script>
         var authJson = null;
         $(function () {
-            $.getJSON("/api/ProductTypesApi", function (data) {
-                var item = "<option value=-1>=请选择=</option>";
-                for (var i = 0; i < data.length; i++) {
-                    item += ' <option value="' + data[i].ProductTypeID + '">' + data[i].ProductTypeName + '</option>';
-                }
-                $("#producttypeid").empty().append(item);
-                $("#eproducttypeid").empty().append(item);
-            });
-
-            //新建
-            $("#productname").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-            $("#eproductname").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-
             $("#productcode").bind('change', function () {
                 $("#errmsg").css("display", "none")
+
                 $.getJSON("/Products/CheckCode", { code: $(this).val() }, function (data) {
-                    if (data == "ishave") {
-                        $("#errmsg").css("display", "block").text("条码:" + $("#productcode").val() + " 已存在，请重新输入！");
+                    if (data != "ishave") {
+                        $("#errmsg").css("display", "block").text("条码:" + $("#productcode").val() + " 在系统中未找到，请先到商品信息页面维护！");
                         $("#useraccount").val('').focus();
                     }
                 });
+
             });
-            $("#producttypeid").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-            $("#eproducttypeid").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+
+            $("#eproductcode").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#innum").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#einnum").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#DynamicPrice").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#eDynamicPrice").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
 
             $("#save").bind("click", function () {
                 $("#errmsg").css("display", "none");
                 var model = {};
+                model.Num = $("#innum").val();
                 model.ProductCode = $("#productcode").val();
-                model.ProdcutName = $("#productname").val();
-                model.ProdcutDes = $("#productdes").val();
-                model.ProductTypeID = $("#producttypeid").val();
-                model.DynamicPrice = $("#DynamicPrice").val();
+                model.InPrice = $("#DynamicPrice").val();
+
                 if (model.ProductCode == "") {
                     $("#productcode").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if (model.ProdcutName == "") {
-                    $("#productname").parents(".form-group").attr("class", "form-group has-error");
+                if (model.Num == "") {
+                    $("#innum").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if (model.ProductTypeID == "-1") {
-                    $("#producttypeid").parents(".form-group").attr("class", "form-group has-error");
-                    return;
-                }
-                if (model.DynamicPrice == "") {
+                if (model.InPrice == "") {
                     $("#DynamicPrice").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
+
                 $.ajax({
-                    url: "/Products/Create",
+                    url: "/InRecords/Create",
                     type: 'POST',
                     data: { jsonstr: JSON.stringify(model) },
                     success: function (data) {
                         if (data == "OK") {
-                            location.href = "/Products/Index";
+                            location.href = "/InRecords/Index";
                         }
                     },
                     error: function (error) {
@@ -265,34 +222,28 @@
             $("#esave").bind("click", function () {
                 $("#ederrmsg").css("display", "none");
                 var model = {};
+                model.Num = $("#einnum").val();
                 model.ProductCode = $("#eproductcode").val();
-                model.ProdcutName = $("#eproductname").val();
-                model.ProdcutDes = $("#eproductdes").val();
-                model.ProductTypeID = $("#eproducttypeid").val();
-                model.DynamicPrice = $("#eDynamicPrice").val();
-                if (model.ProductCode == "") {
-                    $("#eproductcode").parents(".form-group").attr("class", "form-group has-error");
+                model.InPrice = $("#eDynamicPrice").val();
+                model.InRecordID = $("#einrecordid").val();
+                model.CreateAt = $("#ecreateat").val();
+                model.CreateBy = $("#ecreateby").val();
+
+                if (model.Num == "") {
+                    $("#einnum").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if (model.ProdcutName == "") {
-                    $("#eproductname").parents(".form-group").attr("class", "form-group has-error");
-                    return;
-                }
-                if (model.ProductTypeID == "-1") {
-                    $("#eproducttypeid").parents(".form-group").attr("class", "form-group has-error");
-                    return;
-                }
-                if (model.DynamicPrice == "") {
+                if (model.InPrice == "") {
                     $("#eDynamicPrice").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
                 $.ajax({
-                    url: "/Products/Edit",
+                    url: "/InRecords/Edit",
                     type: 'POST',
                     data: { jsonstr: JSON.stringify(model) },
                     success: function (data) {
                         if (data == "OK") {
-                            location.href = "/Products/Index";
+                            location.href = "/InRecords/Index";
                         }
                     },
                     error: function (error) {
@@ -306,15 +257,16 @@
         });
         function Edit(id) {
             $.ajax({
-                url: "/Products/GetForEdit",
+                url: "/InRecords/GetForEdit",
                 type: 'GET',
                 data: { id: id },
                 success: function (data) {
                     $("#eproductcode").val(data.ProductCode).attr("disabled", "disabled");
-                    $("#eproductname").val(data.ProdcutName);
-                    $("#eproductdes").val(data.ProdcutDes);
-                    $("#eproducttypeid").val(data.ProductTypeID);
-                    $("#eDynamicPrice").val(data.DynamicPrice);
+                    $("#einnum").val(data.Num);
+                    $("#eDynamicPrice").val(data.InPrice);
+                    $("#einrecordid").val(data.InRecordID);
+                    $("#ecreateat").val(data.CreateAt);
+                    $("#ecreateby").val(data.CreateBy);
                     $('#emyModal').modal('show');
                 }
             });
@@ -322,13 +274,13 @@
 
         }
         function Delete(id) {
-            if (confirm("提示：以下操作将会删除该商品信息，是否继续?")) {
+            if (confirm("提示：以下操作将会删除该商品进货记录，是否继续?")) {
                 $.ajax({
-                    url: "/Products/Delete",
+                    url: "/InRecords/Delete",
                     type: 'GET',
                     data: { id: id },
                     success: function (data) {
-                        location.href = "/Products/Index";
+                        location.href = "/InRecords/Index";
                     }
                 });
             }
