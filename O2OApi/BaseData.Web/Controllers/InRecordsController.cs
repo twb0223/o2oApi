@@ -51,17 +51,7 @@ namespace BaseData.Web.Controllers
             return View(inRecord);
         }
 
-        // GET: InRecords/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: InRecords/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
-
         public async Task<ActionResult> Create(string jsonstr)
         {
             var res = new JsonResult();
@@ -160,17 +150,6 @@ namespace BaseData.Web.Controllers
             }
             res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return res;
-        }
-
-        // POST: InRecords/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
-        {
-            InRecord inRecord = await db.InRecords.FindAsync(id);
-            db.InRecords.Remove(inRecord);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
