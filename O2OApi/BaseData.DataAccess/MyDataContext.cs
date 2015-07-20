@@ -27,6 +27,7 @@ namespace BaseData.DataAccess
         public DbSet<InRecord> InRecords { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
+        public DbSet<DeliveryMan> DeliveryMen { get; set; }
 
         public MyDataContext()
             : base(ConnectionString)

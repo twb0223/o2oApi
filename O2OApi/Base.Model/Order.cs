@@ -42,5 +42,10 @@ namespace BaseData.Model
 
 
         public List<OrderDetail> OrderDetailList { get; set; }
+
+        /// <summary>
+        /// 对应配送员
+        /// </summary>
+        public int? DeliveryManID { get; set; }
     }
 }

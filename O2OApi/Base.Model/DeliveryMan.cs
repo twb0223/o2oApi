@@ -8,40 +8,42 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseData.Model
 {
-    /// <summary>
-    /// 订单明细
-    /// </summary>
-    public class OrderDetail
+    public class DeliveryMan
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public long OrderDetailsID { get; set; }
+        public int DeliveryManID { get; set; }
 
         /// <summary>
-        /// 产品条码
+        /// 姓名
         /// </summary>
-        [MaxLength(100)]
         [Required]
-        public string ProductCode { get; set; }
+        [MaxLength(50)]
+        public string DeliveryManName { get; set; }
+
 
         /// <summary>
-        /// 数量
+        /// 身份证
         /// </summary>
         [Required]
-        public int Num { get; set; }
+        [MaxLength(50)]
+        public string IDNumber { get; set; }
+
 
         /// <summary>
-        /// 卖出单价
+        /// 联系方式
         /// </summary>
         [Required]
-        public double Prices { get; set; }
+        [MaxLength(50)]
+        public string Mobile { get; set; }
+
 
         /// <summary>
-        /// 订单ID
+        /// 所属区域
         /// </summary>
         [Required]
-        public string OrderID { get; set; }
+        public int AreaID { get; set; }
 
-        //public virtual Order Order { get; set; }
+        public virtual Area Area { get; set; }
     }
 }

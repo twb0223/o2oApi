@@ -1,6 +1,6 @@
-﻿@model IEnumerable<BaseData.Model.User>
+﻿@model IEnumerable<BaseData.Model.DeliveryMan>
 @{
-    ViewBag.Title = "用户管理";
+    ViewBag.Title = "配送员管理";
     var idx = 0;
 }
 
@@ -19,7 +19,7 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <h2 class="panel-title">系统用户管理</h2>
+                            <h2 class="panel-title">配送员管理</h2>
                         </td>
                         <td class="pull-right">
                             <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
@@ -34,16 +34,16 @@
                             序号
                         </th>
                         <th>
-                            登录账号
+                            姓名
                         </th>
                         <th>
-                            用户名称
+                            身份证
+                        </th>
+                        <th>
+                            联系电话
                         </th>
                         <th>
                             所属区域
-                        </th>
-                        <th>
-                            状态
                         </th>
                         <th>
                             操作
@@ -58,33 +58,22 @@
                                 @idx
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.UserAccount)
+                                @Html.DisplayFor(modelItem => item.DeliveryManName)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.UserName)
+                                @Html.DisplayFor(modelItem => item.IDNumber)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Area.City.CityName)-@Html.DisplayFor(modelItem => item.Area.AreaName)
+                                @Html.DisplayFor(modelItem => item.Mobile)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Enable)
+                                @Html.DisplayFor(modelItem => item.Area.AreaName)
                             </td>
                             <td>
-
-                                <a title="编辑" href="javascript:Edit('@item.UserID');"><span class=" glyphicon glyphicon-edit"></span></a>
+                                <a title="编辑" href="javascript:Edit('@item.DeliveryManID');"><span class=" glyphicon glyphicon-edit"></span></a>
                                 &nbsp;&nbsp;
-                                <a title="删除" href="javascript:Delete('@item.UserID')"><span class="glyphicon glyphicon-trash"></span></a>
-                                &nbsp;&nbsp;
-                                @if (item.Enable == true)
-                                {
-                                    <a title="锁定" href="javascript:Lock('@item.UserID');"><span class=" glyphicon glyphicon-lock"></span></a>
-                                }
-                                else
-                                {
-                                    <a title="解除锁定" href="javascript:ReLock('@item.UserID');"><span class=" glyphicon glyphicon-lock"></span></a>
-                                }
-
-
+                                <a title="删除" href="javascript:Delete('@item.DeliveryManID')"><span class="glyphicon glyphicon-trash"></span></a>
+                         
                             </td>
                         </tr>
                     }
@@ -100,18 +89,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">用户新建</h4>
+                <h4 class="modal-title" id="myModalLabel">新建配送员</h4>
             </div>
             <div class="modal-body">
                 <div class=" form-horizontal">
 
-                    <div class="form-group">
-                        <label for="useraccount" class="col-sm-2 control-label">用户账号</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="useraccount"
-                                   placeholder="请输入用户账号,不少于6位">
-                        </div>
-                    </div>
+                   
 
                     <div class="form-group">
                         <label for="username" class="col-sm-2 control-label">用户姓名</label>
@@ -122,20 +105,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="userpwd" class="col-sm-2 control-label">登陆密码</label>
+                        <label for="idnumber" class="col-sm-2 control-label">身份证</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="userpwd"
-                                   placeholder="请输入登陆密码" maxlength="6">
+                            <input type="text" class="form-control" id="idnumber"
+                                   placeholder="请输入身份证号">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="reuserpwd" class="col-sm-2 control-label">确认密码</label>
+                        <label for="mobile" class="col-sm-2 control-label">联系方式</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="reuserpwd"
-                                   placeholder="请确认登陆密码" maxlength="6">
+                            <input type="text" class="form-control" id="mobile"
+                                   placeholder="请输入联系方式">
                         </div>
                     </div>
+                
 
 
                     <div class="form-group">
@@ -166,18 +150,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myEditModalLable">用户修改</h4>
+                <h4 class="modal-title" id="myEditModalLable">修改配送员</h4>
             </div>
             <div class="modal-body">
                 <div class=" form-horizontal">
-                    <input type="hidden" id="userid" />
-                    <div class="form-group">
-                        <label for="eduseraccount" class="col-sm-2 control-label">用户账号</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="eduseraccount"
-                                   placeholder="请输入用户账号" disabled>
-                        </div>
-                    </div>
+                    <input type="hidden" id="DeliveryManID" />
+
+
 
                     <div class="form-group">
                         <label for="edusername" class="col-sm-2 control-label">用户姓名</label>
@@ -188,18 +167,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="eduserpwd" class="col-sm-2 control-label">登陆密码</label>
+                        <label for="edidnumber" class="col-sm-2 control-label">身份证</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="eduserpwd"
-                                   placeholder="请输入登陆密码" maxlength="6">
+                            <input type="text" class="form-control" id="edidnumber"
+                                   placeholder="请输入身份证号">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="edreuserpwd" class="col-sm-2 control-label">确认密码</label>
+                        <label for="edmobile" class="col-sm-2 control-label">联系方式</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="edreuserpwd"
-                                   placeholder="请输入登陆密码" maxlength="6">
+                            <input type="text" class="form-control" id="edmobile"
+                                   placeholder="请输入联系方式">
                         </div>
                     </div>
 
@@ -243,67 +222,47 @@
 
             //新建
             $("#username").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-            $("#useraccount").bind('change', function () {
-                $("#errmsg").css("display", "none")
-                $.getJSON("/Users/CheckAccount", { account: $(this).val() }, function (data) {
-                    if (data == "ishave") {
-                        $("#errmsg").css("display", "block").text("账号:" + $("#useraccount").val() + "已被使用，请重新输入！");
-                        $("#useraccount").val('').focus();
-                    }
-                });
-            });
-            $("#reuserpwd").bind('change', function () { $("#errmsg").css("display", "none"); $(this).parents(".form-group").attr("class", "form-group"); });
-            $("#userpwd").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-           
+            $("#mobile").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#idnumber").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#area").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+
             //编辑
             $("#edusername").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-
-            $("#edreuserpwd").bind('change', function () { $("#ederrmsg").css("display", "none"); $(this).parents(".form-group").attr("class", "form-group"); });
-            $("#eduserpwd").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-        
-            $("#area").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#edidnumber").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
             $("#earea").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
+            $("#edmobile").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
 
             $("#save").bind("click", function () {
                 $("#errmsg").css("display", "none");
                 var model = {};
-                model.UserName = $("#username").val();
-                model.UserAccount = $("#useraccount").val();
-                model.Password = $("#reuserpwd").val();
+                model.DeliveryManName = $("#username").val();
+                model.IDNumber = $("#idnumber").val();
+                model.Mobile = $("#mobile").val();
                 model.AreaID = $("#area").val();
-                model.Enable = true;
-                if (model.UserAccount == "") {
-                    $("#useraccount").parents(".form-group").attr("class", "form-group has-error");
-                    return;
-                }
-                if (model.UserName == "") {
+            
+                if (model.DeliveryManName == "") {
                     $("#username").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if ($("#userpwd").val() == "") {
-                    $("#userpwd").parents(".form-group").attr("class", "form-group has-error");
+                if (model.IDNumber == "") {
+                    $("#idnumber").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if (model.Password == "") {
-                    $("#reuserpwd").parents(".form-group").attr("class", "form-group has-error");
-                    $("#errmsg").css("display", "none");
+                if (model.Mobile == "") {
+                    $("#mobile").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if ($("#userpwd").val() != model.Password) {
-                    $("#errmsg").css("display", "block").text("两次输入密码不一致！");
-                    return;
-                }
-                if ($("#area").val() == "-1") {
+                if (model.AreaID == "-1") {
                     $("#area").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
                 $.ajax({
-                    url: "/Users/Create",
+                    url: "/DeliveryMen/Create",
                     type: 'POST',
                     data: { jsonstr: JSON.stringify(model) },
                     success: function (data) {
                         if (data == "OK") {
-                            location.href = "/Users/Index";
+                            location.href = "/DeliveryMen/Index";
                         }
                     },
                     error: function (error) {
@@ -316,59 +275,51 @@
         });
         function Edit(id) {
             $.ajax({
-                url: "/Users/GetForEdit",
+                url: "/DeliveryMen/GetForEdit",
                 type: 'GET',
                 data: { id: id },
                 success: function (data) {
-                    $("#edusername").val(data.UserName);
-                    $("#userid").val(data.UserID);
-                    $("#eduseraccount").val(data.UserAccount);
-                    $("#edreuserpwd").val(data.Password);
-                    $("#eduserpwd").val(data.Password);
+
+                    $("#DeliveryManID").val(data.DeliveryManID);
+                    $("#edusername").val(data.DeliveryManName);
+                    $("#edidnumber").val(data.IDNumber);
+                    $("#edmobile").val(data.Mobile);
                     $("#earea").val(data.AreaID);
+
                     $('#myEditModal').modal('show');
                 }
             });
             $("#esave").bind("click", function () {
                 $("#ederrmsg").css("display", "none");
                 var model = {};
-                model.UserName = $("#edusername").val();
-                model.UserAccount = $("#eduseraccount").val();
-                model.Password = $("#edreuserpwd").val();
-                model.Enable = true;
-                model.UserID = $("#userid").val();
+                model.DeliveryManID = $("#DeliveryManID").val();
+                model.DeliveryManName = $("#edusername").val();
+                model.IDNumber = $("#edidnumber").val();
+                model.Mobile = $("#edmobile").val();
                 model.AreaID = $("#earea").val();
-                if (model.UserName == "") {
+
+                if (model.DeliveryManName == "") {
                     $("#edusername").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if (model.UserAccount == "") {
-                    $("#eduseraccount").parents(".form-group").attr("class", "form-group has-error");
+                if (model.IDNumber == "") {
+                    $("#edidnumber").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if ($("#eduserpwd").val() == "") {
-                    $("#eduserpwd").parents(".form-group").attr("class", "form-group has-error");
+                if (model.Mobile == "") {
+                    $("#edmobile").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
-                if (model.Password == "") {
-                    $("#edreuserpwd").parents(".form-group").attr("class", "form-group has-error");
-                    $("#ederrmsg").css("display", "none");
-                    return;
-                }
-                if ($("#eduserpwd").val() != model.Password) {
-                    $("#ederrmsg").css("display", "block").text("两次输入密码不一致！");
-                    return;
-                }
-                if ($("#earea").val() == "-1") {
+                if (model.AreaID == "-1") {
                     $("#earea").parents(".form-group").attr("class", "form-group has-error");
                     return;
                 }
                 $.ajax({
-                    url: "/Users/Edit",
+                    url: "/DeliveryMen/Edit",
                     type: 'POST',
                     data: { jsonstr: JSON.stringify(model) },
                     success: function (data) {
-                        location.href = "/Users/Index";
+                        location.href = "/DeliveryMen/Index";
                     },
                     error: function (error) {
                         if (error.status == 500) {
@@ -379,37 +330,13 @@
             });
         }
         function Delete(id) {
-            if (confirm("提示：以下操作将会删除该用户信息，是否继续?")) {
+            if (confirm("提示：以下操作将会删除该配送员信息，是否继续?")) {
                 $.ajax({
-                    url: "/Users/Delete",
+                    url: "/DeliveryMen/Delete",
                     type: 'GET',
                     data: { id: id },
                     success: function (data) {
-                        location.href = "/Users/Index";
-                    }
-                });
-            }
-        }
-        function Lock(id) {
-            if (confirm("提示：以下操作将会锁定该账号，是否继续?")) {
-                $.ajax({
-                    url: "/Users/Lock",
-                    type: 'GET',
-                    data: { id: id },
-                    success: function (data) {
-                        location.href = "/Users/Index";
-                    }
-                });
-            }
-        }
-        function ReLock(id) {
-            if (confirm("提示：以下操作将会解除该账号锁定，是否继续?")) {
-                $.ajax({
-                    url: "/Users/Lock",
-                    type: 'GET',
-                    data: { id: id },
-                    success: function (data) {
-                        location.href = "/Users/Index";
+                        location.href = "/DeliveryMen/Index";
                     }
                 });
             }
