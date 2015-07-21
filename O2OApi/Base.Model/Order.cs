@@ -40,12 +40,15 @@ namespace BaseData.Model
         [Required]
         public int Status { get; set; }
 
-
-        public List<OrderDetail> OrderDetailList { get; set; }
-
         /// <summary>
         /// 对应配送员
         /// </summary>
         public int? DeliveryManID { get; set; }
+
+        /// <summary>
+        /// 下单时间
+        /// </summary>
+        public DateTime? OrderDate { get; set; }
+
     }
 }

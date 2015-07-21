@@ -70,9 +70,9 @@
                                 @Html.DisplayFor(modelItem => item.Area.AreaName)
                             </td>
                             <td>
-                                <a title="编辑" href="javascript:Edit('@item.DeliveryManID');"><span class=" glyphicon glyphicon-edit"></span></a>
+                                <a title="编辑" data-placement="bottom" data-toggle="tooltip" href="javascript:Edit('@item.DeliveryManID');"><span class=" glyphicon glyphicon-edit"></span></a>
                                 &nbsp;&nbsp;
-                                <a title="删除" href="javascript:Delete('@item.DeliveryManID')"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a title="删除" data-placement="bottom" data-toggle="tooltip" href="javascript:Delete('@item.DeliveryManID')"><span class="glyphicon glyphicon-trash"></span></a>
                          
                             </td>
                         </tr>
@@ -136,10 +136,10 @@
 
             <div class="modal-footer">
                 <div class="alert alert-danger" style="display:none" id="errmsg">输出数据不合法，请检查重新输入！</div>
-                <button id="save" type="button" class="btn btn-default btn-sm">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+                <button id="save" type="button" class="btn btn-primary">
                     <span class="glyphicon glyphicon-ok"></span> 提交
                 </button>
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
             </div>
         </div>
     </div>
@@ -195,10 +195,10 @@
             </div>
             <div class="modal-footer">
                 <div class="alert alert-danger" style="display:none" id="ederrmsg">输出数据不合法，请检查重新输入！</div>
-                <button id="esave" type="button" class="btn btn-default btn-sm">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+                <button id="esave" type="button" class="btn btn-primary">
                     <span class="glyphicon glyphicon-ok"></span> 提交
                 </button>
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
             </div>
         </div>
     </div>
@@ -211,6 +211,7 @@
     <script>
         var authJson = null;
         $(function () {
+            $("[data-toggle='tooltip']").tooltip();
             $.getJSON("/api/AreasApi", function (data) {
                 var item = "<option value=-1>=请选择=</option>";
                 for (var i = 0; i < data.length; i++) {

@@ -121,17 +121,14 @@ namespace BaseData.Web.Controllers
                 entiy.DynamicPrice = model.DynamicPrice;
                 try
                 {
-
                     db.Entry(entiy).State = EntityState.Modified;
                     await db.SaveChangesAsync();
                     res.Data = "OK";
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
-
             }
             else
             {

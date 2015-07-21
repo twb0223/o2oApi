@@ -12,6 +12,7 @@ using BaseData.Model;
 using Newtonsoft.Json;
 using Webdiyer.WebControls;
 using Webdiyer.WebControls.Mvc;
+using BaseData.Web.ViewModels;
 
 namespace BaseData.Web.Controllers
 {
@@ -44,65 +45,59 @@ namespace BaseData.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = await db.Orders.FindAsync(id);
+            Account acc = await db.Accounts.FindAsync(order.AccountID);
+            string sql = string.Format(@"select od.*,p.ProdcutName,p.imgUrl,p.ProductTypeID 
+                                        from OrderDetails od inner join [dbo].[Products] p
+                                        on od.ProductCode=p.ProductCode where od.OrderID='{0}'", id);
+
+            var list =await db.Database.SqlQuery<OrderProductsFullInfo>(sql).ToListAsync();
+
+            OrderFullInfo vm = new OrderFullInfo();
+            vm.OrderID = order.OrderID;
+            vm.OrderNo = order.OrderNo;
+            vm.AccountID = order.AccountID;
+            vm.AccountAddress = acc.DispatchAddress;
+            vm.AccountName = acc.ConnectName;
+            vm.AccountMobile = acc.Mobile;
+            vm.ProductList = list;
+            vm.Status = order.Status;
+            vm.OrderDate = order.OrderDate;
+
+            list.ForEach(x => {
+                vm.TotalPrice += Math.Round(x.Num * x.Prices,2);
+            });
+
             if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(vm);
         }
 
-        // GET: Orders/Create
-        public ActionResult Create()
+         [HttpPost]
+        public async Task<ActionResult> Send(string jsonstr)
         {
-            return View();
-        }
-
-        // POST: Orders/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "OrderID,OrderNo,AccountID,Status")] Order order)
-        {
+            var res = new JsonResult();
             if (ModelState.IsValid)
             {
-                db.Orders.Add(order);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+                var model = JsonConvert.DeserializeObject<Order>(jsonstr);
+                var order = await db.Orders.FindAsync(model.OrderID);
+                order.DeliveryManID = model.DeliveryManID;
+                order.Status = 1;
 
-            return View(order);
-        }
+                var dvman = await db.DeliveryMen.FindAsync(model.DeliveryManID);
+                dvman.Status = 1;
 
-        // GET: Orders/Edit/5
-        public async Task<ActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = await db.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            return View(order);
-        }
-
-        // POST: Orders/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "OrderID,OrderNo,AccountID,Status")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
                 db.Entry(order).State = EntityState.Modified;
+                db.Entry(dvman).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                res.Data = "OK";
             }
-            return View(order);
+            else
+            {
+                res.Data = "ERROR";
+            }
+            return res;
         }
 
         // GET: Orders/Delete/5

@@ -42,6 +42,6 @@ namespace BaseData.Model
         [Required]
         public string OrderID { get; set; }
 
-        //public virtual Order Order { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

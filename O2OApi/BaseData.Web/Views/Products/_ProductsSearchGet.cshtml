@@ -2,7 +2,7 @@
 @model Webdiyer.WebControls.Mvc.PagedList<BaseData.Model.Product>
 @{
     var idx = 0;
-   
+
 }
 <table class="table table-striped">
     <tr>
@@ -19,8 +19,8 @@
             商品类型
         </th>
         <th>
-                商品单价(元)
-            </th>
+            商品单价(元)
+        </th>
         <th>
             操作
         </th>
@@ -44,12 +44,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DynamicPrice)
-                </td>
+            </td>
             <td>
 
-                <a title="编辑" href="javascript:Edit('@item.ProductCode');"><span class=" glyphicon glyphicon-edit"></span></a>
+                <a title="编辑" data-placement="bottom" data-toggle="tooltip" href="javascript:Edit('@item.ProductCode');"><span class=" glyphicon glyphicon-edit"></span></a>
                 &nbsp;&nbsp;
-                <a title="删除" href="javascript:Delete('@item.ProductCode')"><span class="glyphicon glyphicon-trash"></span></a>
+                <a title="删除" data-placement="bottom" data-toggle="tooltip" href="javascript:Delete('@item.ProductCode')"><span class="glyphicon glyphicon-trash"></span></a>
 
             </td>
         </tr>

@@ -53,9 +53,9 @@
                 @Html.DisplayFor(modelItem => item.CreateAt)
             </td>
             <td>
-                <a title="编辑" href="javascript:Edit('@item.InRecordID');"><span class=" glyphicon glyphicon-edit"></span></a>
+                <a title="编辑" data-placement="bottom" data-toggle="tooltip" href="javascript:Edit('@item.InRecordID');"><span class=" glyphicon glyphicon-edit"></span></a>
                 &nbsp;&nbsp;
-                <a title="删除" href="javascript:Delete('@item.InRecordID')"><span class="glyphicon glyphicon-trash"></span></a>
+                <a title="删除" data-placement="bottom" data-toggle="tooltip" href="javascript:Delete('@item.InRecordID')"><span class="glyphicon glyphicon-trash"></span></a>
 
             </td>
         </tr>

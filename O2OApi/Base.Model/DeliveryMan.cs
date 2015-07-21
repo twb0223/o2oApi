@@ -10,6 +10,9 @@ namespace BaseData.Model
 {
     public class DeliveryMan
     {
+        /// <summary>
+        /// 配送员ID
+        /// </summary>
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int DeliveryManID { get; set; }
@@ -45,5 +48,11 @@ namespace BaseData.Model
         public int AreaID { get; set; }
 
         public virtual Area Area { get; set; }
+
+        /// <summary>
+        /// 状态 0:空闲，1:在配送，-1:其他
+        /// </summary>
+        [Required]
+        public int Status { get; set; }
     }
 }

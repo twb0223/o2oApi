@@ -2,10 +2,10 @@
 @model Webdiyer.WebControls.Mvc.PagedList<BaseData.Model.Order>
 @{
     var idx = 0;
-
+    var stauts = "";
 }
 
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             序号
@@ -24,6 +24,7 @@
 
     @foreach (var item in Model)
     {
+        idx++;
         <tr>
             <td>
                 @idx
@@ -35,16 +36,29 @@
                 @Html.DisplayFor(modelItem => item.AccountID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @switch (item.Status)
+                {
+                    case 0:
+                        stauts = "已提交";
+                        break;
+                    case 1:
+                        stauts = "配送中";
+                        break;
+                    case 2:
+                        stauts = "已收货";
+                        break;
+                    case -1:
+                        stauts = "退货";
+                        break;
+                }
+                @stauts
+
+               
             </td>
             <td>
-                <a title="明细" href="javascript:Details('@item.OrderID');"><span class=" glyphicon glyphicon-eye-open"></span></a>
-                &nbsp;&nbsp;
-
-                <a title="分配" href="javascript:Edit('@item.OrderID');"><span class=" glyphicon glyphicon-share-alt"></span></a>
-                &nbsp;&nbsp;
-                @*<a title="删除" href="javascript:Delete('@item.OrderID')"><span class="glyphicon glyphicon-trash"></span></a>*@
-
+                <a title="明细查看" href="/Orders/Details/@item.OrderID" data-placement="bottom" data-toggle="tooltip"><span class=" glyphicon glyphicon-eye-open"></span></a>
+                @*&nbsp;&nbsp;
+                <a title="分配订单" href="javascript:Edit('@item.OrderID');" data-placement="bottom" data-toggle="tooltip"><span class=" glyphicon glyphicon-share-alt"></span></a>*@
             </td>
         </tr>
     }

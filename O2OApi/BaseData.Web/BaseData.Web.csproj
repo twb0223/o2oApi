@@ -171,6 +171,8 @@
     <Compile Include="Controllers\AccountsApiController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AreasApiController.cs" />
+    <Compile Include="Controllers\AreasController.cs" />
+    <Compile Include="Controllers\DeliveryMenApiController.cs" />
     <Compile Include="Controllers\DeliveryMenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InRecordsController.cs" />
@@ -184,6 +186,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\OrderFullInfo.cs" />
+    <Compile Include="ViewModels\OrderProductsFullInfo.cs" />
     <Compile Include="ViewModels\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +272,12 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\_OrdersSearchGet.cshtml" />
     <Content Include="Views\DeliveryMen\Index.cshtml" />
+    <Content Include="Views\Areas\Create.cshtml" />
+    <Content Include="Views\Areas\Delete.cshtml" />
+    <Content Include="Views\Areas\Details.cshtml" />
+    <Content Include="Views\Areas\Edit.cshtml" />
+    <Content Include="Views\Areas\Index.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Model\BaseData.Model.csproj">
