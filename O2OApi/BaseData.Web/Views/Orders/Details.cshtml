@@ -1,0 +1,220 @@
+﻿@model BaseData.Web.ViewModels.OrderFullInfo
+
+@{
+    ViewBag.Title = "订单明细";
+    int idx = 0;
+    double totalprice = 0;
+    var stauts = "";
+}
+
+<div>
+    <ol class="breadcrumb">
+        <li><a href="~/Orders/Index">订单管理</a></li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                订单明细
+            </div>
+            <div class="panel-body">
+                <input type="hidden" value="@Html.DisplayFor(model => model.OrderID)" id="ordid" />
+                <ul style=" list-style:none">
+                    <li><label> 订单编号: @Html.DisplayFor(model => model.OrderNo)</label></li>
+                    <li> <label> 用户名称: @Html.DisplayFor(model => model.AccountName)</label></li>
+                    <li> <label> 配送地址: @Html.DisplayFor(model => model.AccountAddress)</label></li>
+                    <li> <label> 联系电话: @Html.DisplayFor(model => model.AccountMobile)</label></li>
+                    <li>
+                        <label>
+                            订单状态:@switch (Model.Status)
+                            {
+                                case 0:
+                                    stauts = "已提交";
+                                    break;
+                                case 1:
+                                    stauts = "配送中";
+                                    break;
+                                case 2:
+                                    stauts = "已收货";
+                                    break;
+                                case -1:
+                                    stauts = "退货";
+                                    break;
+                            }
+
+                            @stauts
+                        </label>
+                    </li>
+                    <li>  <label>下单时间: @Html.DisplayFor(model => model.OrderDate)</label></li>
+                </ul>
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            商品名称
+                        </th>
+                        <th>
+                            商品条码
+                        </th>
+                        <th>
+                            数量
+                        </th>
+                        <th>
+                            单价(元)
+                        </th>
+                        <th>
+                            总价(元)
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.ProductList)
+                    {
+                        idx++;
+                        totalprice = Math.Round(item.Prices * item.Num, 2);
+                        <tr>
+                            <td>@idx</td>
+                            <td>@item.ProdcutName</td>
+                            <td>@item.ProductCode</td>
+                            <td>@item.Num</td>
+                            <td>￥:@Math.Round(item.Prices, 2)</td>
+                            <td style="font-weight:900; color:red">￥:@totalprice</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td style=" font-size: x-large; font-weight:bold; color:red;" colspan="3"> 总价：￥:@Html.DisplayFor(model => model.TotalPrice)</td>
+                        <td style="text-align:right;" colspan="3">
+                            @switch (Model.Status)
+                            {
+                                case 0:
+                                    //订单状态为0 时 未配送
+                                    <button id="send" type="button" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-send"></span> 立即发货
+                                    </button>
+                                    break;
+                                case 1:
+                                    //将状态改为2
+                                    <button id="confirm" type="button" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-ok-circle"></span> 确认收货
+                                    </button>
+                                    //将状态改为-1
+                                    <button id="back" type="button" class="btn btn-warning">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> 用户退货
+                                    </button>
+                                    break;
+                                default:
+                                    break;
+                            }
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("返回列表", "Index")
+</p>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">确认发货</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <ul>
+                        <li><label>编号: @Html.DisplayFor(model => model.OrderNo)</label></li>
+                        <li><label>名称: @Html.DisplayFor(model => model.AccountName)</label></li>
+                        <li><label>地址: @Html.DisplayFor(model => model.AccountAddress)</label></li>
+                        <li><label>电话: @Html.DisplayFor(model => model.AccountMobile)</label></li>
+                        <li><label>总价: ￥:@Html.DisplayFor(model => model.TotalPrice) (元)</label></li>
+                        <li>
+                            <label for="dvman"> 配送员：</label>
+                            <select id="dvman" style="width:50%;" class=" form-control">
+                                <option value="-1">默认选择</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="alert alert-danger" style="display:none" id="errmsg">输出数据不合法，请检查重新输入！</div>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+                <button id="save" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span> 提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#send").bind("click", function () {
+                $.getJSON("/api/DeliveryMenApi", function (data) {
+                    var item = "<option value=-1>=请选择=</option>";
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].Status == 0) {
+                            item += ' <option value="' + data[i].DeliveryManID + '">' + data[i].DeliveryManName + '</option>';
+                        }
+                    }
+                    $("#dvman").empty().append(item);
+                    $('#myModal').modal('show');
+                });
+            });
+            $("#save").bind("click", function () {
+                var model = {};
+                model.DeliveryManID = $("#dvman").val();
+                model.OrderID = $("#ordid").val();
+                if (model.DeliveryManID == "-1") {
+                    $("#dvman").parents(".form-group").attr("class", "form-group has-error");
+                    return;
+                }
+
+                $.ajax({
+                    url: "/Orders/Send",
+                    type: 'POST',
+                    data: { jsonstr: JSON.stringify(model) },
+                    success: function (data) {
+                        if (data == "OK") {
+                            location.href = "/Orders/Index";
+                        }
+                    },
+                    error: function (error) {
+                        if (error.status == 500) {
+                            $("#errmsg").css("display", "block");
+                        }
+                    }
+                });
+            });
+
+            $("#confirm").bind("click", function () {
+                $.ajax({
+                    url: "/Orders/Confirm",
+                    type: 'GET',
+                    data: { id: $("#ordid").val() },
+                    success: function (data) {
+                        if (data == "OK") {
+                            location.href = "/Orders/Index";
+                        }
+                    },
+                    error: function (error) {
+                        if (error.status == 500) {
+                            $("#errmsg").css("display", "block");
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+}
