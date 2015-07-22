@@ -55,22 +55,43 @@ namespace BaseData.Web.Controllers
         public async Task<ActionResult> Create(string jsonstr)
         {
             var res = new JsonResult();
-            if (ModelState.IsValid)
+            try
             {
                 var model = JsonConvert.DeserializeObject<InRecord>(jsonstr);
                 model.CreateAt = DateTime.Now;
                 model.InRecordID = Guid.NewGuid().ToString();
                 model.CreateBy = Session["account"].ToString();
                 db.InRecords.Add(model);
+
+                //todo：更新ProductsStore
+                var psmodel = db.ProductsStores.FirstOrDefault(x => x.ProductCode == model.ProductCode);
+                if (psmodel == null)//首次添加
+                {
+                    ProductsStore vm = new ProductsStore();
+                    vm.ProductCode = model.ProductCode;
+                    vm.TotalInNum = model.Num;
+                    vm.TotalSaleNum = 0;
+                    vm.TotalBreakNum = 0;
+                    db.ProductsStores.Add(vm);
+                }
+                else//添加库存
+                {
+                    psmodel.TotalInNum += model.Num;
+                    db.Entry(psmodel).State = EntityState.Modified;
+                }
                 await db.SaveChangesAsync();
                 res.Data = "OK";
             }
-            else
+            catch (Exception)
             {
                 res.Data = "ERROR";
+                throw;
             }
+
+
             return res;
         }
+
         // GET: Products/Edit/5
         public async Task<ActionResult> GetForEdit(string id)
         {
@@ -127,7 +148,7 @@ namespace BaseData.Web.Controllers
             return res;
         }
 
-      
+
 
         // GET: InRecords/Delete/5
         public async Task<ActionResult> Delete(string id)

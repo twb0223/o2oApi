@@ -67,7 +67,16 @@
                                 @Html.DisplayFor(modelItem => item.Area.City.CityName)-@Html.DisplayFor(modelItem => item.Area.AreaName)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Enable)
+
+                                @if (item.Enable == true)
+                                {
+                                    <span>正常</span>
+                                }
+                                else
+                                {
+                                    <span style=" color:red">已锁定</span>
+                                }
+
                             </td>
                             <td>
 
@@ -235,7 +244,7 @@
             $.getJSON("/api/AreasApi", function (data) {
                 var item = "<option value=-1>=请选择=</option>";
                 for (var i = 0; i < data.length; i++) {
-                    item += ' <option value="' + data[i].AreaID + '">' + data[i].City.CityName+'-'+data[i].AreaName + '</option>';
+                    item += ' <option value="' + data[i].AreaID + '">' + data[i].City.CityName + '-' + data[i].AreaName + '</option>';
                 }
                 $("#area").empty().append(item);
                 $("#earea").empty().append(item);
@@ -254,13 +263,13 @@
             });
             $("#reuserpwd").bind('change', function () { $("#errmsg").css("display", "none"); $(this).parents(".form-group").attr("class", "form-group"); });
             $("#userpwd").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-           
+
             //编辑
             $("#edusername").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
 
             $("#edreuserpwd").bind('change', function () { $("#ederrmsg").css("display", "none"); $(this).parents(".form-group").attr("class", "form-group"); });
             $("#eduserpwd").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
-        
+
             $("#area").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
             $("#earea").bind('change', function () { $(this).parents(".form-group").attr("class", "form-group"); });
 

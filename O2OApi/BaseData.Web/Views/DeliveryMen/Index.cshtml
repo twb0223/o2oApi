@@ -16,73 +16,47 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <table width="100%">
-                    <tr>
-                        <td>
-                            <h2 class="panel-title">配送员管理</h2>
-                        </td>
-                        <td class="pull-right">
-                            <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
-                        </td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
+                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                        {
+                            <div class="row">
+
+                                <div class="col-lg-5 col-md-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：姓名,身份证">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                    <div class=" col-md-1 pull-right">
+                        <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
+                    </div>
+                </div>
+
             </div>
             <div class="panel-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>
-                            序号
-                        </th>
-                        <th>
-                            姓名
-                        </th>
-                        <th>
-                            身份证
-                        </th>
-                        <th>
-                            联系电话
-                        </th>
-                        <th>
-                            所属区域
-                        </th>
-                        <th>
-                            操作
-                        </th>
-                    </tr>
+                <div id="tables">
+                    @Html.Partial("_DeliveryMenSearchGet", Model)
+                </div>
 
-                    @foreach (var item in Model)
-                    {
-                        idx++;
-                        <tr>
-                            <td>
-                                @idx
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DeliveryManName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IDNumber)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Mobile)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Area.AreaName)
-                            </td>
-                            <td>
-                                <a title="编辑" data-placement="bottom" data-toggle="tooltip" href="javascript:Edit('@item.DeliveryManID');"><span class=" glyphicon glyphicon-edit"></span></a>
-                                &nbsp;&nbsp;
-                                <a title="删除" data-placement="bottom" data-toggle="tooltip" href="javascript:Delete('@item.DeliveryManID')"><span class="glyphicon glyphicon-trash"></span></a>
-                         
-                            </td>
-                        </tr>
-                    }
 
-                </table>
             </div>
         </div>
     </div>
 </div>
+
+
+
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">

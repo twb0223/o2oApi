@@ -179,6 +179,7 @@
     <Compile Include="Controllers\OrdersApiController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductsStoresController.cs" />
     <Compile Include="Controllers\ProductTypesApiController.cs" />
     <Compile Include="Controllers\UsersApiController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -278,6 +279,9 @@
     <Content Include="Views\Areas\Edit.cshtml" />
     <Content Include="Views\Areas\Index.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\ProductsStores\Index.cshtml" />
+    <Content Include="Views\ProductsStores\_ProductsStoreSearchGet.cshtml" />
+    <Content Include="Views\DeliveryMen\_DeliveryMenSearchGet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Model\BaseData.Model.csproj">

@@ -17,6 +17,9 @@
             订购账号
         </th>
         <th>
+            订购时间
+        </th>
+        <th>
             订单状态
         </th>
         <th>操作</th>
@@ -34,6 +37,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AccountID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
                 @switch (item.Status)

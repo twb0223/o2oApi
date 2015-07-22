@@ -4,7 +4,7 @@
     var idx = 0;
 
 }
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
             序号
@@ -17,9 +17,9 @@
             邮件地址
         </th>
 
-        <th>
+        @*<th>
             用户类型
-        </th>
+        </th>*@
         <th>
             注册时间
         </th>
@@ -31,9 +31,10 @@
 
     @foreach (var item in Model)
     {
+        idx++;
         <tr>
             <td>
-                @idx;
+                @idx
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AccountNo)
@@ -41,9 +42,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountType)
-            </td>
+          
             <td>
                 @Html.DisplayFor(modelItem => item.RegDate)
             </td>

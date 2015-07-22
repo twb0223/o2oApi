@@ -55,6 +55,7 @@ namespace BaseData.Model
         /// 当前售价
         /// </summary>
         [Required]
-        public double DynamicPrice { get; set; } 
+        public double DynamicPrice { get; set; }
+ 
     }
 }

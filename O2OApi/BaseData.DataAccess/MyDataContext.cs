@@ -29,6 +29,8 @@ namespace BaseData.DataAccess
 
         public DbSet<DeliveryMan> DeliveryMen { get; set; }
 
+        public DbSet<ProductsStore> ProductsStores { get; set; }
+
         public MyDataContext()
             : base(ConnectionString)
         {

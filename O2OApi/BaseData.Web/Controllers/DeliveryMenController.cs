@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using BaseData.DataAccess;
 using BaseData.Model;
 using Newtonsoft.Json;
+using Webdiyer.WebControls;
+using Webdiyer.WebControls.Mvc;
 
 namespace BaseData.Web.Controllers
 {
@@ -17,12 +19,22 @@ namespace BaseData.Web.Controllers
     {
         private MyDataContext db = new MyDataContext();
 
-        // GET: DeliveryMen
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string key, int id = 1)
         {
-            var deliveryMans = db.DeliveryMen.Include(d => d.Area);
-            return View(await deliveryMans.ToListAsync());
+            return ajaxSearchGetResult(key, id);
         }
+
+        private ActionResult ajaxSearchGetResult(string key, int id = 1)
+        {
+            var qry = db.DeliveryMen.Include(x=>x.Area).AsQueryable();
+            if (!String.IsNullOrWhiteSpace(key))
+                qry = qry.Where(x => x.DeliveryManName.Contains(key) || x.IDNumber.Contains(key));
+            var model = qry.OrderByDescending(a => a.DeliveryManID).ToPagedList(id, 10);
+            if (Request.IsAjaxRequest())
+                return PartialView("_DeliveryMenSearchGet", model);
+            return View(model);
+        }
+
 
         // GET: DeliveryMen/Details/5
         public async Task<ActionResult> Details(int? id)

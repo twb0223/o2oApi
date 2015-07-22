@@ -50,7 +50,7 @@ namespace BaseData.Web.Controllers
                                         from OrderDetails od inner join [dbo].[Products] p
                                         on od.ProductCode=p.ProductCode where od.OrderID='{0}'", id);
 
-            var list =await db.Database.SqlQuery<OrderProductsFullInfo>(sql).ToListAsync();
+            var list = await db.Database.SqlQuery<OrderProductsFullInfo>(sql).ToListAsync();
 
             OrderFullInfo vm = new OrderFullInfo();
             vm.OrderID = order.OrderID;
@@ -63,8 +63,9 @@ namespace BaseData.Web.Controllers
             vm.Status = order.Status;
             vm.OrderDate = order.OrderDate;
 
-            list.ForEach(x => {
-                vm.TotalPrice += Math.Round(x.Num * x.Prices,2);
+            list.ForEach(x =>
+            {
+                vm.TotalPrice += Math.Round(x.Num * x.Prices, 2);
             });
 
             if (order == null)
@@ -74,11 +75,11 @@ namespace BaseData.Web.Controllers
             return View(vm);
         }
 
-         [HttpPost]
+        [HttpPost]
         public async Task<ActionResult> Send(string jsonstr)
         {
             var res = new JsonResult();
-            if (ModelState.IsValid)
+            try
             {
                 var model = JsonConvert.DeserializeObject<Order>(jsonstr);
                 var order = await db.Orders.FindAsync(model.OrderID);
@@ -93,9 +94,10 @@ namespace BaseData.Web.Controllers
                 await db.SaveChangesAsync();
                 res.Data = "OK";
             }
-            else
+            catch (Exception)
             {
                 res.Data = "ERROR";
+                throw;
             }
             return res;
         }
@@ -124,6 +126,44 @@ namespace BaseData.Web.Controllers
             db.Orders.Remove(order);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> Confirm(string id)
+        {
+            var res = new JsonResult();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            try
+            {
+                Order order = await db.Orders.FindAsync(id);
+                order.Status = 2;
+
+                var dvman = await db.DeliveryMen.FindAsync(order.DeliveryManID);
+                dvman.Status = 0;
+
+                var odl = db.OrderDetails.Where(x => x.OrderID == id).ToList();
+                //遍历订单明细，并更新库存信息表
+                odl.ForEach(x => {
+                    var psmodel = db.ProductsStores.FirstOrDefault(t=> t.ProductCode == x.ProductCode);
+                    psmodel.TotalSaleNum += x.Num;
+                    db.Entry(psmodel).State = EntityState.Modified;
+                });
+
+                db.Entry(order).State = EntityState.Modified;
+                db.Entry(dvman).State = EntityState.Modified;
+
+                await db.SaveChangesAsync();
+                res.Data = "OK";
+            }
+            catch (Exception)
+            {
+                res.Data = "ERROR";
+                throw;
+            }
+            res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return res;
         }
 
         protected override void Dispose(bool disposing)
