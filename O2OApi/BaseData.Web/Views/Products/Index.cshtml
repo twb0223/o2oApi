@@ -11,6 +11,7 @@
         <li><a href="../Products/Index">商品基础信息</a></li>
 
         <li><a href="../InRecords/Index">进货管理</a></li>
+        <li><a href="../BreakRecords/Index">货损管理</a></li>
 
     </ol>
 </div>
@@ -23,21 +24,21 @@
                     <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
                         @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "products", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
                         {
-                            <div class="row">
-                                <div class="col-lg-5 col-md-7">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码，类型">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-7">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码，类型">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
 
-                                        </span>
+                                    </span>
 
-                                    </div>
                                 </div>
-
                             </div>
+
+                        </div>
 
                         }
                     </div>
@@ -60,72 +61,72 @@
 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">添加商品</h4>
-                </div>
-                <div class="modal-body">
-                    <div class=" form-horizontal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
 
-                        <div class="form-group">
-                            <label for="productcode" class="col-sm-2 control-label">商品条码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="productcode"
-                                       placeholder="请输商品条码(数字)" maxlength="50" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
-                            </div>
+                    <div class="form-group">
+                        <label for="productcode" class="col-sm-2 control-label">商品条码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="productcode"
+                                   placeholder="请输商品条码(数字)" maxlength="50" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
                         </div>
-
-                        <div class="form-group">
-                            <label for="productname" class="col-sm-2 control-label">商品名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="productname"
-                                       placeholder="请输入商品名称">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="producttypeid" class="col-sm-2 control-label">商品类型</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="producttypeid">
-                                    <option value="">默认选择</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="DynamicPrice" class="col-sm-2 control-label">出售单价</label>
-                            <div class="col-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">￥</span>
-                                    <input type="text" class="form-control" id="DynamicPrice" placeholder="请输入出售单价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
-                                    <span class="input-group-addon">元</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="productdes" class="col-sm-2 control-label">商品描述</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" id="productdes"
-                                          placeholder="请输入商品描述" rows="4"></textarea>
-                            </div>
-                        </div>
-
                     </div>
-                </div>
 
-                <div class="modal-footer">
-                    <div class="alert alert-danger" style="display:none" id="errmsg">输出数据不合法，请检查重新输入！</div>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
-                    <button id="save" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-ok"></span> 提交
-                    </button>
+                    <div class="form-group">
+                        <label for="productname" class="col-sm-2 control-label">商品名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="productname"
+                                   placeholder="请输入商品名称">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="producttypeid" class="col-sm-2 control-label">商品类型</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="producttypeid">
+                                <option value="">默认选择</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="DynamicPrice" class="col-sm-2 control-label">出售单价</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" id="DynamicPrice" placeholder="请输入出售单价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productdes" class="col-sm-2 control-label">商品描述</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="productdes"
+                                      placeholder="请输入商品描述" rows="4"></textarea>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="alert alert-danger" style="display:none" id="errmsg">输出数据不合法，请检查重新输入！</div>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+                <button id="save" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span> 提交
+                </button>
             </div>
         </div>
     </div>
+</div>
 
 <div class="modal fade" id="emyModal" tabindex="-1" role="dialog" aria-labelledby="emyModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
@@ -195,10 +196,59 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="myupModal" tabindex="-1" role="dialog" aria-labelledby="myupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myupModalLabel">商品图片上传</h4>
+                <input type="hidden" id="pcode" />
+            </div>
+            <div class="modal-body">
+                <div id="btncontainer">
+                    <button id="pickfiles" type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-folder-open"></span> 选择文件
+                    </button>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width:65%">文件名称</th>
+                            <th style="width:15%">大小</th>
+                            <th style="width:10%">进度</th>
+                            <th style="width:10%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="filelist">
+                        <tr>
+                            <td><div>您的浏览器不支持Flash, Silverlight or HTML5.</div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <!--<div class="alert alert-warning" id="console" style="display:block"></div>-->
+                <button id="uploadfiles" type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-cloud-upload"></span> 上传
+                </button>
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @section Scripts {
+
+    <script src="~/Scripts/plupload/plupload.full.min.js"></script>
+
     <script>
         var authJson = null;
         $(function () {
+            $(".popover-options a").popover({ html: true });
             $("[data-toggle='tooltip']").tooltip();
             $.getJSON("/api/ProductTypesApi", function (data) {
                 var item = "<option value=-1>=请选择=</option>";
@@ -305,7 +355,6 @@
                     }
                 });
             });
-
         });
         function Edit(id) {
             $.ajax({
@@ -336,5 +385,72 @@
                 });
             }
         }
+
+        function Remove(_element) {
+            var id = _element.getAttribute("tip");
+            var _parenttdElement = _element.parentNode;
+            var _parenttrElement = _parenttdElement.parentNode;
+            var _parenttbElement = _parenttrElement.parentNode;
+            for (var i = 0; i < uploader.files.length; i++) {
+                if (uploader.files[i].id == id) {
+                    uploader.removeFile(uploader.files[i]);
+                    if (_parenttbElement) {
+                        _parenttbElement.removeChild(_parenttrElement);
+                    }
+                    break;
+                }
+            }
+        };
+
+        var uploader = new plupload.Uploader({
+            runtimes: 'html5,flash,silverlight,html4',
+            browse_button: 'pickfiles', // you can pass in id...
+            container: document.getElementById('btncontainer'), // ... or DOM Element itself
+            url: window.location.origin + '/api/UploadApi',
+            flash_swf_url: '../Scripts/plupload/Moxie.swf',
+            silverlight_xap_url: '../Scripts/plupload/Moxie.xap',
+            filters: {
+                max_file_size: '100mb',
+                mime_types: [
+                    { title: "Image files", extensions: "jpg,gif,png" }
+                ],
+                prevent_duplicates: false
+            },
+            multipart: true,
+            multipart_params: {
+                code: $("#pcode").val()
+            },
+            init: {
+                PostInit: function () {
+                    document.getElementById('filelist').innerHTML = '';
+                    document.getElementById('uploadfiles').onclick = function () {
+                        uploader.start();
+                        return false;
+                    };
+                },
+                FilesAdded: function (up, files) {
+                    plupload.each(files, function (file) {
+                        document.getElementById('filelist').innerHTML += '<tr><td><div style="cursor:coress" >' + file.name + '<b></b></div></td><td>' + plupload.formatSize(file.size) + '</td><td id="' + file.id + '"><b></b></td><td><span style="cursor:pointer" class="glyphicon glyphicon-remove" onclick="Remove(this);" tip="' + file.id + '"></span></td></tr></tr>';
+                    });
+                },
+                UploadProgress: function (up, file) {
+                    document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                },
+                Error: function (up, err) {
+                },
+                FilesRemoved: function (up, file) {
+                },
+                UploadComplete: function (up, files) {
+                    $('#myupModal').modal('hide');
+                    $("#filelist").empty();
+                }
+            }
+        });
+        uploader.init();
+        function UploadImg(id) {
+            uploader.settings.multipart_params.code = id;
+            $('#myupModal').modal('show');
+        }
     </script>
+
 }

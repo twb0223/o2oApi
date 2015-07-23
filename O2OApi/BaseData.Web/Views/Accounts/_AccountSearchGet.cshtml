@@ -4,31 +4,32 @@
     var idx = 0;
 
 }
-<table class="table table-striped">
-    <tr>
-        <th>
-            序号
-        </th>
-        <th>
-            账号
-        </th>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                序号
+            </th>
+            <th>
+                账号
+            </th>
 
-        <th>
-            邮件地址
-        </th>
+            <th>
+                邮件地址
+            </th>
 
-        @*<th>
-            用户类型
-        </th>*@
-        <th>
-            注册时间
-        </th>
-        <th>
-            最后登录时间
-        </th>
+            @*<th>
+                    用户类型
+                </th>*@
+            <th>
+                注册时间
+            </th>
+            <th>
+                最后登录时间
+            </th>
 
-    </tr>
-
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         idx++;
@@ -42,7 +43,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-          
+
             <td>
                 @Html.DisplayFor(modelItem => item.RegDate)
             </td>

@@ -36,7 +36,7 @@ namespace BaseData.Model
         public string ProdcutDes { get; set; }
 
         /// <summary>
-        /// 产品图片[img1.jpg|img2.jpg|img3.jpg]
+        /// 产品图片[img1.jpg;img2.jpg;img3.jpg]
         /// </summary>
     
         public string ImgUrl { get; set; }

@@ -31,6 +31,9 @@ namespace BaseData.DataAccess
 
         public DbSet<ProductsStore> ProductsStores { get; set; }
 
+        public DbSet<BreakRecord> BreakRecords { get; set; }
+
+
         public MyDataContext()
             : base(ConnectionString)
         {

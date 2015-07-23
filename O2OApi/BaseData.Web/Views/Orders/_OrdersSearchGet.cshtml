@@ -5,26 +5,27 @@
     var stauts = "";
 }
 
-<table class="table table-striped">
-    <tr>
-        <th>
-            序号
-        </th>
-        <th>
-            订单编号
-        </th>
-        <th>
-            订购账号
-        </th>
-        <th>
-            订购时间
-        </th>
-        <th>
-            订单状态
-        </th>
-        <th>操作</th>
-    </tr>
-
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                序号
+            </th>
+            <th>
+                订单编号
+            </th>
+            <th>
+                订购账号
+            </th>
+            <th>
+                订购时间
+            </th>
+            <th>
+                订单状态
+            </th>
+            <th>操作</th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         idx++;
@@ -59,12 +60,12 @@
                 }
                 @stauts
 
-               
+
             </td>
             <td>
                 <a title="明细查看" href="/Orders/Details/@item.OrderID" data-placement="bottom" data-toggle="tooltip"><span class=" glyphicon glyphicon-eye-open"></span></a>
                 @*&nbsp;&nbsp;
-                <a title="分配订单" href="javascript:Edit('@item.OrderID');" data-placement="bottom" data-toggle="tooltip"><span class=" glyphicon glyphicon-share-alt"></span></a>*@
+                    <a title="分配订单" href="javascript:Edit('@item.OrderID');" data-placement="bottom" data-toggle="tooltip"><span class=" glyphicon glyphicon-share-alt"></span></a>*@
             </td>
         </tr>
     }

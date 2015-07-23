@@ -2,59 +2,77 @@
 @model Webdiyer.WebControls.Mvc.PagedList<BaseData.Model.Product>
 @{
     var idx = 0;
-
+    string[] imglist = null;
 }
-<table class="table table-striped">
-    <tr>
-        <th>
-            序号
-        </th>
-        <th>
-            商品条码
-        </th>
-        <th>
-            商品名称
-        </th>
-        <th>
-            商品类型
-        </th>
-        <th>
-            商品单价(元)
-        </th>
-        <th>
-            操作
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        idx++;
+<table class="table table-hover">
+    <thead>
         <tr>
-            <td>
-                @idx
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProdcutName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductType.ProductTypeName)
-            </td>
-            <td>
-                ￥@Html.DisplayFor(modelItem => item.DynamicPrice)
-            </td>
-            <td>
-
-                <a title="编辑" data-placement="bottom" data-toggle="tooltip" href="javascript:Edit('@item.ProductCode');"><span class=" glyphicon glyphicon-edit"></span></a>
-                &nbsp;&nbsp;
-                <a title="删除" data-placement="bottom" data-toggle="tooltip" href="javascript:Delete('@item.ProductCode')"><span class="glyphicon glyphicon-trash"></span></a>
-
-            </td>
+            <th>
+                序号
+            </th>
+            <th>
+                商品条码
+            </th>
+            <th>
+                商品名称
+            </th>
+            <th>
+                商品类型
+            </th>
+            <th>
+                商品单价(元)
+            </th>
+            <th>
+                操作
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            idx++;
+            if (!string.IsNullOrEmpty(item.ImgUrl))
+            {
+                imglist = item.ImgUrl.TrimEnd(new char[] { ';' }).Split(new char[] { ';' });
+            }
+            <tr>
+                <td>
+                    @idx
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductCode)
+                </td>
+                <td>
+                    @if (imglist[0] != null)
+                    {
+                        <img src='/UploadFiles/@imglist[0]' width="40px" height="40px" />
+                        @Html.DisplayFor(modelItem => item.ProdcutName)
+                    }
+                    else
+                    {
+                        <img src='' width="40px" height="40px" />
+                        @Html.DisplayFor(modelItem => item.ProdcutName)
+                    }
 
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductType.ProductTypeName)
+                </td>
+                <td>
+                    ￥@Html.DisplayFor(modelItem => item.DynamicPrice)
+                </td>
+                <td>
+
+                    <a title="编辑" data-placement="bottom" data-toggle="tooltip" href="javascript:Edit('@item.ProductCode');"><span class=" glyphicon glyphicon-edit"></span></a>
+                    &nbsp;&nbsp;
+                    <a title="删除" data-placement="bottom" data-toggle="tooltip" href="javascript:Delete('@item.ProductCode')"><span class="glyphicon glyphicon-trash"></span></a>
+                    &nbsp;&nbsp;
+                    <a title="上传图片" data-placement="bottom" data-toggle="tooltip" href="javascript:UploadImg('@item.ProductCode')"><span class="glyphicon glyphicon-cloud-upload"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 

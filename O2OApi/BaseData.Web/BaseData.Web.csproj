@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AreasApiController.cs" />
     <Compile Include="Controllers\AreasController.cs" />
+    <Compile Include="Controllers\BreakRecordsController.cs" />
     <Compile Include="Controllers\DeliveryMenApiController.cs" />
     <Compile Include="Controllers\DeliveryMenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -181,6 +183,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductsStoresController.cs" />
     <Compile Include="Controllers\ProductTypesApiController.cs" />
+    <Compile Include="Controllers\UploadApiController.cs" />
     <Compile Include="Controllers\UsersApiController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -233,6 +236,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Libs\MvcPager.dll" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -242,6 +246,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\plupload\Moxie.swf" />
+    <Content Include="Scripts\plupload\Moxie.xap" />
+    <Content Include="Scripts\plupload\plupload.full.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config">
@@ -282,6 +289,8 @@
     <Content Include="Views\ProductsStores\Index.cshtml" />
     <Content Include="Views\ProductsStores\_ProductsStoreSearchGet.cshtml" />
     <Content Include="Views\DeliveryMen\_DeliveryMenSearchGet.cshtml" />
+    <Content Include="Views\BreakRecords\Index.cshtml" />
+    <Content Include="Views\BreakRecords\_BreakRecordsSearchGet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Model\BaseData.Model.csproj">

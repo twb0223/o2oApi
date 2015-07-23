@@ -13,78 +13,66 @@ using Newtonsoft.Json;
 using Webdiyer.WebControls;
 using Webdiyer.WebControls.Mvc;
 
-
 namespace BaseData.Web.Controllers
 {
-    public class ProductsController : Controller
+    public class BreakRecordsController : Controller
     {
         private MyDataContext db = new MyDataContext();
 
-        // GET: Products
         public async Task<ActionResult> Index(string key, int id = 1)
         {
             return ajaxSearchGetResult(key, id);
         }
+
         private ActionResult ajaxSearchGetResult(string key, int id = 1)
         {
-            var qry = db.Products.Include(x => x.ProductType).AsQueryable();
+            var qry = db.BreakRecords.AsQueryable();
             if (!String.IsNullOrWhiteSpace(key))
-                qry = qry.Where(x => x.ProductCode.Contains(key) || x.ProdcutName.Contains(key) || x.ProductType.ProductTypeName.Contains(key));
+                qry = qry.Where(x => x.ProductCode.Contains(key) || x.CreateBy.Contains(key));
             var model = qry.OrderByDescending(a => a.ProductCode).ToPagedList(id, 10);
             if (Request.IsAjaxRequest())
-                return PartialView("_ProductsSearchGet", model);
+                return PartialView("_BreakRecordsSearchGet", model);
             return View(model);
         }
-        // GET: Products/Details/5
-        public async Task<ActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = await db.Products.FindAsync(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
 
-        // POST: Products/Create
         [HttpPost]
         public async Task<ActionResult> Create(string jsonstr)
         {
             var res = new JsonResult();
             try
             {
-                var model = JsonConvert.DeserializeObject<Product>(jsonstr);
-                db.Products.Add(model);
+                var model = JsonConvert.DeserializeObject<BreakRecord>(jsonstr);
+                model.CreateAt = DateTime.Now;
+                model.BreakRecordID = Guid.NewGuid().ToString();
+                model.CreateBy = Session["account"].ToString();
+                db.BreakRecords.Add(model);
+
+                //todo：更新ProductsStore
+                var psmodel = db.ProductsStores.FirstOrDefault(x => x.ProductCode == model.ProductCode);
+                if (psmodel == null)//首次添加
+                {
+                    ProductsStore vm = new ProductsStore();
+                    vm.ProductCode = model.ProductCode;
+                    vm.TotalInNum = model.Num;
+                    vm.TotalSaleNum = 0;
+                    vm.TotalBreakNum = 0;
+                    db.ProductsStores.Add(vm);
+                }
+                else//添加库存
+                {
+                    psmodel.TotalBreakNum += model.Num;
+                    db.Entry(psmodel).State = EntityState.Modified;
+                }
                 await db.SaveChangesAsync();
                 res.Data = "OK";
             }
             catch (Exception)
             {
                 res.Data = "ERROR";
+                throw;
             }
             return res;
         }
-        public ActionResult CheckCode(string code)
-        {
-            var res = new JsonResult();
-            var num = db.Products.Count(x => x.ProductCode == code);
-            if (num > 0)
-            {
-                res.Data = "ishave";
-            }
-            else
-            {
-                res.Data = "canuse";
-            }
-            res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return res;
-        }
-
-        // GET: Products/Edit/5
         public async Task<ActionResult> GetForEdit(string id)
         {
             var res = new JsonResult();
@@ -92,7 +80,7 @@ namespace BaseData.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product model = await db.Products.FindAsync(id);
+            BreakRecord model = await db.BreakRecords.FindAsync(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -105,46 +93,43 @@ namespace BaseData.Web.Controllers
             }
         }
 
-
         [HttpPost]
         public async Task<ActionResult> Edit(string jsonstr)
         {
             var res = new JsonResult();
-            if (ModelState.IsValid)
+            try
             {
-                var model = JsonConvert.DeserializeObject<Product>(jsonstr);
-                var entiy = db.Products.Find(model.ProductCode);
-                entiy.ProdcutName = model.ProdcutName;
+                var model = JsonConvert.DeserializeObject<BreakRecord>(jsonstr);
+                var entiy = db.BreakRecords.Find(model.BreakRecordID);
+
+                var psmodel = db.ProductsStores.FirstOrDefault(x => x.ProductCode == model.ProductCode);
+                //重新计算货损总数
+                psmodel.TotalBreakNum = psmodel.TotalBreakNum - entiy.Num + model.Num;
+
+                entiy.BreakRecordID = model.BreakRecordID;
                 entiy.ProductCode = model.ProductCode;
-                entiy.ProductTypeID = model.ProductTypeID;
-                entiy.ProdcutDes = model.ProdcutDes;
-                entiy.DynamicPrice = model.DynamicPrice;
-                try
-                {
-                    db.Entry(entiy).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
-                    res.Data = "OK";
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                entiy.Num = model.Num;
+                entiy.CreateBy = model.CreateBy;
+                entiy.CreateAt = model.CreateAt;
+                db.Entry(entiy).State = EntityState.Modified;
+                db.Entry(psmodel).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                res.Data = "OK";
             }
-            else
+            catch (Exception)
             {
                 res.Data = "ERROR";
+                throw;
             }
             return res;
         }
-
-        // GET: Products/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product model = await db.Products.FindAsync(id);
+            BreakRecord model = await db.BreakRecords.FindAsync(id);
             var res = new JsonResult();
             if (model == null)
             {
@@ -152,15 +137,17 @@ namespace BaseData.Web.Controllers
             }
             else
             {
-                db.Products.Remove(model);
+                var psmodel = db.ProductsStores.FirstOrDefault(x => x.ProductCode == model.ProductCode);
+                //重新计算货损总数
+                psmodel.TotalBreakNum = psmodel.TotalBreakNum - model.Num;
+                db.Entry(psmodel).State = EntityState.Modified;
+                db.BreakRecords.Remove(model);
                 await db.SaveChangesAsync();
                 res.Data = "OK";
             }
             res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return res;
         }
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
