@@ -33,8 +33,8 @@ namespace BaseData.Model
         /// <summary>
         /// 卖出单价
         /// </summary>
-        [Required]
-        public double Prices { get; set; }
+    
+        public decimal Prices { get; set; }
 
         /// <summary>
         /// 订单ID

@@ -65,8 +65,10 @@ namespace BaseData.Web.Controllers
 
             list.ForEach(x =>
             {
-                vm.TotalPrice += Math.Round(x.Num * x.Prices, 2);
+                vm.TotalAmount += x.Num * x.Prices;
             });
+            vm.DiscountAmount = order.DiscountAmount;
+            vm.PayAmount = order.PayAmount;
 
             if (order == null)
             {
@@ -165,6 +167,40 @@ namespace BaseData.Web.Controllers
             res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return res;
         }
+
+        public async Task<ActionResult> Back(string jsonstr)
+        {
+            var res = new JsonResult();
+            if (jsonstr == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            try
+            {
+                var model = JsonConvert.DeserializeObject<Order>(jsonstr);
+                var order = await db.Orders.FindAsync(model.OrderID);
+
+                order.Status = -1;
+                order.Content=model.Content;
+
+                var dvman = await db.DeliveryMen.FindAsync(order.DeliveryManID);
+                dvman.Status = 0;
+
+                db.Entry(order).State = EntityState.Modified;
+                db.Entry(dvman).State = EntityState.Modified;
+
+                await db.SaveChangesAsync();
+                res.Data = "OK";
+            }
+            catch (Exception)
+            {
+                res.Data = "ERROR";
+                throw;
+            }
+            res.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return res;
+        }
+
 
         protected override void Dispose(bool disposing)
         {

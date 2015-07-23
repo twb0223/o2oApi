@@ -58,7 +58,19 @@ namespace BaseData.Web.ViewModels
         /// <summary>
         /// 总价
         /// </summary>
-       
-        public double TotalPrice { get; set; }
+
+        public decimal TotalAmount { get; set; }
+
+
+        /// <summary>
+        /// 优惠金额
+        /// </summary>
+
+        public decimal DiscountAmount { get; set; }
+
+        /// <summary>
+        /// 支付金额
+        /// </summary>
+        public decimal PayAmount { get; set; }
     }
 }

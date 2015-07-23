@@ -22,7 +22,7 @@ namespace BaseData.Web.ViewModels
         /// <summary>
         /// 卖出单价
         /// </summary>
-        public double Prices { get; set; }
+        public decimal Prices { get; set; }
 
         /// <summary>
         /// 产品名称

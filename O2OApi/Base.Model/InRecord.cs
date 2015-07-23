@@ -36,7 +36,7 @@ namespace BaseData.Model
         /// 单品进价
         /// </summary>
         [Required]
-        public double InPrice { get; set; }
+        public decimal InPrice { get; set; }
 
 
         /// <summary>

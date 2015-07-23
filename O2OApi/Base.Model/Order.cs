@@ -50,5 +50,38 @@ namespace BaseData.Model
         /// </summary>
         public DateTime? OrderDate { get; set; }
 
+
+        /// <summary>
+        /// 订单总金额
+        /// </summary>
+       
+        public decimal TotalAmount { get; set; }
+
+        /// <summary>
+        /// 订单折扣金额
+        /// </summary>
+      
+        public decimal DiscountAmount { get; set; }
+
+
+        /// <summary>
+        /// 订单实际金额
+        /// </summary>
+       
+        public decimal PayAmount { get; set; }
+
+        ///// <summary>
+        ///// 销售策略(折扣，满xx减xx等)
+        ///// </summary>
+        //[Required]
+        //public int SaleStrategyID { get; set; }
+
+
+        /// <summary>
+        /// 订单说明
+        /// </summary>
+        [MaxLength(400)]
+        public string Content { get; set; }
+
     }
 }

@@ -9,7 +9,7 @@
         <li><a href="../ProductsStores/Index">商品库存信息</a></li>
 
         <li><a href="../Products/Index">商品基础信息</a></li>
-     
+
         <li><a href="../InRecords/Index">进货管理</a></li>
 
     </ol>
@@ -38,7 +38,7 @@
                                 </div>
 
                             </div>
-                            
+
                         }
                     </div>
                     <div class=" col-md-1 pull-right">
@@ -58,73 +58,74 @@
     </div>
 </div>
 
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加商品</h4>
-            </div>
-            <div class="modal-body">
-                <div class=" form-horizontal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加商品</h4>
+                </div>
+                <div class="modal-body">
+                    <div class=" form-horizontal">
 
-                    <div class="form-group">
-                        <label for="productcode" class="col-sm-2 control-label">商品条码</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="productcode"
-                                   placeholder="请输商品条码(数字)" maxlength="50" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="productname" class="col-sm-2 control-label">商品名称</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="productname"
-                                   placeholder="请输入商品名称">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="producttypeid" class="col-sm-2 control-label">商品类型</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="producttypeid">
-                                <option value="">默认选择</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="DynamicPrice" class="col-sm-2 control-label">出售单价</label>
-                        <div class="col-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">￥</span>
-                                <input type="text" class="form-control" id="DynamicPrice" placeholder="请输入出售单价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
-                                <span class="input-group-addon">元</span>
+                        <div class="form-group">
+                            <label for="productcode" class="col-sm-2 control-label">商品条码</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="productcode"
+                                       placeholder="请输商品条码(数字)" maxlength="50" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="productdes" class="col-sm-2 control-label">商品描述</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="productdes"
-                                      placeholder="请输入商品描述" rows="4"></textarea>
+                        <div class="form-group">
+                            <label for="productname" class="col-sm-2 control-label">商品名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="productname"
+                                       placeholder="请输入商品名称">
+                            </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="producttypeid" class="col-sm-2 control-label">商品类型</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="producttypeid">
+                                    <option value="">默认选择</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="DynamicPrice" class="col-sm-2 control-label">出售单价</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">￥</span>
+                                    <input type="text" class="form-control" id="DynamicPrice" placeholder="请输入出售单价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
+                                    <span class="input-group-addon">元</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productdes" class="col-sm-2 control-label">商品描述</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="productdes"
+                                          placeholder="请输入商品描述" rows="4"></textarea>
+                            </div>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <div class="alert alert-danger" style="display:none" id="errmsg">输出数据不合法，请检查重新输入！</div>
-                <button type="button" class="btn btn-default" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
-                <button id="save" type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-ok"></span> 提交
-                </button>
+                <div class="modal-footer">
+                    <div class="alert alert-danger" style="display:none" id="errmsg">输出数据不合法，请检查重新输入！</div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span style="cursor:pointer" class="glyphicon glyphicon-remove"></span>关闭</button>
+                    <button id="save" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-ok"></span> 提交
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <div class="modal fade" id="emyModal" tabindex="-1" role="dialog" aria-labelledby="emyModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
@@ -198,7 +199,7 @@
     <script>
         var authJson = null;
         $(function () {
-           $("[data-toggle='tooltip']").tooltip(); 
+            $("[data-toggle='tooltip']").tooltip();
             $.getJSON("/api/ProductTypesApi", function (data) {
                 var item = "<option value=-1>=请选择=</option>";
                 for (var i = 0; i < data.length; i++) {
