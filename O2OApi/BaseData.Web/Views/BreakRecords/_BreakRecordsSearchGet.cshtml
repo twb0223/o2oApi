@@ -1,0 +1,65 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model Webdiyer.WebControls.Mvc.PagedList<BaseData.Model.BreakRecord>
+@{
+    var idx = 0;
+
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                序号
+            </th>
+            <th>
+                商品条码
+            </th>
+            <th>
+                货损数量
+            </th>
+
+            <th>
+                经办人
+            </th>
+            <th>
+                经办日期
+            </th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            idx++;
+            <tr>
+                <td>
+                    @idx
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateAt)
+                </td>
+                <td>
+                    <a title="编辑" data-placement="bottom" data-toggle="tooltip" href="javascript:Edit('@item.BreakRecordID');"><span class=" glyphicon glyphicon-edit"></span></a>
+                    &nbsp;&nbsp;
+                    <a title="删除" data-placement="bottom" data-toggle="tooltip" href="javascript:Delete('@item.BreakRecordID')"><span class="glyphicon glyphicon-trash"></span></a>
+
+                </td>
+            </tr>
+        }
+
+</table>
+
+<hr />
+<div style="padding-top:5px; width:100%">
+    <div style="float:left">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
+    @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = true, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "tables", DataFormId = "searchForm" }, new { style = "float:right" })
+</div>
