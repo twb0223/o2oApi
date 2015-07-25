@@ -21,15 +21,19 @@ namespace BaseData.Web.Controllers
         private MyDataContext db = new MyDataContext();
 
         // GET: Products
-        public async Task<ActionResult> Index(string key, int id = 1)
+        public async Task<ActionResult> Index(string key,int type=-1, int id = 1)
         {
-            return ajaxSearchGetResult(key, id);
+            return ajaxSearchGetResult(key,type, id);
         }
-        private ActionResult ajaxSearchGetResult(string key, int id = 1)
+        private ActionResult ajaxSearchGetResult(string key,int type=-1,int id = 1)
         {
             var qry = db.Products.Include(x => x.ProductType).AsQueryable();
+            if (type!=-1)
+            {
+                qry = qry.Where(x => x.ProductTypeID == type);
+            }
             if (!String.IsNullOrWhiteSpace(key))
-                qry = qry.Where(x => x.ProductCode.Contains(key) || x.ProdcutName.Contains(key) || x.ProductType.ProductTypeName.Contains(key));
+                qry = qry.Where(x => x.ProductCode.Contains(key) || x.ProdcutName.Contains(key));
             var model = qry.OrderByDescending(a => a.ProductCode).ToPagedList(id, 10);
             if (Request.IsAjaxRequest())
                 return PartialView("_ProductsSearchGet", model);

@@ -6,10 +6,10 @@ using BaseData.Model;
 
 namespace BaseData.Web.ViewModels
 {
-    public class OrderFullInfo
+    public class OrderFullInfoVM
     {
         /// <summary>
-        /// 订单ID
+        /// 订单ID（在添加新订单时，为空）
         /// </summary>
         public string OrderID { get; set; }
 
@@ -41,7 +41,7 @@ namespace BaseData.Web.ViewModels
         /// <summary>
         /// 订单产品列表
         /// </summary>
-        public ICollection<OrderProductsFullInfo> ProductList { get; set; }
+        public ICollection<OrderProductsFullInfoVM> ProductList { get; set; }
 
        // public int DeliverManID { get; set; }
 

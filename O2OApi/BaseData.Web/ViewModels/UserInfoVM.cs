@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BaseData.Web.ViewModels
 {
-    public class UserInfo
+    public class UserInfoVM
     {
         /// <summary>
         /// 账号

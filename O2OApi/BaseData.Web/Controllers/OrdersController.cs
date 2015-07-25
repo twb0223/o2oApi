@@ -21,17 +21,21 @@ namespace BaseData.Web.Controllers
         private MyDataContext db = new MyDataContext();
 
         // GET: Orders
-        public async Task<ActionResult> Index(string key, int id = 1)
+        public async Task<ActionResult> Index(string key, int status = -1, int id = 1)
         {
-            return ajaxSearchGetResult(key, id);
+            return ajaxSearchGetResult(key, status, id);
         }
 
-        private ActionResult ajaxSearchGetResult(string key, int id = 1)
+        private ActionResult ajaxSearchGetResult(string key, int status = -1, int id = 1)
         {
             var qry = db.Orders.AsQueryable();
+            if (status != -1)
+            {
+                qry = qry.Where(x => x.Status == status);
+            }
             if (!String.IsNullOrWhiteSpace(key))
                 qry = qry.Where(x => x.OrderNo.Contains(key) || x.AccountID.Contains(key));
-            var model = qry.OrderByDescending(a => a.OrderID).ToPagedList(id, 10);
+            var model = qry.OrderByDescending(a => a.OrderDate).ToPagedList(id, 10);
             if (Request.IsAjaxRequest())
                 return PartialView("_OrdersSearchGet", model);
             return View(model);
@@ -50,9 +54,9 @@ namespace BaseData.Web.Controllers
                                         from OrderDetails od inner join [dbo].[Products] p
                                         on od.ProductCode=p.ProductCode where od.OrderID='{0}'", id);
 
-            var list = await db.Database.SqlQuery<OrderProductsFullInfo>(sql).ToListAsync();
+            var list = await db.Database.SqlQuery<OrderProductsFullInfoVM>(sql).ToListAsync();
 
-            OrderFullInfo vm = new OrderFullInfo();
+            OrderFullInfoVM vm = new OrderFullInfoVM();
             vm.OrderID = order.OrderID;
             vm.OrderNo = order.OrderNo;
             vm.AccountID = order.AccountID;
@@ -147,8 +151,9 @@ namespace BaseData.Web.Controllers
 
                 var odl = db.OrderDetails.Where(x => x.OrderID == id).ToList();
                 //遍历订单明细，并更新库存信息表
-                odl.ForEach(x => {
-                    var psmodel = db.ProductsStores.FirstOrDefault(t=> t.ProductCode == x.ProductCode);
+                odl.ForEach(x =>
+                {
+                    var psmodel = db.ProductsStores.FirstOrDefault(t => t.ProductCode == x.ProductCode);
                     psmodel.TotalSaleNum += x.Num;
                     db.Entry(psmodel).State = EntityState.Modified;
                 });
@@ -180,8 +185,8 @@ namespace BaseData.Web.Controllers
                 var model = JsonConvert.DeserializeObject<Order>(jsonstr);
                 var order = await db.Orders.FindAsync(model.OrderID);
 
-                order.Status = -1;
-                order.Content=model.Content;
+                order.Status = 3;
+                order.Content = model.Content;
 
                 var dvman = await db.DeliveryMen.FindAsync(order.DeliveryManID);
                 dvman.Status = 0;

@@ -190,9 +190,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\OrderFullInfo.cs" />
-    <Compile Include="ViewModels\OrderProductsFullInfo.cs" />
-    <Compile Include="ViewModels\UserInfo.cs" />
+    <Compile Include="ViewModels\OrderFullInfoVM.cs" />
+    <Compile Include="ViewModels\OrderProductsFullInfoVM.cs" />
+    <Compile Include="ViewModels\PostOrderInfoVM.cs" />
+    <Compile Include="ViewModels\ResultVM.cs" />
+    <Compile Include="ViewModels\UserInfoVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApiTest.html" />

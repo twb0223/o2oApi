@@ -25,9 +25,16 @@
                         @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "products", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
                         {
                         <div class="row">
-                            <div class="col-lg-5 col-md-7">
+                            <div class="col-md-3">
+                                <select class="form-control" name="type" id="type">
+                                  
+                                  
+                                </select>
+                            </div>
+
+                            <div class="col-md-5">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码，类型">
+                                    <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="submit">
                                             <span class="glyphicon glyphicon-search"></span>
@@ -251,12 +258,13 @@
             $(".popover-options a").popover({ html: true });
             $("[data-toggle='tooltip']").tooltip();
             $.getJSON("/api/ProductTypesApi", function (data) {
-                var item = "<option value=-1>=请选择=</option>";
+                var item = "<option value=-1>=请选择商品类型=</option>";
                 for (var i = 0; i < data.length; i++) {
                     item += ' <option value="' + data[i].ProductTypeID + '">' + data[i].ProductTypeName + '</option>';
                 }
                 $("#producttypeid").empty().append(item);
                 $("#eproducttypeid").empty().append(item);
+                $("#type").empty().append(item);
             });
 
             //新建

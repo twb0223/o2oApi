@@ -26,9 +26,9 @@ namespace BaseData.Web.Controllers
 
         private ActionResult ajaxSearchGetResult(string key, int id = 1)
         {
-            var qry = db.BreakRecords.AsQueryable();
+            var qry = db.BreakRecords.Include(x=>x.Product).AsQueryable();
             if (!String.IsNullOrWhiteSpace(key))
-                qry = qry.Where(x => x.ProductCode.Contains(key) || x.CreateBy.Contains(key));
+                qry = qry.Where(x => x.ProductCode.Contains(key) || x.CreateBy.Contains(key) || x.Product.ProdcutName.Contains(key));
             var model = qry.OrderByDescending(a => a.ProductCode).ToPagedList(id, 10);
             if (Request.IsAjaxRequest())
                 return PartialView("_BreakRecordsSearchGet", model);

@@ -14,6 +14,9 @@ using BaseData.Model;
 
 namespace BaseData.Web.Controllers
 {
+    /// <summary>
+    /// 产品类型
+    /// </summary>
     public class ProductTypesApiController : ApiController
     {
         private MyDataContext db = new MyDataContext();

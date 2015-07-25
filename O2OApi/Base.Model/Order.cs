@@ -35,7 +35,7 @@ namespace BaseData.Model
 
 
         /// <summary>
-        /// 状态 0：已提交；1：配送中；2：已收货；-1：退货
+        /// 状态 0：已提交；1：配送中；2：已收货；3：退货
         /// </summary>
         [Required]
         public int Status { get; set; }

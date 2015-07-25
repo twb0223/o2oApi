@@ -14,6 +14,9 @@ using BaseData.Model;
 
 namespace BaseData.Web.Controllers
 {
+    /// <summary>
+    /// 系统用户管理API
+    /// </summary>
     public class UsersApiController : ApiController
     {
         private MyDataContext db = new MyDataContext();

@@ -9,17 +9,23 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-
 using BaseData.DataAccess;
 using BaseData.Model;
 using System.Data.Entity;
 
-
 namespace BaseData.Web.Controllers
 {
+    /// <summary>
+    /// 商品图片上传
+    /// </summary>
     public class UploadApiController : ApiController
     {
         private MyDataContext db = new MyDataContext();
+
+        /// <summary>
+        /// 商品图片上传
+        /// </summary>
+        /// <returns></returns>
         public async Task<HttpResponseMessage> PostFormData()
         {
             HttpContextBase context = (HttpContextBase)Request.Properties["MS_HttpContext"];//获取传统context     

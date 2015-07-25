@@ -15,7 +15,7 @@ using BaseData.Model;
 namespace BaseData.Web.Controllers
 {
     /// <summary>
-    /// 注册账号
+    /// 账号管理API
     /// </summary>
     public class AccountsApiController : ApiController
     {

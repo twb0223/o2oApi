@@ -1,190 +1,410 @@
 <?xml version="1.0"?>
 <doc>
-  <assembly>
-    <name>BaseData.Model</name>
-  </assembly>
-  <members>
-    <member name="T:BaseData.Model.Account">
-      <summary>
-        账户信息
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.AccountID">
-      <summary>
-        用户ID
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.AccountNo">
-      <summary>
-        账号名称
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.AccountPwd">
-      <summary>
-        账号密码
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.Email">
-      <summary>
-        Email
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.DispatchAddress">
-      <summary>
-        配送地址
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.ConnectName">
-      <summary>
-        收货人姓名
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.Mobile">
-      <summary>
-        联系方式
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.OpenID">
-      <summary>
-        微信等第三方openid
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.AccountType">
-      <summary>
-        账号类型；wechat,weibo,qq,reg
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.RegDate">
-      <summary>
-        注册时间
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Account.LastLoginDate">
-      <summary>
-        最后登录时间
-      </summary>
-    </member>
-    <member name="T:BaseData.Model.Area">
-      <summary>
-        区域
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Area.AreaID">
-      <summary>
-        区域ID
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Area.AreaName">
-      <summary>
-        区域名称
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Area.CityID">
-      <summary>
-        所属城市ID
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Area.City">
-      <summary>
-        城市
-      </summary>
-    </member>
-    <member name="T:BaseData.Model.City">
-      <summary>
-        城市
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.City.CityID">
-      <summary>
-        区域ID
-      </summary>
-    </member>
-    <member name="T:BaseData.Model.Product">
-      <summary>
-        商品信息
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Product.ProductCode">
-      <summary>
-        产品条码
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Product.ProdcutName">
-      <summary>
-        产品名称
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Product.ProdcutDes">
-      <summary>
-        产品描述
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Product.ImgUrl">
-      <summary>
-        产品图片[img1.jpg|img2.jpg|img3.jpg]
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Product.ProductTypeID">
-      <summary>
-        产品类型ID
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.Product.ProductType">
-      <summary>
-        产品类型
-      </summary>
-    </member>
-    <member name="T:BaseData.Model.ProductType">
-      <summary>
-        商品类型
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.ProductType.ProductTypeID">
-      <summary>
-        类型ID
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.ProductType.ProductTypeName">
-      <summary>
-        类型ID
-      </summary>
-    </member>
-    <member name="T:BaseData.Model.User">
-      <summary>
-        系统用户
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.User.UserID">
-      <summary>
-        用户ID
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.User.UserAccount">
-      <summary>
-        用户账号（登陆使用）
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.User.UserName">
-      <summary>
-        用户名称(显示用)
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.User.Password">
-      <summary>
-        用户密码
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.User.CreateTime">
-      <summary>
-        创建时间
-      </summary>
-    </member>
-    <member name="P:BaseData.Model.User.Enable">
-      <summary>
-        是否可用 True:可用，false：禁用
-      </summary>
-    </member>
-  </members>
+    <assembly>
+        <name>BaseData.Model</name>
+    </assembly>
+    <members>
+        <member name="T:BaseData.Model.Account">
+            <summary>
+            账户信息
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.AccountID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.AccountNo">
+            <summary>
+            账号名称
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.AccountPwd">
+            <summary>
+            账号密码
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.DispatchAddress">
+            <summary>
+            配送地址
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.ConnectName">
+            <summary>
+            收货人姓名
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.Mobile">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.OpenID">
+            <summary>
+            微信等第三方openid
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.AccountType">
+            <summary>
+            账号类型；wechat,weibo,qq,reg
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.RegDate">
+            <summary>
+            注册时间
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Account.LastLoginDate">
+            <summary>
+            最后登录时间
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.Area">
+            <summary>
+            区域
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Area.AreaID">
+            <summary>
+            区域ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Area.AreaName">
+            <summary>
+            区域名称
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Area.CityID">
+            <summary>
+            所属城市ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Area.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.BreakRecord">
+            <summary>
+            货损记录
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.BreakRecord.BreakRecordID">
+            <summary>
+            记录ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.BreakRecord.Num">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.BreakRecord.CreateBy">
+            <summary>
+            经办人
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.BreakRecord.CreateAt">
+            <summary>
+            经办时间
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.City.CityID">
+            <summary>
+            区域ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.DeliveryMan.DeliveryManID">
+            <summary>
+            配送员ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.DeliveryMan.DeliveryManName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.DeliveryMan.IDNumber">
+            <summary>
+            身份证
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.DeliveryMan.Mobile">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.DeliveryMan.AreaID">
+            <summary>
+            所属区域
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.DeliveryMan.Status">
+            <summary>
+            状态 0:空闲，1:在配送，-1:其他
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.InRecord">
+            <summary>
+            进货记录
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.InRecord.InRecordID">
+            <summary>
+            记录ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.InRecord.ProductCode">
+            <summary>
+            产品条码
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.InRecord.Num">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.InRecord.InPrice">
+            <summary>
+            单品进价
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.InRecord.CreateBy">
+            <summary>
+            经办人
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.InRecord.CreateAt">
+            <summary>
+            经办时间
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.Order">
+            <summary>
+            订单记录
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.OrderID">
+            <summary>
+            订单ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.OrderNo">
+            <summary>
+            订单编号
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.AccountID">
+            <summary>
+            订购用户
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.Status">
+            <summary>
+            状态 0：已提交；1：配送中；2：已收货；3：退货
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.DeliveryManID">
+            <summary>
+            对应配送员
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.OrderDate">
+            <summary>
+            下单时间
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.TotalAmount">
+            <summary>
+            订单总金额
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.DiscountAmount">
+            <summary>
+            订单折扣金额
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.PayAmount">
+            <summary>
+            订单实际金额
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Order.Content">
+            <summary>
+            订单说明
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.OrderDetail">
+            <summary>
+            订单明细
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.OrderDetail.ProductCode">
+            <summary>
+            产品条码
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.OrderDetail.Num">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.OrderDetail.Prices">
+            <summary>
+            卖出单价
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.OrderDetail.OrderID">
+            <summary>
+            订单ID
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.Product">
+            <summary>
+            商品信息
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Product.ProductCode">
+            <summary>
+            产品条码
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Product.ProdcutName">
+            <summary>
+            产品名称
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Product.ProdcutDes">
+            <summary>
+            产品描述
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Product.ImgUrl">
+            <summary>
+            产品图片[img1.jpg;img2.jpg;img3.jpg]
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Product.ProductTypeID">
+            <summary>
+            产品类型ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Product.ProductType">
+            <summary>
+            产品类型
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.Product.DynamicPrice">
+            <summary>
+            当前售价
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.ProductsStore">
+            <summary>
+            产品库存表
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.ProductsStore.ProductsStoreID">
+            <summary>
+            主键ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.ProductsStore.ProductCode">
+            <summary>
+            商品条码
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.ProductsStore.TotalInNum">
+            <summary>
+            历史进货总量
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.ProductsStore.TotalSaleNum">
+            <summary>
+            历史销售总量
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.ProductsStore.TotalBreakNum">
+            <summary>
+            历史损坏总量
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.ProductType">
+            <summary>
+            商品类型
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.ProductType.ProductTypeID">
+            <summary>
+            类型ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.ProductType.ProductTypeName">
+            <summary>
+            类型ID
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.SaleStrategy">
+            <summary>
+            销售策略
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.SaleStrategy.SaleStrategyName">
+            <summary>
+            策略名称
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.SaleStrategy.Formula">
+            <summary>
+            计算公式（例如：{0}*0.8表示8折;{0}>500:-50:表示）
+            </summary>
+        </member>
+        <member name="T:BaseData.Model.User">
+            <summary>
+            系统用户
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.User.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.User.UserAccount">
+            <summary>
+            用户账号（登陆使用）
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.User.UserName">
+            <summary>
+            用户名称(显示用)
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.User.Password">
+            <summary>
+            用户密码
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.User.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:BaseData.Model.User.Enable">
+            <summary>
+            是否可用 True:可用，false：禁用
+            </summary>
+        </member>
+    </members>
 
   <assembly>
     <name>BaseData.Web</name>
@@ -738,7 +958,7 @@
     </member>
     <member name="T:BaseData.Web.Controllers.AccountsApiController">
       <summary>
-        注册账号
+        账号管理API
       </summary>
     </member>
     <member name="M:BaseData.Web.Controllers.AccountsApiController.GetAccounts">
@@ -794,11 +1014,89 @@
       <param name="id"></param>
       <returns></returns>
     </member>
+    <member name="T:BaseData.Web.Controllers.DeliveryMenApiController">
+      <summary>
+        配送员API
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.DeliveryMenApiController.GetDeliveryMen">
+      <summary>
+        获取所有配送员列表
+      </summary>
+      <returns></returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.DeliveryMenApiController.GetDeliveryMan(System.Int32)">
+      <summary>
+        根据ID获取指定配送员信息
+      </summary>
+      <param name="id"></param>
+      <returns></returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.OrdersApiController">
+      <summary>
+        订单处理
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.OrdersApiController.GetOrders">
+      <summary>
+        获取所有订单
+      </summary>
+      <returns></returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.OrdersApiController.GetOrderDetails(System.String)">
+      <summary>
+        获取单个订单的订单明细
+      </summary>
+      <param name="OrderID"></param>
+      <returns></returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.OrdersApiController.GetOrderByAccountID(System.String)">
+      <summary>
+        获取用户名下所有订单信息
+      </summary>
+      <param name="AccountID">用户账号</param>
+      <returns></returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.OrdersApiController.PostOrder(BaseData.Web.ViewModels.PostOrderInfoVM)">
+      <summary>
+        添加新订单
+      </summary>
+      <param name="vm">OrderID为空</param>
+      <returns></returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.OrdersApiController.Dispose(System.Boolean)">
+      <summary>
+        删除订单
+      </summary>
+      <param name="id"></param>
+      <returns></returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.ProductTypesApiController">
+      <summary>
+        产品类型
+      </summary>
+    </member>
     <member name="M:BaseData.Web.Controllers.ProductTypesApiController.GetProductTypes">
       <summary>
         获取商品类型列表
       </summary>
       <returns></returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.UploadApiController">
+      <summary>
+        商品图片上传
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.UploadApiController.PostFormData">
+      <summary>
+        商品图片上传
+      </summary>
+      <returns></returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.UsersApiController">
+      <summary>
+        系统用户管理API
+      </summary>
     </member>
     <member name="M:BaseData.Web.Controllers.UsersApiController.GetUsers">
       <summary>
@@ -813,22 +1111,157 @@
       <param name="id"></param>
       <returns></returns>
     </member>
-    <member name="P:BaseData.Web.ViewModels.UserInfo.UserAccount">
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.OrderID">
+      <summary>
+        订单ID（在添加新订单时，为空）
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.OrderNo">
+      <summary>
+        订单编号
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.AccountID">
+      <summary>
+        顾客账号ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.AccountName">
+      <summary>
+        顾客名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.AccountMobile">
+      <summary>
+        顾客名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.AccountAddress">
+      <summary>
+        顾客名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.ProductList">
+      <summary>
+        订单产品列表
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.Status">
+      <summary>
+        状态
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.OrderDate">
+      <summary>
+        下单时间
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.TotalAmount">
+      <summary>
+        总价
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.DiscountAmount">
+      <summary>
+        优惠金额
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderFullInfoVM.PayAmount">
+      <summary>
+        支付金额
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.ProductCode">
+      <summary>
+        产品条码
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.Num">
+      <summary>
+        数量
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.Prices">
+      <summary>
+        卖出单价
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.ProdcutName">
+      <summary>
+        产品名称
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.ProdcutDes">
+      <summary>
+        产品描述
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.ImgUrl">
+      <summary>
+        产品图片[img1.jpg|img2.jpg|img3.jpg]
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.ProductTypeID">
+      <summary>
+        产品类型ID
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.PostOrderInfoVM.AccountID">
+      <summary>
+        订购用户账号
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.PostOrderInfoVM.ProductList">
+      <summary>
+        订单明细
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.PostOrderInfoVM.TotalAmount">
+      <summary>
+        订单总金额
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.PostOrderInfoVM.DiscountAmount">
+      <summary>
+        打折金额
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.PostOrderInfoVM.PayAmount">
+      <summary>
+        应付金额
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.PostProductListVM.ProductCode">
+      <summary>
+        商品条码
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.PostProductListVM.Prices">
+      <summary>
+        单品售价
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.PostProductListVM.Num">
+      <summary>
+        数量
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.UserInfoVM.UserAccount">
       <summary>
         账号
       </summary>
     </member>
-    <member name="P:BaseData.Web.ViewModels.UserInfo.UserName">
+    <member name="P:BaseData.Web.ViewModels.UserInfoVM.UserName">
       <summary>
         用户姓名
       </summary>
     </member>
-    <member name="P:BaseData.Web.ViewModels.UserInfo.RoleID">
+    <member name="P:BaseData.Web.ViewModels.UserInfoVM.RoleID">
       <summary>
         角色ID
       </summary>
     </member>
-    <member name="P:BaseData.Web.ViewModels.UserInfo.RoleName">
+    <member name="P:BaseData.Web.ViewModels.UserInfoVM.RoleName">
       <summary>
         角色名称
       </summary>

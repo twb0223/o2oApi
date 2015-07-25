@@ -22,6 +22,8 @@ namespace BaseData.Model
         [MaxLength(100)]
         public string ProductCode { get; set; }
 
+        public virtual Product Product { get; set; }
+
         /// <summary>
         /// 数量
         /// </summary>

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BaseData.Web.ViewModels
 {
-    public class OrderProductsFullInfo
+    public class OrderProductsFullInfoVM
     {
         public long OrderDetailsID { get; set; }
 
