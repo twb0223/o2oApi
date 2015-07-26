@@ -33,6 +33,7 @@ namespace BaseData.Model
         [Required]
         public string AccountID { get; set; }
 
+        public virtual Account Account { get; set; }
 
         /// <summary>
         /// 状态 0：已提交；1：配送中；2：已收货；3：退货

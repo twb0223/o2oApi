@@ -21,12 +21,13 @@ namespace BaseData.Web.Controllers
     {
         private MyDataContext db = new MyDataContext();
 
-        
+
         // GET: api/AccountsApi
         /// <summary>
         /// 获取所有注册账户
         /// </summary>
         /// <returns></returns>
+        [ApiCompression]
         public IQueryable<Account> GetAccounts()
         {
             return db.Accounts;
@@ -38,6 +39,7 @@ namespace BaseData.Web.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [ApiCompression]
         [ResponseType(typeof(Account))]
         public async Task<IHttpActionResult> GetAccount(string id)
         {
@@ -50,7 +52,7 @@ namespace BaseData.Web.Controllers
             return Ok(account);
         }
 
-        
+
         // PUT: api/AccountsApi/5
         /// <summary>
         /// 修改账号信息
@@ -59,6 +61,7 @@ namespace BaseData.Web.Controllers
         /// <param name="account">账号对象</param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
+      
         public async Task<IHttpActionResult> PutAccount(string id, Account account)
         {
             if (!ModelState.IsValid)
@@ -99,7 +102,7 @@ namespace BaseData.Web.Controllers
         /// <param name="account">accoubnt对象</param>
         /// <returns></returns>
         [ResponseType(typeof(Account))]
-        
+        [ApiCompression]
         public async Task<IHttpActionResult> PostAccount(Account account)
         {
             if (!ModelState.IsValid)

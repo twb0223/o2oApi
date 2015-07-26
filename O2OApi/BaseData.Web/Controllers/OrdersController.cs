@@ -21,7 +21,8 @@ namespace BaseData.Web.Controllers
         private MyDataContext db = new MyDataContext();
 
         // GET: Orders
-        public async Task<ActionResult> Index(string key, int status = -1, int id = 1)
+        [MvcCompression]
+        public ActionResult Index(string key, int status = -1, int id = 1)
         {
             return ajaxSearchGetResult(key, status, id);
         }
@@ -42,33 +43,45 @@ namespace BaseData.Web.Controllers
         }
 
         // GET: Orders/Details/5
+        [MvcCompression]
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = await db.Orders.FindAsync(id);
-            Account acc = await db.Accounts.FindAsync(order.AccountID);
-            string sql = string.Format(@"select od.*,p.ProdcutName,p.imgUrl,p.ProductTypeID 
-                                        from OrderDetails od inner join [dbo].[Products] p
-                                        on od.ProductCode=p.ProductCode where od.OrderID='{0}'", id);
-
-            var list = await db.Database.SqlQuery<OrderProductsFullInfoVM>(sql).ToListAsync();
+            Order order = await db.Orders.Include(x => x.Account).FirstOrDefaultAsync(x => x.OrderID == id);
+            var plist = await db.OrderDetails.Include(x => x.Product).Where(x => x.OrderID == order.OrderID)
+                        .Select(x => new
+                        {
+                            x.OrderDetailsID,
+                            x.ProductCode,
+                            x.Num,
+                            x.Prices,
+                            x.Product.ProdcutName,
+                            x.Product.ProdcutDes,
+                            x.Product.ImgUrl,
+                            x.Product.ProductTypeID
+                        }).ToListAsync();
 
             OrderFullInfoVM vm = new OrderFullInfoVM();
             vm.OrderID = order.OrderID;
             vm.OrderNo = order.OrderNo;
             vm.AccountID = order.AccountID;
-            vm.AccountAddress = acc.DispatchAddress;
-            vm.AccountName = acc.ConnectName;
-            vm.AccountMobile = acc.Mobile;
-            vm.ProductList = list;
+            vm.AccountAddress = order.Account.DispatchAddress;
+            vm.AccountName = order.Account.ConnectName;
+            vm.AccountMobile = order.Account.Mobile;
+
+
             vm.Status = order.Status;
             vm.OrderDate = order.OrderDate;
+            vm.ProductList = new List<OrderProductsFullInfoVM>();
 
-            list.ForEach(x =>
+            plist.ForEach(x =>
             {
+                OrderProductsFullInfoVM opfvm = new OrderProductsFullInfoVM(x.OrderDetailsID, x.ProductCode, x.Num, x.Prices,
+                    x.ProdcutName, x.ProdcutDes, x.ImgUrl, x.ProductTypeID);
+                vm.ProductList.Add(opfvm);
                 vm.TotalAmount += x.Num * x.Prices;
             });
             vm.DiscountAmount = order.DiscountAmount;
@@ -108,31 +121,31 @@ namespace BaseData.Web.Controllers
             return res;
         }
 
-        // GET: Orders/Delete/5
-        public async Task<ActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = await db.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            return View(order);
-        }
+        //// GET: Orders/Delete/5
+        //public async Task<ActionResult> Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Order order = await db.Orders.FindAsync(id);
+        //    if (order == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(order);
+        //}
 
-        // POST: Orders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
-        {
-            Order order = await db.Orders.FindAsync(id);
-            db.Orders.Remove(order);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        //// POST: Orders/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteConfirmed(string id)
+        //{
+        //    Order order = await db.Orders.FindAsync(id);
+        //    db.Orders.Remove(order);
+        //    await db.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
 
         public async Task<ActionResult> Confirm(string id)
         {

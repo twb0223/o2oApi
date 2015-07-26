@@ -18,9 +18,11 @@ namespace BaseData.Web.Controllers
     public class UsersController : Controller
     {
         private MyDataContext db = new MyDataContext();
+
+        [MvcCompression]
         public ActionResult Index()
         {
-            var list = db.Users.Include(x=>x.Area).Include(x=>x.Area.City).ToList();
+            var list = db.Users.Include(x => x.Area).Include(x => x.Area.City).ToList();
 
             return View(list);
         }
@@ -108,13 +110,13 @@ namespace BaseData.Web.Controllers
                 var entiy = db.Users.Find(model.UserID);
                 if (entiy.Password != model.Password)//如果密码和库中一致表明没改，否则加密先。
                 {
-                   var pwd = Tools.MD5Encrypt(model.Password);
-                   model.Password = pwd;
+                    var pwd = Tools.MD5Encrypt(model.Password);
+                    model.Password = pwd;
                 }
                 entiy.UserName = model.UserName;
 
                 entiy.Password = model.Password;
- 
+
                 try
                 {
 
@@ -124,7 +126,7 @@ namespace BaseData.Web.Controllers
                 }
                 catch (Exception)
                 {
-                    
+
                     throw;
                 }
 

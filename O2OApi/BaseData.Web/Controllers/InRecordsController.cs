@@ -20,7 +20,8 @@ namespace BaseData.Web.Controllers
         private MyDataContext db = new MyDataContext();
 
         // GET: InRecords
-        public async Task<ActionResult> Index(string key, int id = 1)
+         [MvcCompression]
+        public ActionResult Index(string key, int id = 1)
         {
             return ajaxSearchGetResult(key, id);
         }

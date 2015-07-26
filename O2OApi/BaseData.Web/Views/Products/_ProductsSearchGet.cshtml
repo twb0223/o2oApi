@@ -31,10 +31,7 @@
         @foreach (var item in Model)
         {
             idx++;
-            if (!string.IsNullOrEmpty(item.ImgUrl))
-            {
-                imglist = item.ImgUrl.TrimEnd(new char[] { ';' }).Split(new char[] { ';' });
-            }
+
             <tr>
                 <td>
                     @idx
@@ -43,18 +40,17 @@
                     @Html.DisplayFor(modelItem => item.ProductCode)
                 </td>
                 <td>
-                    @if (imglist[0] != null)
+                    @if (!string.IsNullOrEmpty(item.ImgUrl))
                     {
+                        imglist = item.ImgUrl.TrimEnd(new char[] { ';' }).Split(new char[] { ';' });
                         <img src='/UploadFiles/@imglist[0]' width="40px" height="40px" />
                         @Html.DisplayFor(modelItem => item.ProdcutName)
                     }
                     else
                     {
-                        <img src='' width="40px" height="40px" />
+                        <img src='~/UploadFiles/nopic.png' width="40px" height="40px" />
                         @Html.DisplayFor(modelItem => item.ProdcutName)
                     }
-
-
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ProductType.ProductTypeName)

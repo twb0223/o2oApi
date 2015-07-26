@@ -7,6 +7,21 @@ namespace BaseData.Web.ViewModels
 {
     public class OrderProductsFullInfoVM
     {
+        public OrderProductsFullInfoVM(long _OrderDetailsID,
+            string _ProductCode, int _Num, decimal _Prices, string _ProdcutName, string _ProdcutDes, string _ImgUrl, int _ProductTypeID)
+        {
+            this.OrderDetailsID = _OrderDetailsID;
+            this.ProductCode = _ProductCode;
+            this.Num = _Num;
+            this.Prices = _Prices;
+            this.ProdcutName = _ProdcutName;
+            this.ProdcutDes = _ProdcutDes;
+            this.ImgUrl = _ImgUrl;
+            this.ProductTypeID = _ProductTypeID;
+        }
+        /// <summary>
+        /// 明细ID
+        /// </summary>
         public long OrderDetailsID { get; set; }
 
         /// <summary>

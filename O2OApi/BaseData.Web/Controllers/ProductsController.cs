@@ -20,8 +20,9 @@ namespace BaseData.Web.Controllers
     {
         private MyDataContext db = new MyDataContext();
 
+         [MvcCompression]
         // GET: Products
-        public async Task<ActionResult> Index(string key,int type=-1, int id = 1)
+        public ActionResult Index(string key,int type=-1, int id = 1)
         {
             return ajaxSearchGetResult(key,type, id);
         }
@@ -39,6 +40,8 @@ namespace BaseData.Web.Controllers
                 return PartialView("_ProductsSearchGet", model);
             return View(model);
         }
+
+         [MvcCompression]
         // GET: Products/Details/5
         public async Task<ActionResult> Details(string id)
         {

@@ -26,6 +26,7 @@ namespace BaseData.Web.Controllers
         /// 获取商品类型列表
         /// </summary>
         /// <returns></returns>
+          [ApiCompression]
         public IQueryable<ProductType> GetProductTypes()
         {
             return db.ProductTypes;

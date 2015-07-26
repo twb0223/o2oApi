@@ -19,7 +19,7 @@ namespace BaseData.Web.Controllers
     {
         private MyDataContext db = new MyDataContext();
 
-        public async Task<ActionResult> Index(string key, int id = 1)
+        public ActionResult Index(string key, int id = 1)
         {
             return ajaxSearchGetResult(key, id);
         }

@@ -26,6 +26,7 @@ namespace BaseData.Web.Controllers
         /// 获取区域列表
         /// </summary>
         /// <returns></returns>
+        [ApiCompression]
         public IQueryable<Area> GetAreas()
         {
             return db.Areas.Include(x=>x.City);
@@ -38,6 +39,7 @@ namespace BaseData.Web.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(Area))]
+        [ApiCompression]
         public async Task<IHttpActionResult> GetArea(int id)
         {
             Area area = await db.Areas.FindAsync(id);

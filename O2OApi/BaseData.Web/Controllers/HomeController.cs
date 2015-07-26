@@ -18,6 +18,8 @@ namespace BaseData.Web.Controllers
     public class HomeController : Controller
     {
         private MyDataContext db = new MyDataContext();
+
+        [MvcCompression]
         public ActionResult Index()
         {
             ViewBag.Title = "O2O数据接口平台";

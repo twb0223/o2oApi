@@ -54,13 +54,10 @@ namespace BaseData.Web.ViewModels
         /// 下单时间
         /// </summary>
         public DateTime? OrderDate { get; set; }
-
         /// <summary>
         /// 总价
         /// </summary>
-
         public decimal TotalAmount { get; set; }
-
 
         /// <summary>
         /// 优惠金额

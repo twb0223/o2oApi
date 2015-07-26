@@ -19,14 +19,15 @@ namespace BaseData.Web.Controllers
     {
         private MyDataContext db = new MyDataContext();
 
-        public async Task<ActionResult> Index(string key, int id = 1)
+        [MvcCompression]
+        public ActionResult Index(string key, int id = 1)
         {
             return ajaxSearchGetResult(key, id);
         }
 
         private ActionResult ajaxSearchGetResult(string key, int id = 1)
         {
-            var qry = db.BreakRecords.Include(x=>x.Product).AsQueryable();
+            var qry = db.BreakRecords.Include(x => x.Product).AsQueryable();
             if (!String.IsNullOrWhiteSpace(key))
                 qry = qry.Where(x => x.ProductCode.Contains(key) || x.CreateBy.Contains(key) || x.Product.ProdcutName.Contains(key));
             var model = qry.OrderByDescending(a => a.ProductCode).ToPagedList(id, 10);

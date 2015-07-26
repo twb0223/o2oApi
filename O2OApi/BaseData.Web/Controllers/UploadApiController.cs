@@ -26,6 +26,7 @@ namespace BaseData.Web.Controllers
         /// 商品图片上传
         /// </summary>
         /// <returns></returns>
+        [ApiCompression]
         public async Task<HttpResponseMessage> PostFormData()
         {
             HttpContextBase context = (HttpContextBase)Request.Properties["MS_HttpContext"];//获取传统context     
@@ -54,7 +55,7 @@ namespace BaseData.Web.Controllers
                 }
                 //更新产品对应端图片，以;分割
                 var model = await db.Products.FindAsync(pcode);
-                model.ImgUrl += imgurl+";";
+                model.ImgUrl += imgurl + ";";
                 db.Entry(model).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
@@ -85,7 +86,7 @@ namespace BaseData.Web.Controllers
             var filename = Guid.NewGuid().ToString();
             var extension = Path.GetExtension(filePath);
             var contentType = headers.ContentType.MediaType;
-            return filename+extension;
+            return filename + extension;
         }
 
     }

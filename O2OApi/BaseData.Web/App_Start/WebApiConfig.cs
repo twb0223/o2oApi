@@ -10,6 +10,9 @@ namespace BaseData.Web
     {
         public static void Register(HttpConfiguration config)
         {
+            config.Formatters.RemoveAt(0);
+            config.Formatters.Insert(0, new JilFormatter());
+
             // Web API 配置和服务
 
             // Web API 路由

@@ -27,11 +27,11 @@ namespace BaseData.Web.Controllers
         /// 获取所有订单
         /// </summary>
         /// <returns></returns>
+        [ApiCompression]
         public IQueryable<Order> GetOrders()
         {
             return db.Orders;
         }
-
         // GET: api/OrdersApi/5
         /// <summary>
         /// 获取单个订单的订单明细
@@ -39,33 +39,41 @@ namespace BaseData.Web.Controllers
         /// <param name="OrderID"></param>
         /// <returns></returns>
         [ResponseType(typeof(OrderFullInfoVM))]
+        [ApiCompression]
         public async Task<IHttpActionResult> GetOrderDetails(string OrderID)
         {
-            Order order = await db.Orders.FindAsync(OrderID);
-            Account acc = await db.Accounts.FindAsync(order.AccountID);
-            string sql = string.Format(@"select od.*,p.ProdcutName,p.imgUrl,p.ProductTypeID 
-                                        from OrderDetails od inner join [dbo].[Products] p
-                                        on od.ProductCode=p.ProductCode where od.OrderID='{0}'", OrderID);
-
-            var list = await db.Database.SqlQuery<OrderProductsFullInfoVM>(sql).ToListAsync();
-
+            Order order = await db.Orders.Include(x => x.Account).FirstOrDefaultAsync(x => x.OrderID == OrderID);
+            var plist = await db.OrderDetails.Include(x => x.Product).Where(x => x.OrderID == order.OrderID)
+              .Select(x => new
+              {
+                  x.OrderDetailsID,
+                  x.ProductCode,
+                  x.Num,
+                  x.Prices,
+                  x.Product.ProdcutName,
+                  x.Product.ProdcutDes,
+                  x.Product.ImgUrl,
+                  x.Product.ProductTypeID
+              }).ToListAsync();
             OrderFullInfoVM vm = new OrderFullInfoVM();
             vm.OrderID = order.OrderID;
             vm.OrderNo = order.OrderNo;
             vm.AccountID = order.AccountID;
-            vm.AccountAddress = acc.DispatchAddress;
-            vm.AccountName = acc.ConnectName;
-            vm.AccountMobile = acc.Mobile;
-            vm.ProductList = list;
+            vm.AccountAddress = order.Account.DispatchAddress;
+            vm.AccountName = order.Account.ConnectName;
+            vm.AccountMobile = order.Account.Mobile;
             vm.Status = order.Status;
             vm.OrderDate = order.OrderDate;
-
-            list.ForEach(x =>
-            {
-                vm.TotalAmount += x.Num * x.Prices;
-            });
             vm.DiscountAmount = order.DiscountAmount;
             vm.PayAmount = order.PayAmount;
+            vm.ProductList = new List<OrderProductsFullInfoVM>();
+            plist.ForEach(x =>
+            {
+                OrderProductsFullInfoVM opfvm = new OrderProductsFullInfoVM(x.OrderDetailsID, x.ProductCode, x.Num, x.Prices,
+                    x.ProdcutName, x.ProdcutDes, x.ImgUrl, x.ProductTypeID);
+                vm.ProductList.Add(opfvm);
+                vm.TotalAmount += x.Num * x.Prices;
+            });
 
             if (order == null)
             {
@@ -81,32 +89,43 @@ namespace BaseData.Web.Controllers
         /// <param name="AccountID">用户账号</param>
         /// <returns></returns>
         [ResponseType(typeof(List<OrderFullInfoVM>))]
+        [ApiCompression]
         public async Task<IHttpActionResult> GetOrderByAccountID(string AccountID)
         {
-            var orderlist = db.Orders.Where(x => x.AccountID == AccountID);
+            var orderlist = await db.Orders.Include(x => x.Account).Where(x => x.AccountID == AccountID).ToListAsync();
             List<OrderFullInfoVM> list = new List<OrderFullInfoVM>();
             foreach (var order in orderlist)
             {
-                Account acc = await db.Accounts.FindAsync(order.AccountID);
-                string sql = string.Format(@"select od.*,p.ProdcutName,p.imgUrl,p.ProductTypeID 
-                                        from OrderDetails od inner join [dbo].[Products] p
-                                        on od.ProductCode=p.ProductCode where od.OrderID='{0}'", order.OrderID);
-
-                var plist = await db.Database.SqlQuery<OrderProductsFullInfoVM>(sql).ToListAsync();
+                var plist = await db.OrderDetails.Include(x => x.Product).Where(x => x.OrderID == order.OrderID)
+                            .Select(x => new
+                            {
+                                x.OrderDetailsID,
+                                x.ProductCode,
+                                x.Num,
+                                x.Prices,
+                                x.Product.ProdcutName,
+                                x.Product.ProdcutDes,
+                                x.Product.ImgUrl,
+                                x.Product.ProductTypeID
+                            }).ToListAsync();
 
                 OrderFullInfoVM vm = new OrderFullInfoVM();
                 vm.OrderID = order.OrderID;
                 vm.OrderNo = order.OrderNo;
                 vm.AccountID = order.AccountID;
-                vm.AccountAddress = acc.DispatchAddress;
-                vm.AccountName = acc.ConnectName;
-                vm.AccountMobile = acc.Mobile;
-                vm.ProductList = plist;
+                vm.AccountAddress = order.Account.DispatchAddress;
+                vm.AccountName = order.Account.ConnectName;
+                vm.AccountMobile = order.Account.Mobile;
+
                 vm.Status = order.Status;
                 vm.OrderDate = order.OrderDate;
 
+                vm.ProductList = new List<OrderProductsFullInfoVM>();
                 plist.ForEach(x =>
                 {
+                    OrderProductsFullInfoVM opfvm = new OrderProductsFullInfoVM(x.OrderDetailsID, x.ProductCode, x.Num, x.Prices,
+                        x.ProdcutName, x.ProdcutDes, x.ImgUrl, x.ProductTypeID);
+                    vm.ProductList.Add(opfvm);
                     vm.TotalAmount += x.Num * x.Prices;
                 });
                 vm.DiscountAmount = order.DiscountAmount;
@@ -168,10 +187,9 @@ namespace BaseData.Web.Controllers
         /// </summary>
         /// <param name="vm">OrderID为空</param>
         /// <returns></returns>
+        [ResponseType(typeof(ResultVM))]
         public async Task<IHttpActionResult> PostOrder(PostOrderInfoVM vm)
         {
-           // OrderFullInfoVM dfm = new OrderFullInfoVM();
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -204,7 +222,7 @@ namespace BaseData.Web.Controllers
             {
                 await db.SaveChangesAsync();
                 model.Result = "OK";
-                model.Message = "订单编号："+order.OrderNo;
+                model.Message = "订单编号：" + order.OrderNo;
             }
             catch (DbUpdateException ex)
             {

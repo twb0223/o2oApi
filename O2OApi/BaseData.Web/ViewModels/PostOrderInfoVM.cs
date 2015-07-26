@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BaseData.Web.Areas.HelpPage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace BaseData.Web.ViewModels
 {
-    public class PostOrderInfoVM
+    public class PostOrderInfoVM : Parameter
     {
         /// <summary>
         /// 订购用户账号
@@ -34,7 +35,7 @@ namespace BaseData.Web.ViewModels
 
     }
 
-    public class PostProductListVM
+    public class PostProductListVM : Parameter
     {
         /// <summary>
         /// 商品条码

@@ -410,6 +410,28 @@
     <name>BaseData.Web</name>
   </assembly>
   <members>
+    <member name="T:BaseData.Web.ApiCompressionAttribute">
+      <summary>
+        Api 响应内容压缩
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.ApiCompressionAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+      <summary>
+        重写响应内容压缩
+      </summary>
+      <param name="actContext"></param>
+    </member>
+    <member name="T:BaseData.Web.MvcCompressionAttribute">
+      <summary>
+        MVC压缩传输
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.MvcCompressionAttribute.OnActionExecuted(System.Web.Mvc.ActionExecutedContext)">
+      <summary>
+        重写action执行完成后 设置响应头
+      </summary>
+      <param name="filterContext"></param>
+    </member>
     <member name="M:BaseData.Web.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
       <summary>
         Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
@@ -1171,6 +1193,11 @@
         支付金额
       </summary>
     </member>
+    <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.OrderDetailsID">
+      <summary>
+        明细ID
+      </summary>
+    </member>
     <member name="P:BaseData.Web.ViewModels.OrderProductsFullInfoVM.ProductCode">
       <summary>
         产品条码
@@ -1244,6 +1271,21 @@
     <member name="P:BaseData.Web.ViewModels.PostProductListVM.Num">
       <summary>
         数量
+      </summary>
+    </member>
+    <member name="T:BaseData.Web.ViewModels.ResultVM">
+      <summary>
+        Post结果返回VM
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.ResultVM.Result">
+      <summary>
+        结果状态
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.ViewModels.ResultVM.Message">
+      <summary>
+        结果信息
       </summary>
     </member>
     <member name="P:BaseData.Web.ViewModels.UserInfoVM.UserAccount">

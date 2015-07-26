@@ -25,6 +25,7 @@ namespace BaseData.Web.Controllers
         /// 获取所有配送员列表
         /// </summary>
         /// <returns></returns>
+          [ApiCompression]
         public IQueryable<DeliveryMan> GetDeliveryMen()
         {
             return db.DeliveryMen;
@@ -35,6 +36,7 @@ namespace BaseData.Web.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [ResponseType(typeof(DeliveryMan))]
+        [ApiCompression]
         public async Task<IHttpActionResult> GetDeliveryMan(int id)
         {
             DeliveryMan deliveryMan = await db.DeliveryMen.FindAsync(id);

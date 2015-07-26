@@ -24,6 +24,8 @@ namespace BaseData.Model
         [Required]
         public string ProductCode { get; set; }
 
+        public Product Product { get; set; }
+
         /// <summary>
         /// 数量
         /// </summary>
@@ -33,7 +35,7 @@ namespace BaseData.Model
         /// <summary>
         /// 卖出单价
         /// </summary>
-    
+
         public decimal Prices { get; set; }
 
         /// <summary>
