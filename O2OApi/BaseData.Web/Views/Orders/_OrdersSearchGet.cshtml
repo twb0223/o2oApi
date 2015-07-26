@@ -74,4 +74,6 @@
 <div style="padding-top:5px; width:100%">
     <div style="float:left">共 @Model.TotalPageCount 页 @Model.TotalItemCount 条记录，当前为第 @Model.CurrentPageIndex 页</div>
     @Ajax.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ShowPageIndexBox = false, PageIndexBoxType = PageIndexBoxType.DropDownList, ShowGoButton = false }, new MvcAjaxOptions { UpdateTargetId = "orderlist", DataFormId = "searchForm" }, new { style = "float:right" })
+
+    @*@Html.Pager(Model, new PagerOptions { PageIndexParameterName = "id", ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "bootstrappager" })*@
 </div>

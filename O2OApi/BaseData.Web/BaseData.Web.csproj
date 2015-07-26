@@ -254,6 +254,7 @@
     <Content Include="Icon.png" />
     <Content Include="Libs\Ionic.Zip.dll" />
     <Content Include="Libs\MvcPager.dll" />
+    <Content Include="Libs\Webdiyer.MvcPager.dll" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
