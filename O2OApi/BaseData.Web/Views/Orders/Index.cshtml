@@ -13,7 +13,8 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
-                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                     
+                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "orderlist", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
                         {
                         <div class="row">
                             <div class="col-md-3">
@@ -46,7 +47,7 @@
 
             </div>
             <div class="panel-body">
-                <div id="tables">
+                <div id="orderlist">
                     @Html.Partial("_OrdersSearchGet", Model)
                 </div>
             </div>

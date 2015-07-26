@@ -27,9 +27,9 @@ namespace BaseData.Web
                        "~/Content/bootstrap-theme.min.css",
                          "~/Content/site.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/upload").Include(
-                     "~/Scripts/plupload/plupload.full.min.js",
-                     "~/Scripts/app.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/upload").Include(
+            //         "~/Scripts/plupload/plupload.full.min.js",
+            //         "~/Scripts/app.js"));
         }
     }
 }
