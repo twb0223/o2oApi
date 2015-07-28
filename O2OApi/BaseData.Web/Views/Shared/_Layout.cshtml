@@ -8,7 +8,6 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
-
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -29,19 +28,19 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="~/ProductsStores/Index"><span class="glyphicon glyphicon-briefcase"></span>  商品管理</a>
+                        <a href="~/ProductsStores/Index"><span class="glyphicon glyphicon-briefcase"></span>  商品信息</a>
                     </li>
 
                     <li>
                         <a href="~/Orders/Index"><span class="glyphicon glyphicon-shopping-cart"></span>  订单处理</a>
                     </li>
                     <li>
-                        <a href="~/Users/Index"><span class="glyphicon glyphicon-user"></span> 基础数据管理</a>
+                        <a href="~/Users/Index"><span class="glyphicon glyphicon-user"></span> 基础数据</a>
                     </li>
 
-                    <li>
+                    @*<li>
                         <a href="~/Projects/Index"><span class="glyphicon glyphicon-list-alt"></span> 日常统计</a>
-                    </li>
+                    </li>*@
 
                     <li>
                         <a href="~/Help/Index"><span class="glyphicon glyphicon-flag"></span> APIs</a>
