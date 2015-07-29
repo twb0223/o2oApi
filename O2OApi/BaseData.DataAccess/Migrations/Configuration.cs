@@ -1,5 +1,6 @@
 namespace BaseData.DataAccess.Migrations
 {
+    using Model;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -19,13 +20,12 @@ namespace BaseData.DataAccess.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.ProductTypes.AddOrUpdate(
+              p => p.ProductTypeID,
+              new ProductType { ProductTypeName = "饮料" },
+              new ProductType { ProductTypeName = "食品" },
+              new ProductType { ProductTypeName = "日常百货" }
+            );
         }
     }
 }
