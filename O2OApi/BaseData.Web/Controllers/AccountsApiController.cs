@@ -61,7 +61,6 @@ namespace BaseData.Web.Controllers
         /// <param name="account">账号对象</param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-      
         public async Task<IHttpActionResult> PutAccount(string id, Account account)
         {
             if (!ModelState.IsValid)

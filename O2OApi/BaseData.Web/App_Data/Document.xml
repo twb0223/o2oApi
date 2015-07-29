@@ -718,6 +718,32 @@
         Initializes a new instance of the <see cref="T:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator"/> class.
       </summary>
     </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+      <summary>
+        Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+      <summary>
+        Gets the objects that are used directly as samples for certain actions.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+      <summary>
+        Gets the objects that are serialized as samples by the supported formatters.
+      </summary>
+    </member>
+    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+      <summary>
+        Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+        stopping when the factory successfully returns a non-<see langref="null"/> object.
+      </summary>
+      <remarks>
+        Collection includes just <see cref="M:BaseData.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+        <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+        <code>SampleObjectFactories.Add(func)</code> to provide a fallback.
+      </remarks>
+    </member>
     <member name="M:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
       <summary>
         Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
@@ -800,32 +826,6 @@
       <param name="type">The type.</param>
       <param name="mediaType">Type of the media.</param>
       <returns></returns>
-    </member>
-    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
-      <summary>
-        Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
-      </summary>
-    </member>
-    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
-      <summary>
-        Gets the objects that are used directly as samples for certain actions.
-      </summary>
-    </member>
-    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
-      <summary>
-        Gets the objects that are serialized as samples by the supported formatters.
-      </summary>
-    </member>
-    <member name="P:BaseData.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
-      <summary>
-        Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
-        stopping when the factory successfully returns a non-<see langref="null"/> object.
-      </summary>
-      <remarks>
-        Collection includes just <see cref="M:BaseData.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
-        <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
-        <code>SampleObjectFactories.Add(func)</code> to provide a fallback.
-      </remarks>
     </member>
     <member name="T:BaseData.Web.Areas.HelpPage.HelpPageSampleKey">
       <summary>
@@ -1091,6 +1091,27 @@
         删除订单
       </summary>
       <param name="id"></param>
+      <returns></returns>
+    </member>
+    <member name="T:BaseData.Web.Controllers.ProductsApiController">
+      <summary>
+        商品信息Api
+      </summary>
+    </member>
+    <member name="M:BaseData.Web.Controllers.ProductsApiController.GetProducts(System.Int32,System.Int32,System.Int32)">
+      <summary>
+        分页获取商品列表
+      </summary>
+      <param name="productTypeID">商品类型ID</param>
+      <param name="pageNum">页码</param>
+      <param name="pageSize">每页显示数量</param>
+      <returns></returns>
+    </member>
+    <member name="M:BaseData.Web.Controllers.ProductsApiController.GetProduct(System.String)">
+      <summary>
+        获取商品明细
+      </summary>
+      <param name="id">商品ID</param>
       <returns></returns>
     </member>
     <member name="T:BaseData.Web.Controllers.ProductTypesApiController">
