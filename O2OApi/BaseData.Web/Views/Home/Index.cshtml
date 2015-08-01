@@ -1,9 +1,18 @@
-﻿<div class="jumbotron">
-    <h1>数据接口平台</h1>
-    <p class="lead">为Web，App提供数据接口</p>
-    <p><a href="/Help" class="btn btn-primary btn-lg">API 查询</a></p>
+﻿@*<div class="jumbotron">
+        <h1>数据接口平台</h1>
+        <p class="lead">为Web，App提供数据接口</p>
+        <p><a href="/Help" class="btn btn-primary btn-lg">API 查询</a></p>
+    </div>*@
+<div class="row" style=" margin-top:10px;">
+    <div id="container" class="col-md-6">
+
+    </div>
+    <div id="container2" class="col-md-6">
+
+    </div>
 </div>
-<div class="row">
+
+@*<div class="row">
     <div class="col-md-4">
         <h2>商品管理</h2>
         <p><a class="btn btn-default" href="/Products/Index">点击进入 &raquo;</a></p>
@@ -17,4 +26,151 @@
         <h2>基础数据</h2>
         <p><a class="btn btn-default" href="/Users/Index">点击进入 &raquo;</a></p>
     </div>
-</div>
+</div>*@
+
+@section Scripts {
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script>
+        $(function () {
+            ChartInit();
+            ChartInit2();
+        });
+        function ChartInit() {
+            var title = {
+                text: '月销售总量'
+            };
+            var subtitle = {
+                text: '2015'
+            };
+            var xAxis = {
+                categories: ['一月', '二月', '三月', '四月', '五月', '六月'
+                       , '七月', '八月', '九月', '十月', '十一月', '十二月']
+            };
+            var yAxis = {
+                title: {
+                    text: ' 单位(件)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            };
+            var tooltip = {
+                valueSuffix: '件'
+            }
+            //var legend = {
+            //    layout: 'vertical',
+            //    align: 'right',
+            //    verticalAlign: 'middle',
+            //    borderWidth: 0
+            //};
+            var series = [
+               {
+                   name: '食品',
+                   data: [73, 64, 93, 114, 182, 221, 235,
+                      216, 223, 183, 179, 196]
+               },
+               {
+                   name: '饮料',
+                   data: [20, 89, 57, 113, 170, 220, 248,
+                      241, 201, 141, 86, 25]
+               },
+               {
+                   name: '日用百货',
+                   data: [90, 60, 50, 84, 135, 170, 186,
+                      179, 143, 90, 59, 100]
+               },
+               {
+                   name: '香烟',
+                   data: [39, 42, 57, 85, 119, 152, 170,
+                      166, 142, 103, 66, 48]
+               }
+            ];
+            var json = {};
+            json.title = title;
+            json.subtitle = subtitle;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.tooltip = tooltip;
+           // json.legend = legend;
+            json.series = series;
+            $('#container').highcharts(json);
+            $("text[text-anchor=end]").last().html('');//去掉logo
+        }
+
+        function ChartInit2() {
+            var chart = {
+                type: 'column'
+            };
+            var title = {
+                text: '每月销售额'
+            };
+            var subtitle = {
+                text: '2015'
+            };
+            var xAxis = {
+                categories: ['一月', '二月', '三月', '四月', '五月', '六月'
+                       , '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                crosshair: true
+            };
+            var yAxis = {
+                min: 0,
+                title: {
+                    text: '单位 (元)'
+                }
+            };
+            var tooltip = {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                   '<td style="padding:0"><b>{point.y:.1f} 元</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            };
+            var plotOptions = {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            };
+            var credits = {
+                enabled: false
+            };
+            var legend = {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            };
+            var series = [{
+                name: '食品',
+                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            }, {
+                name: '饮料',
+                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+            }, {
+                name: '日用百货',
+                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+            }, {
+                name: '香烟',
+                data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+            }];
+
+            var json = {};
+            json.chart = chart;
+            json.title = title;
+            json.subtitle = subtitle;
+            json.tooltip = tooltip;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.series = series;
+           // json.legend = legend;
+            json.plotOptions = plotOptions;
+
+            json.credits = credits;
+            $('#container2').highcharts(json);
+            $("text[text-anchor=end]").last().html('');//去掉logo
+        }
+    </script>
+}
