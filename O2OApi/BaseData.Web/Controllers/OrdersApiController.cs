@@ -38,7 +38,7 @@ namespace BaseData.Web.Controllers
         /// <returns></returns>
         [ResponseType(typeof(OrderFullInfoVM))]
         [ApiCompression]
-        [Route("api/OrdersApi/GetByOrder/{OrderID}")]
+        //[Route("api/OrdersApi/GetByOrder/{OrderID}")]
         public async Task<IHttpActionResult> GetOrderDetails(string OrderID)
         {
             Order order = await db.Orders.Include(x => x.Account).FirstOrDefaultAsync(x => x.OrderID == OrderID);
@@ -89,7 +89,7 @@ namespace BaseData.Web.Controllers
         /// <returns></returns>
         [ResponseType(typeof(List<OrderFullInfoVM>))]
         [ApiCompression]
-        [Route("api/OrdersApi/GetByAccount/{AccountID}")]
+        //[Route("api/OrdersApi/GetByAccount/{AccountID}")]
         public async Task<IHttpActionResult> GetOrderByAccountID(string AccountID)
         {
             var orderlist = await db.Orders.Include(x => x.Account).Where(x => x.AccountID == AccountID).ToListAsync();

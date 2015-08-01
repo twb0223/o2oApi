@@ -24,7 +24,7 @@ namespace BaseData.Web.Controllers
         /// <param name="pageNum">页码</param>
         /// <param name="pageSize">每页显示数量</param>
         /// <returns></returns>
-        [Route("api/ProductsApi/{productTypeID}/{pageNum}/{pageSize}")]
+        //[Route("api/ProductsApi/{productTypeID}/{pageNum}/{pageSize}")]
         public IQueryable<Product> GetProducts(int productTypeID, int pageNum, int pageSize)
         {
             return db.Products.Include(x=>x.ProductType).Where(x=>x.ProductTypeID==productTypeID).OrderByDescending(x=>x.ProductCode).Skip((pageNum-1) * pageSize).Take(pageSize);
