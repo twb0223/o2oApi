@@ -27,7 +27,18 @@ namespace BaseData.Web.Controllers
         //[Route("api/ProductsApi/{productTypeID}/{pageNum}/{pageSize}")]
         public IQueryable<Product> GetProducts(int productTypeID, int pageNum, int pageSize)
         {
-            return db.Products.Include(x=>x.ProductType).Where(x=>x.ProductTypeID==productTypeID).OrderByDescending(x=>x.ProductCode).Skip((pageNum-1) * pageSize).Take(pageSize);
+            return db.Products.Include(x => x.ProductType).Where(x => x.ProductTypeID == productTypeID).OrderByDescending(x => x.ProductCode).Skip((pageNum - 1) * pageSize).Take(pageSize);
+        }
+
+        /// <summary>
+        /// 获取各类商品中销量最好的前几位商品列表
+        /// </summary>
+        /// <param name="productTypeID">商品类型ID</param>
+        /// <param name="topNum">数量</param>
+        /// <returns></returns>
+        public IQueryable<ProductsStore> GetSaleProductsByType(int productTypeID, int topNum)
+        {
+            return db.ProductsStores.Include(t => t.Product).Where(x => x.Product.ProductTypeID == productTypeID).OrderByDescending(x => x.TotalSaleNum).Take(topNum);
         }
 
         // GET: api/ProductsApi/5
