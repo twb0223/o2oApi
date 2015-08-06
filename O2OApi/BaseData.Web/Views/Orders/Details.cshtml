@@ -5,7 +5,6 @@
     int idx = 0;
     decimal totalprice = 0;
     var stauts = "";
-    string[] imglist = null;
 }
 
 <div>
@@ -82,8 +81,7 @@
                             <td>
                                 @if (!string.IsNullOrEmpty(item.ImgUrl))
                                 {
-                                    imglist = item.ImgUrl.TrimEnd(new char[] { ';' }).Split(new char[] { ';' });
-                                    <img src='/UploadFiles/@imglist[0]' width="40px" height="40px" />
+                                    <img src='/UploadFiles/@item.ImgUrl' width="40px" height="40px" />
                                     @Html.DisplayFor(modelItem => item.ProdcutName)
                                 }
                                 else

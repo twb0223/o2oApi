@@ -51,7 +51,7 @@ namespace BaseData.Web.Controllers
                 }
                 //更新产品对应端图片，以;分割
                 var model = await db.Products.FindAsync(pcode);
-                model.ImgUrl += imgurl + ";";
+                model.ImgUrl = imgurl;
                 db.Entry(model).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
