@@ -7,7 +7,7 @@
 </div>
 
 @section Scripts {
-    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="~/Scripts/highcharts.js"></script>
     <script>
         $(function () {
             ChartInit();
@@ -71,7 +71,7 @@
             json.xAxis = xAxis;
             json.yAxis = yAxis;
             json.tooltip = tooltip;
-           // json.legend = legend;
+            // json.legend = legend;
             json.series = series;
             $('#container').highcharts(json);
             $("text[text-anchor=end]").last().html('');//去掉logo
@@ -143,7 +143,7 @@
             json.xAxis = xAxis;
             json.yAxis = yAxis;
             json.series = series;
-           // json.legend = legend;
+            // json.legend = legend;
             json.plotOptions = plotOptions;
 
             json.credits = credits;

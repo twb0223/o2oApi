@@ -41,6 +41,28 @@ namespace BaseData.Web.Controllers
             return db.ProductsStores.Include(t => t.Product).Where(x => x.Product.ProductTypeID == productTypeID).OrderByDescending(x => x.TotalSaleNum).Take(topNum);
         }
 
+        /// <summary>
+        /// 获取各类商品中销量最好的前几位商品列表
+        /// </summary>
+        /// <param name="topNum">数量</param>
+        /// <returns></returns>
+
+        public IQueryable<ProductsStore> GetSaleProducts(int topNum)
+        {
+            return db.ProductsStores.Include(t => t.Product).OrderByDescending(x => x.TotalSaleNum).Take(topNum);
+        }
+
+        /// <summary>
+        /// 商品搜索
+        /// </summary>
+        /// <param name="keyword">查询条件关键字</param>
+        /// <returns></returns>
+        public IQueryable<ProductsStore> GetProductsBySerarch(string keyword)
+        {
+            var qry = db.ProductsStores.Include(x => x.Product).Include(x=>x.Product.ProductType).AsQueryable();
+            return qry.Where(x => x.Product.ProdcutName.Contains(keyword)||x.ProductCode.Contains(keyword)|x.Product.ProductType.ProductTypeName.Contains(keyword)).OrderByDescending(x=>x.TotalSaleNum).Take(20);
+        }
+
         // GET: api/ProductsApi/5
         /// <summary>
         /// 获取商品明细
@@ -48,6 +70,7 @@ namespace BaseData.Web.Controllers
         /// <param name="id">商品ID</param>
         /// <returns></returns>
         [ResponseType(typeof(Product))]
+        [ApiCompression]
         public async Task<IHttpActionResult> GetProduct(string id)
         {
             Product product = await db.Products.FindAsync(id);
