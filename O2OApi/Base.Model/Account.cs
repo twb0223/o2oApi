@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaseData.Model
 {
@@ -12,7 +13,8 @@ namespace BaseData.Model
         /// 用户ID
         /// </summary>
         [Key]
-        public string AccountID { get; set; }
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public long AccountID { get; set; }
 
         /// <summary>
         /// 账号名称

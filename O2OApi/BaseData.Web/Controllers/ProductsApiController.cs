@@ -57,6 +57,7 @@ namespace BaseData.Web.Controllers
         /// </summary>
         /// <param name="keyword">查询条件关键字</param>
         /// <returns></returns>
+        [ApiCompression]
         public IQueryable<ProductsStore> GetProductsBySerarch(string keyword)
         {
             var qry = db.ProductsStores.Include(x => x.Product).Include(x=>x.Product.ProductType).AsQueryable();

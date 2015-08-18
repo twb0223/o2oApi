@@ -33,13 +33,13 @@ namespace BaseData.Web.Controllers
         /// <summary>
         /// 获取单一账户信息
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="openid">微信openid</param>
         /// <returns></returns>
         [ApiCompression]
         [ResponseType(typeof(Account))]
-        public async Task<IHttpActionResult> GetAccount(string id)
+        public async Task<IHttpActionResult> GetAccount(string openid)
         {
-            Account account = await db.Accounts.FindAsync(id);
+            Account account = await db.Accounts.FirstOrDefaultAsync(x=>x.OpenID== openid);
             if (account == null)
             {
                 return NotFound();
@@ -53,18 +53,18 @@ namespace BaseData.Web.Controllers
         /// <summary>
         /// 修改账号信息
         /// </summary>
-        /// <param name="id">账号ID</param>
+        /// <param name="openid">微信openid</param>
         /// <param name="account">账号对象</param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutAccount(string id, Account account)
+        public async Task<IHttpActionResult> PutAccount(string openid, Account account)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != account.AccountID)
+            if (openid != account.OpenID)
             {
                 return BadRequest();
             }
@@ -77,7 +77,7 @@ namespace BaseData.Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountExists(id))
+                if (!AccountExists(openid))
                 {
                     return NotFound();
                 }
@@ -94,7 +94,7 @@ namespace BaseData.Web.Controllers
         /// <summary>
         /// 账号注册
         /// </summary>
-        /// <param name="account">accoubnt对象</param>
+        /// <param name="account">account对象</param>
         /// <returns></returns>
         [ResponseType(typeof(Account))]
         [ApiCompression]
@@ -113,7 +113,7 @@ namespace BaseData.Web.Controllers
             }
             catch (DbUpdateException)
             {
-                if (AccountExists(account.AccountID))
+                if (AccountExists(account.OpenID))
                 {
                     return Conflict();
                 }
@@ -126,26 +126,26 @@ namespace BaseData.Web.Controllers
             return CreatedAtRoute("DefaultApi", new { id = account.AccountID }, account);
         }
 
-        // DELETE: api/AccountsApi/5
-        /// <summary>
-        /// 账号注销
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [ResponseType(typeof(Account))]
-        public async Task<IHttpActionResult> DeleteAccount(string id)
-        {
-            Account account = await db.Accounts.FindAsync(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/AccountsApi/5
+        ///// <summary>
+        ///// 账号注销
+        ///// </summary>
+        ///// <param name="openid"></param>
+        ///// <returns></returns>
+        //[ResponseType(typeof(Account))]
+        //public async Task<IHttpActionResult> DeleteAccount(string openid)
+        //{
+        //    Account account = await db.Accounts.FirstOrDefaultAsync(x=>x.OpenID==openid);
+        //    if (account == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.Accounts.Remove(account);
-            await db.SaveChangesAsync();
+        //    db.Accounts.Remove(account);
+        //    await db.SaveChangesAsync();
 
-            return Ok(account);
-        }
+        //    return Ok(account);
+        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -158,7 +158,7 @@ namespace BaseData.Web.Controllers
 
         private bool AccountExists(string id)
         {
-            return db.Accounts.Count(e => e.AccountID == id) > 0;
+            return db.Accounts.Count(e => e.OpenID == id) > 0;
         }
     }
 }
