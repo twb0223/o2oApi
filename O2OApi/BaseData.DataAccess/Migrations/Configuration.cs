@@ -17,12 +17,12 @@ namespace BaseData.DataAccess.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            context.ProductTypes.AddOrUpdate(
-              p => p.ProductTypeID,
-              new ProductType { ProductTypeName = "饮料" },
-              new ProductType { ProductTypeName = "食品" },
-              new ProductType { ProductTypeName = "日常百货" }
-            );
+            //context.ProductTypes.AddOrUpdate(
+            //  p => p.ProductTypeID,
+            //  new ProductType { ProductTypeName = "饮料" },
+            //  new ProductType { ProductTypeName = "食品" },
+            //  new ProductType { ProductTypeName = "日常百货" }
+            //);
         }
     }
 }

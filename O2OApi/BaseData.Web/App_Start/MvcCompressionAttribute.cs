@@ -30,6 +30,7 @@ namespace BaseData.Web
                 response.Filter = new Ionic.Zlib.DeflateStream(response.Filter, Ionic.Zlib.CompressionMode.Compress, Ionic.Zlib.CompressionLevel.BestCompression);
                 response.AppendHeader("Content-Encoding", "deflate");
             }
+            response.Headers.Add("Content-Type", "application/json;charset=utf-8");
         }
     }
 }

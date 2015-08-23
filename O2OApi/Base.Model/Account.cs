@@ -13,8 +13,7 @@ namespace BaseData.Model
         /// 用户ID
         /// </summary>
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public long AccountID { get; set; }
+        public string AccountID { get; set; }
 
         /// <summary>
         /// 账号名称

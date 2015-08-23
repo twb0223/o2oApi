@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BaseData.DataAccess;
 using BaseData.Model;
+using BaseData.Web.ViewModels;
 
 namespace BaseData.Web.Controllers
 {
@@ -53,18 +54,18 @@ namespace BaseData.Web.Controllers
         /// <summary>
         /// 修改账号信息
         /// </summary>
-        /// <param name="openid">微信openid</param>
+        /// <param name="id">id</param>
         /// <param name="account">账号对象</param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutAccount(string openid, Account account)
+        public async Task<IHttpActionResult> PutAccount(string id, Account account)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (openid != account.OpenID)
+            if (id != account.AccountID)
             {
                 return BadRequest();
             }
@@ -77,7 +78,7 @@ namespace BaseData.Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountExists(openid))
+                if (!AccountExists(id))
                 {
                     return NotFound();
                 }
@@ -104,26 +105,31 @@ namespace BaseData.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            account.AccountID = System.Guid.NewGuid().ToString();
             db.Accounts.Add(account);
 
+            ResultVM model = new ResultVM();
             try
             {
                 await db.SaveChangesAsync();
+                model.Result = "OK";
+                model.Message = "账号:" +account.AccountNo;
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
-                if (AccountExists(account.OpenID))
+                model.Result = "Error";
+                if (AccountExists(account.AccountID))
                 {
+                    model.Message = "重复提交";
                     return Conflict();
                 }
                 else
                 {
+                    model.Message = ex.Message;
                     throw;
                 }
             }
-
-            return CreatedAtRoute("DefaultApi", new { id = account.AccountID }, account);
+            return Ok(model);
         }
 
         //// DELETE: api/AccountsApi/5
@@ -158,7 +164,7 @@ namespace BaseData.Web.Controllers
 
         private bool AccountExists(string id)
         {
-            return db.Accounts.Count(e => e.OpenID == id) > 0;
+            return db.Accounts.Count(e => e.AccountID == id) > 0;
         }
     }
 }
