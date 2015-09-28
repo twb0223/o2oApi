@@ -10,6 +10,7 @@ using Webdiyer.WebControls.Mvc;
 
 namespace BaseData.Web.Controllers
 {
+    [MyActionFilter]
     public class AccountsController : Controller
     {
         private MyDataContext db = new MyDataContext();

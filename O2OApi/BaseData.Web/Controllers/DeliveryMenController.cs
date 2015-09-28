@@ -12,6 +12,7 @@ using Webdiyer.WebControls.Mvc;
 
 namespace BaseData.Web.Controllers
 {
+    [MyActionFilter]
     public class DeliveryMenController : Controller
     {
         private MyDataContext db = new MyDataContext();

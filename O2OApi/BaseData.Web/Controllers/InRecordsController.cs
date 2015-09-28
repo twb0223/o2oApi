@@ -12,12 +12,12 @@ using Webdiyer.WebControls.Mvc;
 
 namespace BaseData.Web.Controllers
 {
+    [MyActionFilter]
     public class InRecordsController : Controller
     {
         private MyDataContext db = new MyDataContext();
 
         // GET: InRecords
-         [MvcCompression]
         public ActionResult Index(string key, int id = 1)
         {
             return ajaxSearchGetResult(key, id);

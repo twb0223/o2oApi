@@ -7,6 +7,7 @@ using BaseData.Model;
 
 namespace BaseData.Web.Controllers
 {
+    [MyActionFilter]
     public class AreasController : Controller
     {
         private MyDataContext db = new MyDataContext();

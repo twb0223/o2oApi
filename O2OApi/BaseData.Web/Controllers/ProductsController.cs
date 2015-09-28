@@ -13,11 +13,10 @@ using Webdiyer.WebControls.Mvc;
 
 namespace BaseData.Web.Controllers
 {
+    [MyActionFilter]
     public class ProductsController : Controller
     {
         private MyDataContext db = new MyDataContext();
-
-         [MvcCompression]
         // GET: Products
         public ActionResult Index(string key,int type=-1, int id = 1)
         {
@@ -37,8 +36,6 @@ namespace BaseData.Web.Controllers
                 return PartialView("_ProductsSearchGet", model);
             return View(model);
         }
-
-         [MvcCompression]
         // GET: Products/Details/5
         public async Task<ActionResult> Details(string id)
         {

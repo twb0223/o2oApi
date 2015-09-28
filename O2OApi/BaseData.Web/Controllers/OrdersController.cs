@@ -14,12 +14,13 @@ using BaseData.Web.ViewModels;
 
 namespace BaseData.Web.Controllers
 {
+    [MyActionFilter]
     public class OrdersController : Controller
     {
         private MyDataContext db = new MyDataContext();
 
         // GET: Orders
-        [MvcCompression]
+  
         public ActionResult Index(string key, int status = -1, int id = 1)
         {
             return ajaxSearchGetResult(key, status, id);
@@ -41,7 +42,6 @@ namespace BaseData.Web.Controllers
         }
 
         // GET: Orders/Details/5
-        [MvcCompression]
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)

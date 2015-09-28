@@ -11,11 +11,10 @@ using BaseData.Web.Common;
 
 namespace BaseData.Web.Controllers
 {
+    [MyActionFilter]
     public class UsersController : Controller
     {
         private MyDataContext db = new MyDataContext();
-
-        [MvcCompression]
         public ActionResult Index()
         {
             var list = db.Users.Include(x => x.Area).Include(x => x.Area.City).ToList();

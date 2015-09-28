@@ -8,11 +8,10 @@ using Webdiyer.WebControls.Mvc;
 
 namespace BaseData.Web.Controllers
 {
+    [MyActionFilter]
     public class ProductsStoresController : Controller
     {
         private MyDataContext db = new MyDataContext();
-
-        [MvcCompression]
         public ActionResult Index(string key, int id = 1)
         {
             return ajaxSearchGetResult(key, id);
