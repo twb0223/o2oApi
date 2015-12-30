@@ -22,7 +22,6 @@ namespace BaseData.Web.Controllers
         }
         public ActionResult CheckUser(FormCollection from)
         {
-            //todo:验证账号密码
             string account = from["account"];
             string pwd = from["password"];
             var encypwd = Tools.MD5Encrypt(pwd);
@@ -40,7 +39,6 @@ namespace BaseData.Web.Controllers
         public ActionResult LogOut()
         {
             ViewBag.Title = "登录";
-            //todo:注销session;
             Session.Abandon();
             Session.Clear();
             return Redirect("Login");
