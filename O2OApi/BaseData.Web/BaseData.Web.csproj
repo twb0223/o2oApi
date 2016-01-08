@@ -254,7 +254,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\O2O.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Icon.png" />
     <Content Include="Libs\Ionic.Zip.dll" />
     <Content Include="Libs\MvcPager.dll" />
     <Content Include="Libs\Webdiyer.MvcPager.dll" />
@@ -313,6 +312,9 @@
     <Content Include="Views\DeliveryMen\_DeliveryMenSearchGet.cshtml" />
     <Content Include="Views\BreakRecords\Index.cshtml" />
     <Content Include="Views\BreakRecords\_BreakRecordsSearchGet.cshtml" />
+    <Content Include="Views\Shared\_GoodsTitle.cshtml" />
+    <Content Include="Views\Shared\_UserTitle.cshtml" />
+    <Content Include="Views\Shared\_OrderTitle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base.Model\BaseData.Model.csproj">

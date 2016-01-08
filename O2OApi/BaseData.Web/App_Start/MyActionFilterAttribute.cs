@@ -11,19 +11,14 @@ namespace BaseData.Web
         private bool flag = true;
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            string strController = filterContext.RouteData.Values["controller"].ToString();
-            string strAction = filterContext.RouteData.Values["action"].ToString();
-            if (strController != "Home" && strAction != "Login")
+            if (filterContext.HttpContext.Session["account"] == null)
             {
-                if (filterContext.HttpContext.Session["account"] == null)
-                {
-                    flag = false;
-                    filterContext.HttpContext.Response.Redirect("~/Home/Login");
-                }
-                else
-                {
-                    flag = true;
-                }
+                flag = false;
+                filterContext.HttpContext.Response.Redirect("~/Home/Login");
+            }
+            else
+            {
+                flag = true;
             }
             base.OnActionExecuting(filterContext);
         }

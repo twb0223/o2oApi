@@ -7,7 +7,7 @@ using System.Net;
 using System.Web.Mvc;
 using BaseData.DataAccess;
 using BaseData.Model;
-using Newtonsoft.Json;
+using Jil;
 using Webdiyer.WebControls.Mvc;
 
 namespace BaseData.Web.Controllers
@@ -55,7 +55,7 @@ namespace BaseData.Web.Controllers
             var res = new JsonResult();
             try
             {
-                var model = JsonConvert.DeserializeObject<InRecord>(jsonstr);
+                var model = JSON.Deserialize<InRecord>(jsonstr);
                 model.CreateAt = DateTime.Now;
                 model.InRecordID = Guid.NewGuid().ToString();
                 model.CreateBy = Session["account"].ToString();
@@ -117,7 +117,7 @@ namespace BaseData.Web.Controllers
             var res = new JsonResult();
             if (ModelState.IsValid)
             {
-                var model = JsonConvert.DeserializeObject<InRecord>(jsonstr);
+                var model = JSON.Deserialize<InRecord>(jsonstr);
                 var entiy = db.InRecords.Find(model.InRecordID);
                 entiy.InRecordID = model.InRecordID;
                 entiy.ProductCode = model.ProductCode;

@@ -2,11 +2,7 @@
 @{
     ViewBag.Title = "订单管理";
 }
-<div>
-    <ol class="breadcrumb">
-        <li><a href="~/Orders/Index">订单管理</a></li>
-    </ol>
-</div>
+@Html.Partial("~/Views/Shared/_OrderTitle.cshtml")
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">

@@ -7,7 +7,7 @@ using System.Net;
 using System.Web.Mvc;
 using BaseData.DataAccess;
 using BaseData.Model;
-using Newtonsoft.Json;
+using Jil;
 using Webdiyer.WebControls.Mvc;
 
 namespace BaseData.Web.Controllers
@@ -62,7 +62,7 @@ namespace BaseData.Web.Controllers
             var res = new JsonResult();
             if (ModelState.IsValid)
             {
-                var model = JsonConvert.DeserializeObject<DeliveryMan>(jsonstr);
+                var model = JSON.Deserialize<DeliveryMan>(jsonstr);
                 db.DeliveryMen.Add(model);
                 await db.SaveChangesAsync();
                 res.Data = "OK";
@@ -102,7 +102,7 @@ namespace BaseData.Web.Controllers
             var res = new JsonResult();
             if (ModelState.IsValid)
             {
-                var model = JsonConvert.DeserializeObject<DeliveryMan>(jsonstr);
+                var model= JSON.Deserialize<DeliveryMan>(jsonstr);
                 try
                 {
                     db.Entry(model).State = EntityState.Modified;
