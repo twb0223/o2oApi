@@ -4,49 +4,45 @@
     ViewBag.Title = "货损记录";
 }
 
-@Html.Partial("~/Views/Shared/_GoodsTitle.cshtml")
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
-                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
-                        {
-                            <div class="row">
+@*@Html.Partial("~/Views/Shared/_GoodsTitle.cshtml")*@
 
-                                <div class="col-lg-5 col-md-7">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：条码,名称,经办人">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
+                @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                {
+                    <div class="row">
 
-                                        </span>
+                        <div class="col-lg-5 col-md-7">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：条码,名称,经办人">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
 
-                                    </div>
-                                </div>
+                                </span>
 
                             </div>
-                        }
+                        </div>
+
                     </div>
-                    <div class=" col-md-1 pull-right">
-                        <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
-                    </div>
-                </div>
-
+                }
             </div>
-            <div class="panel-body">
-                <div id="tables">
-                    @Html.Partial("_BreakRecordsSearchGet", Model)
-                </div>
-
-
+            <div class=" col-md-1 pull-right">
+                <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
             </div>
+        </div>
+
+    </div>
+    <div class="panel-body">
+        <div id="tables">
+            @Html.Partial("_BreakRecordsSearchGet", Model)
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
@@ -77,15 +73,15 @@
 
 
                     @*<div class="form-group">
-                        <label for="DynamicPrice" class="col-sm-2 control-label">单品进价</label>
-                        <div class="col-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">￥</span>
-                                <input type="text" class="form-control" id="DynamicPrice" placeholder="请输入单品进价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
-                                <span class="input-group-addon">元</span>
+                            <label for="DynamicPrice" class="col-sm-2 control-label">单品进价</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">￥</span>
+                                    <input type="text" class="form-control" id="DynamicPrice" placeholder="请输入单品进价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
+                                    <span class="input-group-addon">元</span>
+                                </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
 
                 </div>
             </div>
@@ -130,15 +126,15 @@
                     </div>
 
                     @*<div class="form-group">
-                        <label for="eDynamicPrice" class="col-sm-2 control-label">单品进价</label>
-                        <div class="col-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">￥</span>
-                                <input type="text" class="form-control" id="eDynamicPrice" placeholder="请输入单品进价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
-                                <span class="input-group-addon">元</span>
+                            <label for="eDynamicPrice" class="col-sm-2 control-label">单品进价</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">￥</span>
+                                    <input type="text" class="form-control" id="eDynamicPrice" placeholder="请输入单品进价" onkeyup="value=value.replace(/[^\d/.]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d/.]/g,''))">
+                                    <span class="input-group-addon">元</span>
+                                </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
                 </div>
             </div>
             <div class="modal-footer">
@@ -156,7 +152,7 @@
     <script>
         var authJson = null;
         $(function () {
-           $("[data-toggle='tooltip']").tooltip();
+            $("[data-toggle='tooltip']").tooltip();
             $("#productcode").bind('change', function () {
                 $("#errmsg").css("display", "none")
 

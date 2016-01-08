@@ -2,54 +2,52 @@
 @{
     ViewBag.Title = "订单管理";
 }
-@Html.Partial("~/Views/Shared/_OrderTitle.cshtml")
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
-                     
-                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "orderlist", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
-                        {
-                        <div class="row">
-                            <div class="col-md-3">
-                                    <select class="form-control" name="status" id="status">
-                                        <option value="-1">=请选择状态=</option>
-                                        <option value="0">已提交</option>
-                                        <option value="1">配送中</option>
-                                        <option value="2">已收货</option>
-                                        <option value="3">退货</option>
-                                    </select>
-                               </div>
-                            <div class="col-md-5">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：订单编号,订购账号">
+@*@Html.Partial("~/Views/Shared/_OrderTitle.cshtml")*@
 
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
-                                </div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
 
-                            </div>
+                @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "orderlist", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                {
+                    <div class="row">
+                        <div class="col-md-3">
+                            <select class="form-control" name="status" id="status">
+                                <option value="-1">=请选择状态=</option>
+                                <option value="0">已提交</option>
+                                <option value="1">配送中</option>
+                                <option value="2">已收货</option>
+                                <option value="3">退货</option>
+                            </select>
                         </div>
-                            
-                        }
-                    </div>
-    
-                </div>
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：订单编号,订购账号">
 
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
             </div>
-            <div class="panel-body">
-                <div id="orderlist">
-                    @Html.Partial("_OrdersSearchGet", Model)
-                </div>
-            </div>
+
+        </div>
+
+    </div>
+    <div class="panel-body">
+        <div id="orderlist">
+            @Html.Partial("_OrdersSearchGet", Model)
         </div>
     </div>
 </div>
+
 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -60,11 +58,11 @@
                 <h4 class="modal-title" id="myModalLabel">订单明细</h4>
             </div>
             <div class="modal-body">
-              <ul>
-                  <li><label>订单编号</label></li>
-                  <li><label></label></li>
-                  <li><label></label></li>
-              </ul>
+                <ul>
+                    <li><label>订单编号</label></li>
+                    <li><label></label></li>
+                    <li><label></label></li>
+                </ul>
             </div>
 
             <div class="modal-footer">

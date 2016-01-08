@@ -4,47 +4,44 @@
     var idx = 0;
 }
 
-@Html.Partial("~/Views/Shared/_UserTitle.cshtml")
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
-                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
-                        {
-                            <div class="row">
+@*@Html.Partial("~/Views/Shared/_UserTitle.cshtml")*@
 
-                                <div class="col-lg-5 col-md-7">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：姓名,身份证">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
+                @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                {
+                    <div class="row">
 
-                                        </span>
+                        <div class="col-lg-5 col-md-7">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：姓名,身份证">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
 
-                                    </div>
-                                </div>
+                                </span>
 
                             </div>
-                        }
-                    </div>
-                    <div class=" col-md-1 pull-right">
-                        <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
-                    </div>
-                </div>
+                        </div>
 
+                    </div>
+                }
             </div>
-            <div class="panel-body">
-                <div id="tables">
-                    @Html.Partial("_DeliveryMenSearchGet", Model)
-                </div>
-
-
+            <div class=" col-md-1 pull-right">
+                <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
             </div>
         </div>
+
+    </div>
+    <div class="panel-body">
+        <div id="tables">
+            @Html.Partial("_DeliveryMenSearchGet", Model)
+        </div>
+
+
     </div>
 </div>
 
@@ -61,7 +58,7 @@
             <div class="modal-body">
                 <div class=" form-horizontal">
 
-                   
+
 
                     <div class="form-group">
                         <label for="username" class="col-sm-2 control-label">用户姓名</label>
@@ -86,7 +83,7 @@
                                    placeholder="请输入联系方式">
                         </div>
                     </div>
-                
+
 
 
                     <div class="form-group">
@@ -182,7 +179,7 @@
             $.getJSON("/api/AreasApi", function (data) {
                 var item = "<option value=-1>=请选择=</option>";
                 for (var i = 0; i < data.length; i++) {
-                    item += ' <option value="' + data[i].AreaID + '">' + data[i].City.CityName+'-'+data[i].AreaName + '</option>';
+                    item += ' <option value="' + data[i].AreaID + '">' + data[i].City.CityName + '-' + data[i].AreaName + '</option>';
                 }
                 $("#area").empty().append(item);
                 $("#earea").empty().append(item);
@@ -207,7 +204,7 @@
                 model.IDNumber = $("#idnumber").val();
                 model.Mobile = $("#mobile").val();
                 model.AreaID = $("#area").val();
-            
+
                 if (model.DeliveryManName == "") {
                     $("#username").parents(".form-group").attr("class", "form-group has-error");
                     return;

@@ -4,45 +4,42 @@
     ViewBag.Title = "商品库存信息";
 }
 
-@Html.Partial("~/Views/Shared/_GoodsTitle.cshtml")
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
-                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
-                        {
-                            <div class="row">
-                                <div class="col-lg-5 col-md-7">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
+@*@Html.Partial("~/Views/Shared/_GoodsTitle.cshtml")*@
 
-                                        </span>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
+                @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "tables", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                {
+                    <div class="row">
+                        <div class="col-lg-5 col-md-7">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
 
-                                    </div>
-                                </div>
+                                </span>
 
                             </div>
+                        </div>
 
-                        }
                     </div>
-                    
-                </div>
 
+                }
             </div>
-            <div class="panel-body">
-                <div id="tables">
-                    @Html.Partial("_ProductsStoreSearchGet", Model)
-                </div>
 
-
-            </div>
         </div>
+
+    </div>
+    <div class="panel-body">
+        <div id="tables">
+            @Html.Partial("_ProductsStoreSearchGet", Model)
+        </div>
+
+
     </div>
 </div>
 

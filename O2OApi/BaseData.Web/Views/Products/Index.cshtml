@@ -4,55 +4,48 @@
     ViewBag.Title = "商品基础信息管理";
 }
 
-@Html.Partial("~/Views/Shared/_GoodsTitle.cshtml")
+@*@Html.Partial("~/Views/Shared/_GoodsTitle.cshtml")*@
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
-                        @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "products", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
-                        {
-                        <div class="row">
-                            <div class="col-md-3">
-                                <select class="form-control" name="type" id="type">
-                                  
-                                  
-                                </select>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-
-                                    </span>
-
-                                </div>
-                            </div>
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-6 col-lg-10">
+                @using (Ajax.BeginForm("Index", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "products", HttpMethod = "Get", InsertionMode = InsertionMode.Replace }, new RouteValueDictionary { { "id", "searchForm" }, { "class", "bs-example bs-example-form" }, { "role", "form" } }))
+                {
+                    <div class="row">
+                        <div class="col-md-3">
+                            <select class="form-control" name="type" id="type"></select>
                         </div>
 
-                        }
-                    </div>
-                    <div class=" col-md-1 pull-right">
-                        <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
-                    </div>
-                </div>
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="key" id="key" placeholder="查询条件：商品名称，条码">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
 
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
             </div>
-            <div class="panel-body">
-                <div id="products">
-                    @Html.Partial("_ProductsSearchGet", Model)
-                </div>
-
-
+            <div class=" col-md-1 pull-right">
+                <a href="#" data-toggle="modal" data-backdrop="static" data-target="#myModal" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> 新建</a>
             </div>
         </div>
+
+    </div>
+    <div class="panel-body">
+        <div id="products">
+            @Html.Partial("_ProductsSearchGet", Model)
+        </div>
+
+
     </div>
 </div>
 
