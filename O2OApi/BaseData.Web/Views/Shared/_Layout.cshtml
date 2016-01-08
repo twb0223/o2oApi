@@ -29,14 +29,12 @@
                     <li>
                         <a href="~/ProductsStores/Index"><span class="glyphicon glyphicon-briefcase"></span>  商品信息</a>
                     </li>
-
                     <li>
                         <a href="~/Orders/Index"><span class="glyphicon glyphicon-shopping-cart"></span>  订单处理</a>
                     </li>
                     <li>
                         <a href="~/Users/Index"><span class="glyphicon glyphicon-user"></span> 基础数据</a>
                     </li>
-
                     <li>
                         <a href="~/Help/Index"><span class="glyphicon glyphicon-flag"></span> APIs</a>
                     </li>
@@ -49,14 +47,12 @@
                         <a href="~/Home/LogOut"><span class=" glyphicon glyphicon-off"></span>  退出</a>
                     </li>
                 </ul>
-
             </div>
         </div>
     </div>
-
     <div class="container-fluid" style="margin-top:10px;">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 navbar-left">
                 <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
                     <li>
                         <a href="~/Home/Index">
@@ -111,17 +107,10 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <p>&copy; @DateTime.Now.Year - O2O</p>
-        </footer>
     </div>
-
-    @*<div class="container body-content">
-
-    </div>*@
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 
 </html>
