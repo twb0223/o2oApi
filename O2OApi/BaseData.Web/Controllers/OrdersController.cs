@@ -8,7 +8,7 @@ using System.Net;
 using System.Web.Mvc;
 using BaseData.DataAccess;
 using BaseData.Model;
-using Jil;
+using Newtonsoft.Json;
 using Webdiyer.WebControls.Mvc;
 using BaseData.Web.ViewModels;
 
@@ -98,7 +98,7 @@ namespace BaseData.Web.Controllers
             var res = new JsonResult();
             try
             {
-                var model = JSON.Deserialize<Order>(jsonstr);
+                var model =JsonConvert.DeserializeObject<Order>(jsonstr);
                 var order = await db.Orders.FindAsync(model.OrderID);
                 order.DeliveryManID = model.DeliveryManID;
                 order.Status = 1;
@@ -193,7 +193,7 @@ namespace BaseData.Web.Controllers
             }
             try
             {
-                var model = JSON.Deserialize<Order>(jsonstr);
+                var model = JsonConvert.DeserializeObject<Order>(jsonstr);
                 var order = await db.Orders.FindAsync(model.OrderID);
 
                 order.Status = 3;

@@ -275,6 +275,8 @@
                 model.Password = $("#reuserpwd").val();
                 model.AreaID = $("#area").val();
                 model.Enable = true;
+                model.ID = 0;
+               
                 if (model.UserAccount == "") {
                     $("#useraccount").parents(".form-group").attr("class", "form-group has-error");
                     return;

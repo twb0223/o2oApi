@@ -7,7 +7,7 @@ using System.Net;
 using System.Web.Mvc;
 using BaseData.DataAccess;
 using BaseData.Model;
-using Jil;
+using Newtonsoft.Json;
 using Webdiyer.WebControls.Mvc;
 
 
@@ -58,7 +58,7 @@ namespace BaseData.Web.Controllers
             var res = new JsonResult();
             try
             {
-                var model = JSON.Deserialize<Product>(jsonstr);
+                var model = JsonConvert.DeserializeObject<Product>(jsonstr);
                 db.Products.Add(model);
                 await db.SaveChangesAsync();
                 res.Data = "OK";
@@ -114,7 +114,7 @@ namespace BaseData.Web.Controllers
             if (ModelState.IsValid)
             {
                 
-                var model = JSON.Deserialize<Product>(jsonstr);
+                var model = JsonConvert.DeserializeObject<Product>(jsonstr);
                 var entiy = db.Products.Find(model.ProductCode);
                 entiy.ProdcutName = model.ProdcutName;
                 entiy.ProductCode = model.ProductCode;

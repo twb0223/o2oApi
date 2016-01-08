@@ -6,7 +6,7 @@ using System.Net;
 using System.Web.Mvc;
 using BaseData.DataAccess;
 using BaseData.Model;
-using Jil;
+using Newtonsoft.Json;
 using BaseData.Web.Common;
 
 namespace BaseData.Web.Controllers
@@ -43,13 +43,22 @@ namespace BaseData.Web.Controllers
             var res = new JsonResult();
             if (ModelState.IsValid)
             {
-                var model = JSON.Deserialize<User>(jsonstr);
-                model.CreateTime = DateTime.Now;
-                var pwd = Tools.MD5Encrypt(model.Password);
-                model.Password = pwd;
-                db.Users.Add(model);
-                await db.SaveChangesAsync();
-                res.Data = "OK";
+                try
+                {
+                    var model =JsonConvert.DeserializeObject<User>(jsonstr);
+                    model.CreateTime = DateTime.Now;
+                    var pwd = Tools.MD5Encrypt(model.Password);
+                    model.Password = pwd;
+                    db.Users.Add(model);
+                    await db.SaveChangesAsync();
+                    res.Data = "OK";
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+
             }
             else
             {
@@ -101,7 +110,7 @@ namespace BaseData.Web.Controllers
             var res = new JsonResult();
             if (ModelState.IsValid)
             {
-                var model = JSON.Deserialize<User>(jsonstr);
+                var model = JsonConvert.DeserializeObject<User>(jsonstr);
                 var entiy = db.Users.Find(model.UserID);
                 if (entiy.Password != model.Password)//如果密码和库中一致表明没改，否则加密先。
                 {
