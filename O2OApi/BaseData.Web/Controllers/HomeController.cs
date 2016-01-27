@@ -33,7 +33,7 @@ namespace BaseData.Web.Controllers
             else
             {
                 Session["account"] = account;
-                return Redirect("index");
+                return Redirect("Index");
             }
         }
         public ActionResult LogOut()

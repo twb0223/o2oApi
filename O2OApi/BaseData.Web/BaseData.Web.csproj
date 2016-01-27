@@ -152,7 +152,6 @@
     <Compile Include="App_Start\JilFormatter.cs" />
     <Compile Include="App_Start\JsonContentNegotiator.cs" />
     <Compile Include="App_Start\MyActionFilterAttribute.cs" />
-    <Compile Include="App_Start\MyHttpModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />

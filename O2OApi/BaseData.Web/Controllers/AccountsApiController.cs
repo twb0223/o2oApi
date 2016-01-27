@@ -17,8 +17,6 @@ namespace BaseData.Web.Controllers
     public class AccountsApiController : ApiController
     {
         private MyDataContext db = new MyDataContext();
-
-
         // GET: api/AccountsApi
         /// <summary>
         /// 获取所有注册账户
